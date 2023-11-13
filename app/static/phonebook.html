@@ -7,5 +7,20 @@
 	</head>
 	<body>
 		<h1>My Phonebook</h1>
+		<script>
+			console.log("testest");
+			(function () {
+				$.getJSON("api/data", function (data) {
+					var item = [];
+					$.each(data, function(key, val) {
+						item.push("<li>" + key + " : " + val + "</li>");
+					});
+					$("<ul/>", {
+						"class" : "my-new-list",
+						html: item.join("")
+					}).appendTo("body");
+				});
+			})();
+		</script>
 	</body>
 </html>
