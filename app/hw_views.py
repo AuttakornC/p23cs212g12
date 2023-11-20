@@ -1,3 +1,7 @@
+# นายอรรถกร คำสร้อย เอิร์ธ
+# 650510691
+# Sec001
+
 import json
 from app import app
 from flask import jsonify
