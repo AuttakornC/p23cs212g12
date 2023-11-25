@@ -6,6 +6,9 @@ from app import hw_views
 def home():
     return "auttakorn say : Hello world!"
 
+@app.route("/lab02")
+def lab02():
+    return app.send_static_file("lab02_resume.html")
 
 @app.route("/phonebook")
 def index():
