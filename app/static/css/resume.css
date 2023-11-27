@@ -10,13 +10,13 @@ body {
     height: 100vh;
     overflow: auto;
     display: flex;
+    flex-direction: column;
 }
 
 .content {
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
-    height:  100%;
     /* background-color: aqua; */
     padding: 1rem;
     display: flex;
@@ -70,4 +70,11 @@ article > p {
 article > ul {
     width: 100%;
     padding: 0.2rem 4rem;
+}
+
+footer {
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 2rem;
 }
