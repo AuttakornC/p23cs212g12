@@ -13,7 +13,7 @@ def hw01_localweather():
 
 @app.route("/api/weather")
 def api_weather():
-    res = urlopen("https://api.waqi.info/feed/here/?token=7af3dd2f0ebfd5bda114fbbc3fb501edebf05c33")
+    res = urlopen("https://api.waqi.info/feed/ChiangMai/?token=7af3dd2f0ebfd5bda114fbbc3fb501edebf05c33")
     dict_data = json.load(res)["data"]
     return jsonify({
         "AQI": dict_data["aqi"],
