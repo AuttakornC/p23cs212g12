@@ -73,8 +73,27 @@ article > ul {
 }
 
 footer {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: black;
     color: white;
     padding: 2rem;
+}
+
+table {
+    max-width: 1000px;
+    background-color: white;
+    color: #000;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table td, table th {
+    padding: 0.5rem;
+}
+
+table td {
+    text-align: center;
+    width: 0.1428571429%;
 }
