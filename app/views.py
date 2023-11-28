@@ -1,5 +1,6 @@
+from datetime import datetime
 from app import app
-from flask import jsonify
+from flask import jsonify, render_template
 from app import hw_views
 
 @app.route("/")
@@ -21,4 +22,28 @@ def data():
         "Alice": "(708) 727-2377",
         "Bob": "(305) 734-0429"
     }
+
+    app.logger.debug(str(len(d)) + " entries in phonebook")
+    
     return jsonify(d)
+
+@app.route("/lab03")
+def lab03():
+    return render_template("lab03/index.html", utc_dt=datetime.utcnow())
+
+@app.route("/lab03/about/")
+def lab03about():
+    return render_template("lab03/about.html")
+
+@app.route("/lab03/comments/")
+def lab03comments():
+    comments = ['This is the first comment.',
+                'This is the second comment.',
+                'This is the third comment.',
+                'This is the fourth comment.']
+    return render_template("lab03/comments.html", comments=comments)
+
+@app.route("/crash")
+def crash():
+    return 1/0
+    
