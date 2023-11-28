@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM 2.5 Calendar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hw03.css') }}">
+</head>
+<body>
+    <h2 style="text-align: center;">PM 2.5 Calendar</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Web</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in datas %}
+                <tr>
+                    {% for date in i %}
+                        {% if date != "-" %}
+                            <td class="{{ date.color }}">
+                                {{date.day}}
+                                <br>
+                                <p class="status">
+                                    {{date.min}}
+                                    {% if date.status=="-" %}
+                                        -
+                                    {% elif date.status=="gt" %}
+                                        ↑
+                                    {% elif date.status=="lt" %}
+                                        ↓
+                                    {% else %}
+                                        ↔
+                                    {% endif %}
+                                </p>
+                            </td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+
+</html>

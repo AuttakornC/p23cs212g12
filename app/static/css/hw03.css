@@ -1,0 +1,57 @@
+table {
+    border-collapse: collapse;
+    border-color: #333333;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+table td, table th {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 1rem;
+}
+
+table th {
+    background-color: rgb(223, 223, 223);
+}
+
+table td > p {
+    font-size: 1.1rem;
+}
+
+td.good {
+    background-color: #00e400;
+    text-align: center;
+    color: #ffffff;
+}
+ 
+ 
+td.moderate {
+    background-color: #ffff00;
+    color: #333333;
+}
+ 
+ 
+td.unhealthy-sensitive {
+    background-color: #ff7e00;
+    color: #ffffff;
+}
+
+
+td.unhealthy {
+    background-color: #ff0000;
+    color: #ffffff;
+}
+
+
+td.very-unhealthy {
+    background-color: #8f3f97;
+    color: #ffffff;
+}
+
+
+td.hazardous {
+    background-color: #7e0023;
+    color: #ffffff;
+}
