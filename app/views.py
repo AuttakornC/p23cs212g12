@@ -28,15 +28,15 @@ def data():
     return jsonify(d)
 
 @app.route("/lab03")
-def lab03():
+def lab03_home():
     return render_template("lab03/index.html", utc_dt=datetime.utcnow())
 
 @app.route("/lab03/about/")
-def lab03about():
+def lab03_about():
     return render_template("lab03/about.html")
 
 @app.route("/lab03/comments/")
-def lab03comments():
+def lab03_comments():
     comments = ['This is the first comment.',
                 'This is the second comment.',
                 'This is the third comment.',
