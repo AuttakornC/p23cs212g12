@@ -39,23 +39,23 @@ def hw03_pm25():
         if i != "-":
             if before == "-":
                 i["status"] = "-"
-            elif i["min"] == before:
+            elif i["avg"] == before:
                 i["status"] = "eq"
-            elif i["min"] > before:
+            elif i["avg"] > before:
                 i["status"] = "gt"
             else:
                 i["status"] = "lt"
-            before = i["min"]
+            before = i["avg"]
 
-            if i["min"] <= 50:
+            if i["avg"] <= 50:
                 i["color"] = "good"
-            elif i["min"] <= 100:
+            elif i["avg"] <= 100:
                 i["color"] = "moderate"
-            elif i["min"] <= 150:
+            elif i["avg"] <= 150:
                 i["color"] = "unhealthy-sensitive"
-            elif i["min"] <= 200:
+            elif i["avg"] <= 200:
                 i["color"] = "unhealthy"
-            elif i["min"] <= 300:
+            elif i["avg"] <= 300:
                 i["color"] = "very-unhealthy"
             else:
                 i["color"] = "hazardous"
