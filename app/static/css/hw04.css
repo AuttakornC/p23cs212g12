@@ -1,0 +1,119 @@
+.day-value {
+    text-align: center;
+}
+
+.aqi-value {
+    text-align: center;
+}
+
+.aqi-card {
+    min-width: 320px;
+}
+
+.api-status {
+    text-align: center;
+}
+
+.good {
+    background-color: #00e400;
+}
+ 
+ 
+.moderate {
+    background-color: #ffff00;
+}
+ 
+ 
+.unhealthy-sensitive {
+    background-color: #ff7e00;
+}
+
+
+.unhealthy {
+    background-color: #ff0000;
+    color: white;
+}
+
+
+.very-unhealthy {
+    background-color: #8f3f97;
+    color: white;
+}
+
+
+.hazardous {
+    background-color: #7e0023;
+    color: white;
+}
+
+.icon-good {
+    background-image: url('../ico/good.png');
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat;
+    display: inline-block; /* or block depending on your layout */
+    width: 90%; /* Width is 60% of its containing .col element */
+    height: 0; /* Initial height is set to 0 */
+    padding-bottom: 60%; /* Padding-bottom based on the width of the element gives it height */
+    background-position: center center;
+    margin: auto; /* This will help center the block if it's smaller than the column */
+}
+
+.icon-hazardous {
+    background-image: url('../ico/hazardous.png');
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat;
+    display: inline-block; /* or block depending on your layout */
+    width: 90%; /* Width is 60% of its containing .col element */
+    height: 0; /* Initial height is set to 0 */
+    padding-bottom: 60%; /* Padding-bottom based on the width of the element gives it height */
+    background-position: center center;
+    margin: auto; /* This will help center the block if it's smaller than the column */
+}
+
+.icon-moderate {
+    background-image: url('../ico/moderate.png');
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat;
+    display: inline-block; /* or block depending on your layout */
+    width: 90%; /* Width is 60% of its containing .col element */
+    height: 0; /* Initial height is set to 0 */
+    padding-bottom: 60%; /* Padding-bottom based on the width of the element gives it height */
+    background-position: center center;
+    margin: auto; /* This will help center the block if it's smaller than the column */
+}
+
+.icon-unhealthy-sensitive {
+    background-image: url('../ico/unhealthy-sensitive.png');
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat;
+    display: inline-block; /* or block depending on your layout */
+    width: 90%; /* Width is 60% of its containing .col element */
+    height: 0; /* Initial height is set to 0 */
+    padding-bottom: 60%; /* Padding-bottom based on the width of the element gives it height */
+    background-position: center center;
+    margin: auto; /* This will help center the block if it's smaller than the column */
+}
+
+.icon-unhealthy {
+    background-image: url('../ico/unhealthy.png');
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat;
+    display: inline-block; /* or block depending on your layout */
+    width: 90%; /* Width is 60% of its containing .col element */
+    height: 0; /* Initial height is set to 0 */
+    padding-bottom: 60%; /* Padding-bottom based on the width of the element gives it height */
+    background-position: center center;
+    margin: auto; /* This will help center the block if it's smaller than the column */
+}
+
+.icon-very-unhealthy {
+    background-image: url('../ico/very-unhealthy.png');
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat;
+    display: inline-block; /* or block depending on your layout */
+    width: 90%; /* Width is 60% of its containing .col element */
+    height: 0; /* Initial height is set to 0 */
+    padding-bottom: 60%; /* Padding-bottom based on the width of the element gives it height */
+    background-position: center center;
+    margin: auto; /* This will help center the block if it's smaller than the column */
+}

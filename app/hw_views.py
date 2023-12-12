@@ -67,3 +67,53 @@ def hw03_pm25():
         week = week+(["-"]*(7-len(week)))
         week_split.append(week[:])
     return render_template("lab03/hw03_pm25.html", datas=week_split, first_day=day)
+
+@app.route("/hw04")
+def hw04():
+    return app.send_static_file("hw04_rwd.html")
+
+MONTH_LIST = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+def date_format(str_date:str)->(str, str):
+    str_date = str_date[:10]
+    date = list(map(int, str_date.split("-")))
+    return f"{date[2]} {MONTH_LIST[date[1]]} {date[0]}", f"{MONTH_LIST[date[1]][:3]} {date[2]}"
+
+def get_quality(aqi:int)->str:
+    if aqi <= 50:
+        return "good", "Good"
+    if aqi <= 100:
+        return "moderate", "Moderate"
+    if aqi <= 150:
+        return "unhealthy-sensitive", "Unhealthy for Sensitive Groups"
+    if aqi <= 200:
+        return "unhealthy", "Uphealthy"
+    if aqi <= 300:
+        return "very-unhealthy", "Very Unhealthy"
+    return "hazardous", "Hazardous"
+
+@app.route("/hw04/aqicard")
+def hw04_aqicard():
+    infomations = []
+    provinces = ["chiang-mai", "bangkok", "phuket", "ubon-ratchathani"]
+    for province in provinces:
+        link = f"https://api.waqi.info/feed/{province}/?token=7af3dd2f0ebfd5bda114fbbc3fb501edebf05c33"
+        res = urlopen(link)
+        dict_data = json.load(res)["data"]
+        analy_dict = dict()
+        analy_dict["aqi"] = dict_data["aqi"]
+        analy_dict["city"] = " ".join(list(map(lambda x: x[0].upper()+x[1:], province.split("-"))))
+        dd_mm_yyyy, mm_dd = date_format(dict_data["time"]["s"])
+        analy_dict["date"] = dd_mm_yyyy
+        forecast = []
+        for i in dict_data["forecast"]["daily"]["pm25"][4:7]:
+            forecast_dict = dict()
+            forecast_dict["aqi"] = i["avg"]
+            full, sub = date_format(i["day"])
+            forecast_dict["day"] = sub
+            forecast_dict["quality-class"], forecast_dict["quality"] = get_quality(i["avg"])
+            forecast.append(forecast_dict)
+        analy_dict["forecast"] = forecast
+        analy_dict["quality-class"], analy_dict["quality"] = get_quality(dict_data["aqi"])
+        infomations.append(analy_dict)
+    return render_template("hw04_aqicard.html", info=infomations)
