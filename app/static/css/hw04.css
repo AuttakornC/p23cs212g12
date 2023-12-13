@@ -1,13 +1,17 @@
+.aqi-card {
+    margin: 15px 0 15px;
+}
+
+.mydisplay {
+    width: 100%;
+}
+
 .day-value {
     text-align: center;
 }
 
 .aqi-value {
     text-align: center;
-}
-
-.aqi-card {
-    min-width: 320px;
 }
 
 .api-status {

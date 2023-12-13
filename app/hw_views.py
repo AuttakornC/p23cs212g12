@@ -87,7 +87,7 @@ def get_quality(aqi:int)->str:
     if aqi <= 150:
         return "unhealthy-sensitive", "Unhealthy for Sensitive Groups"
     if aqi <= 200:
-        return "unhealthy", "Uphealthy"
+        return "unhealthy", "Unhealthy"
     if aqi <= 300:
         return "very-unhealthy", "Very Unhealthy"
     return "hazardous", "Hazardous"
@@ -106,13 +106,18 @@ def hw04_aqicard():
         dd_mm_yyyy, mm_dd = date_format(dict_data["time"]["s"])
         analy_dict["date"] = dd_mm_yyyy
         forecast = []
-        for i in dict_data["forecast"]["daily"]["pm25"][4:7]:
+        today = dict_data["time"]["s"][:10]
+        for i in dict_data["forecast"]["daily"]["pm25"]:
+            if i["day"] <= today:
+                continue
             forecast_dict = dict()
             forecast_dict["aqi"] = i["avg"]
             full, sub = date_format(i["day"])
             forecast_dict["day"] = sub
             forecast_dict["quality-class"], forecast_dict["quality"] = get_quality(i["avg"])
             forecast.append(forecast_dict)
+            if len(forecast) == 3:
+                break
         analy_dict["forecast"] = forecast
         analy_dict["quality-class"], analy_dict["quality"] = get_quality(dict_data["aqi"])
         infomations.append(analy_dict)
