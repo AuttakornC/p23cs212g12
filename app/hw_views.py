@@ -7,7 +7,7 @@ from app import app
 from flask import jsonify, render_template
 from urllib.request import urlopen
 
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 @app.route("/weather")
 def hw01_localweather():
@@ -79,7 +79,9 @@ def date_format(str_date:str)->(str, str):
     date = list(map(int, str_date.split("-")))
     return f"{date[2]} {MONTH_LIST[date[1]]} {date[0]}", f"{MONTH_LIST[date[1]][:3]} {date[2]}"
 
-def get_quality(aqi:int)->str:
+def get_quality(aqi)->str:
+    if isinstance(aqi, str):
+        return "unhealthy", "Not Found"
     if aqi <= 50:
         return "good", "Good"
     if aqi <= 100:
@@ -92,14 +94,18 @@ def get_quality(aqi:int)->str:
         return "very-unhealthy", "Very Unhealthy"
     return "hazardous", "Hazardous"
 
+
 @app.route("/hw04/aqicard")
 def hw04_aqicard():
+    DEFAULT_API = {"aqi": "-", "time": {"s": str(date.today())}, "forecast": {"daily":{"pm25": [{"day":str(date.today()+timedelta(i)), "avg": "-"} for i in range(1, 4)]}}}
     infomations = []
-    provinces = ["chiang-mai", "bangkok", "phuket", "ubon-ratchathani"]
+    provinces = ["chiang-mai", "bangkok", "phukett", "ubon-ratchathani"]
     for province in provinces:
         link = f"https://api.waqi.info/feed/{province}/?token=7af3dd2f0ebfd5bda114fbbc3fb501edebf05c33"
         res = urlopen(link)
-        dict_data = json.load(res)["data"]
+        dict_data = json.load(res).get("data", DEFAULT_API)
+        if isinstance(dict_data, str):
+            dict_data = DEFAULT_API
         analy_dict = dict()
         analy_dict["aqi"] = dict_data["aqi"]
         analy_dict["city"] = " ".join(list(map(lambda x: x[0].upper()+x[1:], province.split("-"))))
