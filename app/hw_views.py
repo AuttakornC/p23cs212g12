@@ -106,7 +106,7 @@ def get_quality(aqi)->str:
 def hw04_aqicard():
     DEFAULT_API = {"aqi": "-", "time": {"s": str(date.today())}, "forecast": {"daily":{"pm25": [{"day":str(date.today()+timedelta(i)), "avg": "-"} for i in range(1, 4)]}}}
     infomations = []
-    provinces = ["chiang-mai", "bangkok", "phukett", "ubon-ratchathani"]
+    provinces = ["chiang-mai", "bangkok", "phuket", "ubon-ratchathani"]
     for province in provinces:
         link = f"https://api.waqi.info/feed/{province}/?token=7af3dd2f0ebfd5bda114fbbc3fb501edebf05c33"
         res = urlopen(link)
