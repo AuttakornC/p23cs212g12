@@ -75,9 +75,16 @@ def hw04():
 MONTH_LIST = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 def date_format(str_date:str)->(str, str):
-    str_date = str_date[:10]
-    date = list(map(int, str_date.split("-")))
-    return f"{date[2]} {MONTH_LIST[date[1]]} {date[0]}", f"{MONTH_LIST[date[1]][:3]} {date[2]}"
+    try:
+        str_date = str_date[:10]
+        list_date = list(map(int, str_date.split("-")))
+        if len(list_date) != 3:
+            list_date = list(map(int, str(date.today()).split("-")))
+        return f"{list_date[2]} {MONTH_LIST[list_date[1]]} {list_date[0]}", f"{MONTH_LIST[list_date[1]][:3]} {list_date[2]}"
+    except:
+        str_date = str(date.today())
+        list_date = list(map(int, str_date.split("-")))
+        return f"{list_date[2]} {MONTH_LIST[list_date[1]]} {list_date[0]}", f"{MONTH_LIST[list_date[1]][:3]} {list_date[2]}"
 
 def get_quality(aqi)->str:
     if isinstance(aqi, str):
