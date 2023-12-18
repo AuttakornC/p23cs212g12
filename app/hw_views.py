@@ -131,6 +131,16 @@ def hw04_aqicard():
             forecast.append(forecast_dict)
             if len(forecast) == 3:
                 break
+        toay_datetime = datetime.today()
+        if len(forecast) < 3:
+            while len(forecast) < 3:
+                forecast_dict = dict()
+                forecast_dict["aqi"] = "-"
+                full, sub = date_format((toay_datetime + timedelta(len(forecast)+1)).strftime("%Y-%m-%d"))
+                forecast_dict["day"] = sub
+                forecast_dict["quality-class"] = "unhealthy"
+                forecast_dict["quality"] = "Not Found"
+                forecast.append(forecast_dict)
         analy_dict["forecast"] = forecast
         analy_dict["quality-class"], analy_dict["quality"] = get_quality(dict_data["aqi"])
         infomations.append(analy_dict)
