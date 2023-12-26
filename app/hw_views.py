@@ -3,11 +3,22 @@
 # Sec001
 
 import json
+from bcrypt import hashpw, gensalt
 from app import app
-from flask import jsonify, render_template
+from flask import jsonify, render_template, redirect, url_for, request
 from urllib.request import urlopen
 
 from datetime import datetime, date, timedelta
+
+from app.forms.forms import RegistrationForm
+
+def read_file(filename, mode="rt"):
+    with open(filename, mode, encoding='utf-8') as fin:
+        return fin.read()
+
+def write_file(filename, contents, mode="wt"):
+    with open(filename, mode, encoding="utf-8") as fout:
+        fout.write(contents)
 
 @app.route("/weather")
 def hw01_localweather():
@@ -145,3 +156,32 @@ def hw04_aqicard():
         analy_dict["quality-class"], analy_dict["quality"] = get_quality(dict_data["aqi"])
         infomations.append(analy_dict)
     return render_template("hw04_aqicard.html", info=infomations)
+
+@app.route("/hw06/register/", methods=('GET', 'POST'))
+def hw06_register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        raws_json = read_file('app/data/users.json')
+        users = json.loads(raws_json)
+        repeat = ""
+        for user in users:
+            if user["username"] == form.username.data:
+                repeat = "Username"
+                break
+            if user["email"] == form.email.data :
+                repeat = "Email"
+                break
+        if repeat!="":
+            return render_template("lab06/hw06_register.html", form=form, status={"status": True, "message": f"{repeat} already exists."})
+        salt = gensalt()
+        users.append({"username": form.username.data, "email": form.email.data, "password": hashpw(form.password.data.encode(), salt).decode()})
+        print(users)
+        write_file("app/data/users.json", json.dumps(users, indent=4))
+        return redirect(url_for("hw06_users"))
+    return render_template("lab06/hw06_register.html", form=form, status={"status": False, "message": ""})
+
+@app.route("/hw06/users/")
+def hw06_users():
+    raws_json = read_file("app/data/users.json")
+    users = json.loads(raws_json)
+    return render_template("lab06/hw06_users.html", users=users)

@@ -3,6 +3,7 @@ from app import app
 from flask import jsonify, render_template, request, url_for, flash, redirect
 from app import hw_views
 from json import loads, dumps
+from app.forms.forms import CourseForm
 
 def read_file(filename, mode="rt"):
     with open(filename, mode, encoding='utf-8') as fin:
@@ -80,3 +81,25 @@ def lab03_create():
 @app.route("/crash/")
 def crash():
     return 1/0
+
+@app.route('/lab06/', methods=('GET', 'POST'))
+def lab06_index():
+   form = CourseForm()
+   if form.validate_on_submit():
+       raw_json = read_file('app/data/course_list.json')
+       course_list = loads(raw_json)
+       course_list.append({'title': form.title.data,
+                            'description': form.description.data,
+                            'price': form.price.data,
+                            'available': form.available.data,
+                            'level': form.level.data})
+       write_file('app/data/course_list.json', dumps(course_list, indent=4))
+       return redirect(url_for('lab06_courses'))
+   return render_template('lab06/index.html', form=form)
+    
+
+@app.route('/lab06/courses/')
+def lab06_courses():
+    raw_json = read_file('app/data/course_list.json')
+    course_list = loads(raw_json)
+    return render_template('lab06/courses.html', course_list=course_list)
