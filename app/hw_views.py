@@ -5,7 +5,7 @@
 import json
 from bcrypt import hashpw, gensalt
 from app import app
-from flask import jsonify, render_template, redirect, url_for, request
+from flask import jsonify, render_template, redirect, url_for, flash
 from urllib.request import urlopen
 
 from datetime import datetime, date, timedelta
@@ -172,13 +172,14 @@ def hw06_register():
                 repeat = "Email"
                 break
         if repeat!="":
-            return render_template("lab06/hw06_register.html", form=form, status={"status": True, "message": f"{repeat} already exists."})
+            flash(f"{repeat} already exists.", "error")
+            return render_template("lab06/hw06_register.html", form=form)
         salt = gensalt()
         users.append({"username": form.username.data, "email": form.email.data, "password": hashpw(form.password.data.encode(), salt).decode()})
         print(users)
         write_file("app/data/users.json", json.dumps(users, indent=4))
         return redirect(url_for("hw06_users"))
-    return render_template("lab06/hw06_register.html", form=form, status={"status": False, "message": ""})
+    return render_template("lab06/hw06_register.html", form=form)
 
 @app.route("/hw06/users/")
 def hw06_users():
