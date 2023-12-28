@@ -163,19 +163,21 @@ def hw06_register():
     if form.validate_on_submit():
         raws_json = read_file('app/data/users.json')
         users = json.loads(raws_json)
+        username = form.username.data.lower()
+        email = form.email.data.lower()
         repeat = ""
         for user in users:
-            if user["username"] == form.username.data:
+            if user["username"] == username:
                 repeat = "Username"
                 break
-            if user["email"] == form.email.data :
+            if user["email"] == email:
                 repeat = "Email"
                 break
         if repeat!="":
             flash(f"{repeat} already exists.", "error")
             return render_template("lab06/hw06_register.html", form=form)
         salt = gensalt()
-        users.append({"username": form.username.data, "email": form.email.data, "password": hashpw(form.password.data.encode(), salt).decode()})
+        users.append({"username": username, "email": email, "password": hashpw(form.password.data.encode(), salt).decode()})
         print(users)
         write_file("app/data/users.json", json.dumps(users, indent=4))
         return redirect(url_for("hw06_users"))
