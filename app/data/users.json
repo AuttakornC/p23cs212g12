@@ -1,7 +1,12 @@
 [
     {
-        "username": "AuttakornC14",
-        "email": "auttakorn@cmu.com",
-        "password": "$2b$12$3aSlW2/bBLxjLgL801deCOAWtQwXzW2pjblvP3xb/7GfVG5U96BKq"
+        "username": "auttakorn",
+        "email": "auttakorn@auttakorn.com",
+        "password": "$2b$12$MX01luEnIR1WzV3Qn4CV1OiQLaVhqZYkYlTkGwK47UwBbq.ZDLlKi"
+    },
+    {
+        "username": "auttakornc14",
+        "email": "autaakorn@aa.com",
+        "password": "$2b$12$TNUJBGZFJsETFE/oFfB9NuDSIZ1JcAtqcmxiuvaNatZxQHXFTj4Hm"
     }
 ]
