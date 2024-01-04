@@ -103,3 +103,11 @@ def lab06_courses():
     raw_json = read_file('app/data/course_list.json')
     course_list = loads(raw_json)
     return render_template('lab06/courses.html', course_list=course_list)
+
+@app.route("/lab07/")
+def lab07_form_validation():
+    return app.send_static_file("lab07_form_validation.html")
+
+@app.route("/lab07b/")
+def lab07b():
+    return app.send_static_file("lab07b.html")
