@@ -15,5 +15,6 @@ app.config["DEBUG"] = True
 app.config["SECRET_KEY"] = "ce9262b39d8efd3757681a63ea7a6f97e4da7bcc10871a17"
 # SECRET_KEY = urandom(32)
 # app.config['SECRET_KEY'] = SECRET_KEY
+app.config['JSON_AS_ASCII'] = False
 
 from app import views # noqa
