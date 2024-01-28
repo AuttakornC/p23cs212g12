@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=bananachoco123
+      - POSTGRES_USER=banana
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - cs212project
+  
+  server:
+    build: .
+    environment:  
+      - POSTGRES_PASSWORD=bananachoco123
+      - POSTGRES_USER=banana
+    depends_on:
+      - db
+    volumes:
+      - ./:/app/
+    networks:
+      - cs212project
+    ports:
+      - 56734:8000
+
+networks:
+  cs212project:
+
+volumes:
+  db_data:
