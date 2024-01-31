@@ -15,6 +15,7 @@ services:
   
   server:
     build: .
+    restart: always
     environment:  
       - POSTGRES_PASSWORD=bananachoco123
       - POSTGRES_USER=banana
