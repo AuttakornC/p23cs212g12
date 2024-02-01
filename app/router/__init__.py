@@ -3,4 +3,5 @@ from app.router import \
     register, \
     dashboard, \
     play, \
-    authen
+    authen, \
+    notfound
