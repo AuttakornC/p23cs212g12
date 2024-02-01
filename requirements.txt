@@ -4,3 +4,5 @@ Werkzeug==2.2.2
 pyjwt
 bcrypt==4.1.2
 psycopg2-binary
+Flask-WTF==1.0.1
+email-validator==2.0.0
