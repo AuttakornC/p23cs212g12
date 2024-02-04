@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Kanit');
+
+
 body {
-    font-family: 'Kanit', Arial, Helvetica, sans-serif;
+   font-family: 'Kanit', Arial, Helvetica, sans-serif;
 }
 
 
 * {
-    box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 
@@ -25,11 +27,13 @@ textarea {
 
 
 label {
-    width: 100px;
+   width: 100px;
 }
 
 
-input[type=submit] {
+input[type=submit],
+input[type=reset],
+button {
     background-color: #04AA6D;
     color: white;
     padding: 12px 20px;
@@ -40,7 +44,7 @@ input[type=submit] {
 
 
 input[type=submit]:hover {
-    background-color: #45a049;
+   background-color: #45a049;
 }
 
 
@@ -56,6 +60,11 @@ input[type=submit]:hover {
 }
 
 
+.box3 {
+    float: right;
+}
+
+
 .container {
     border-radius: 5px;
     background-color: #f2f2f2;
@@ -63,15 +72,33 @@ input[type=submit]:hover {
 }
 
 
-#contact-table {
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-
-
+#header {
+    background-color: #ffffff;
 }
 
 
-.greyed_active {
-    background-color: #ffffff;
+.left {
+    float: left;
+}
+
+
+.right {
+    float: right;
+}
+
+
+.edit {
+    margin-right: 10px;
+}
+
+
+.item {
+    margin-bottom: 20px;
+}
+
+
+#phonebook-table {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
 }
