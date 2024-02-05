@@ -14,7 +14,6 @@ class Contact(db.Model, SerializerMixin):
         self.lastname = lastname
         self.phone = phone
 
-
     def update(self, firstname, lastname, phone):
         self.firstname = firstname
         self.lastname = lastname

@@ -6,6 +6,7 @@ from sqlalchemy.sql import text
 from app import app
 from app import db
 from app.models.contact import Contact
+from app.models.blog import BlogEntry
 
 @ app.route('/')
 def home():
@@ -78,7 +79,6 @@ def lab10_phonebook():
                 contact = Contact.query.get(id_)
                 contact.update(**validated_dict)
 
-
             db.session.commit()
 
 
@@ -99,3 +99,61 @@ def lab10_remove_contacts():
            app.logger.error(f"Error removing contact with id {id_}: {ex}")
            raise
     return lab10_db_contacts()
+
+@app.route("/hw10")
+def hw10():
+    return app.send_static_file("lab11_microblog.html")
+
+
+@app.route("/hw10/blog", methods=('GET', 'POST', 'DELETE'))
+def hw10_blog():
+    if request.method == 'POST':
+        request_data = request.form.to_dict()
+        try:
+            id_, name, email, message = request_data.get("id", ""), request_data["name"], request_data["email"], request_data["message"]
+        except:
+            return jsonify({"message": "Your request don't have some arguments."}), 400
+        have_err = False
+        err_dict = {}
+        if len(name) > 50:
+            have_err = True
+            err_dict["name"] = "Name must less than 51 charactors."
+        if len(email) > 50:
+            have_err = True
+            err_dict["email"] = "Email must less than 51 charactors."
+        elif len(list(filter(lambda x: len(x)>0, email.split("@"))))!=2 or \
+            len(list(filter(lambda x: len(x)>0, email.split("@")[1].split(".")))) <= 1 :
+            have_err = True
+            err_dict["email"] = "Email's wrong format."
+        
+        if len(message) > 280:
+            have_err = True
+            err_dict["message"] = "Message must less than 281 charactors."
+        if have_err:
+            return jsonify(err_dict), 400
+        
+        if id_=="":
+            db.session.add(BlogEntry(name, message, email))
+        else :
+            blog = BlogEntry.query.get(id_)
+            blog.update(name, message, email)
+        db.session.commit()
+
+        return ""
+    elif request.method=='DELETE':
+        request_data = request.form.to_dict()
+        try:
+            id_ = request_data["id"]
+            blog = BlogEntry.query.get(id_)
+            db.session.delete(blog)
+            db.session.commit()
+        except Exception as ex:
+            app.logger.error(f"Error removing contact with id {id_}: {ex}")
+            return ""
+        return ""
+    else :
+        blogs = []
+        db_blogs = BlogEntry.query.all()
+
+        blogs = list(map(lambda x: x.to_dict(), db_blogs))
+        return jsonify(blogs)

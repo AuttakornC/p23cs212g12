@@ -1,0 +1,47 @@
+.my-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.my-form > label {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.my-form > input[type=submit] {
+    background-color: rgb(70, 212, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
+
+.my-form > input[type=submit]:hover {
+    background-color: rgb(47, 154, 187);
+}
+
+.content-message {
+    margin: 0.7rem 0;
+}
+
+.edit-text {
+    color: gray;
+    font-size: 0.75rem;
+}
+
+.btn-post span {
+    cursor: pointer;
+}
+
+.err {
+    position: absolute;
+    right: 0;
+    top: 0.25rem;
+    color: red;
+    font-size: 0.75rem;
+}
