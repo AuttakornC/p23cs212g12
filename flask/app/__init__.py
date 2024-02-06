@@ -3,17 +3,14 @@ from flask import Flask
 from werkzeug.debug import DebuggedApplication
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__, static_folder='static')
 app.url_map.strict_slashes = False
-
 
 app.jinja_options = app.jinja_options.copy()
 app.jinja_options.update({
     'trim_blocks': True,
     'lstrip_blocks': True
 })
-
 
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = \
@@ -31,4 +28,4 @@ if app.debug:
 db = SQLAlchemy(app)
 
 
-from app import views  # noqa
+from app import route  # noqa
