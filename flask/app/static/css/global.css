@@ -1,0 +1,30 @@
+* {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    --choco-color: #725C3A;
+    --main1-color: #EEBA74;
+    --main2-color: #F6D394;
+    --main3-color: #FEECB3;
+    --banana-color: #FFE86E;
+    --white-color: #fff;
+
+    min-height: 100vh;
+}
+
+.icon-btn {
+    border-radius: 50%;
+    border: none;
+    width: 4rem;
+    height: 4rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    cursor: pointer;
+    background-color: var(--main3-color);
+}
