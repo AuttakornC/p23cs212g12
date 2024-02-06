@@ -100,9 +100,9 @@ def lab10_remove_contacts():
            raise
     return lab10_db_contacts()
 
-@app.route("/lab11")
+@app.route("/hw10")
 def lab11():
-    return app.send_static_file("lab11_microblog.html")
+    return app.send_static_file("hw10_microblog.html")
 
 
 @app.route("/hw10/blog", methods=('GET', 'POST', 'DELETE'))

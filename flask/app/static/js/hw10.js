@@ -94,12 +94,8 @@ function createBlog(id, name, email, message, create_time, update_time) {
                 Last Edit : ${padZero(update_date.getDate(), 2)}/${padZero(update_date.getMonth()+1, 2)}/${update_date.getFullYear()%100} - ${padZero(update_date.getHours(), 2)}:${padZero(update_date.getMinutes(), 2)}
             </div>` : ""}
             <div class="row text-muted btn-post">
-                <div class="col-md-2"><span class="oi oi-bullhorn"></span></div>
-                <div class="col-md-2"><span class="oi oi-loop-circular"></span></div>
-                <div class="col-md-2"><span class="oi oi-heart"></span></div>
-                <div class="col-md-2"><span class="oi oi-envelope-open"></span></div>
-                <div class="col-md-2"><span class="oi oi-pencil" onclick="onEdit('${id}', '${name}', '${email}', '${message}')"></span></div>
-                <div class="col-md-2"><span class="oi oi-trash" onclick="onDelete('${id}')"></span></div>
+                <div class="col-md-6 text-center"><span class="oi oi-pencil" onclick="onEdit('${id}', '${name}', '${email}', '${message}')"></span></div>
+                <div class="col-md-6 text-center"><span class="oi oi-trash" onclick="onDelete('${id}')"></span></div>
             </div>
         </div>
     </div>
