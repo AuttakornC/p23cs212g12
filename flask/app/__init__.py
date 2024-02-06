@@ -3,7 +3,7 @@ from flask import Flask
 from werkzeug.debug import DebuggedApplication
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, static_folder='static', template_folder='template')
 app.url_map.strict_slashes = False
 
 app.jinja_options = app.jinja_options.copy()
