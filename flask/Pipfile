@@ -13,6 +13,7 @@ email-validator = "==2.0.0"
 flask-sqlalchemy = "==3.0.2"
 psycopg2-binary = "==2.9.5"
 sqlalchemy-serializer = "==1.4.1"
+flask-session = "==0.6.0"
 
 [dev-packages]
 pylint = "*"
