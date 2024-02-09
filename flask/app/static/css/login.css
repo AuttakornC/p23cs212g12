@@ -5,6 +5,15 @@ body {
     align-items: center;
 }
 
+.err_text {
+    color: var(--danger-color);
+    font-size: 0.7rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+}
+
 header {
     color: var(--banana-color);
     width: 100%;
@@ -69,7 +78,7 @@ form > .login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.9rem;
 }
 
 form > .login-form > h1 {
@@ -84,8 +93,9 @@ form > .login-form > label {
     font-size: 1.1rem;
 }
 
-form > .login-form > input {
-    width: 80%;
+form > .login-form > label > input {
+    width: 100%;
+    margin-top: 0.5rem;
     font-size: 0.9rem;
     padding: 0.3rem;
     color: var(--choco-color);
@@ -94,7 +104,11 @@ form > .login-form > input {
     border: 2px solid var(--main2-color);
 }
 
-form > .login-form > input:focus {
+form > .login-form > label > input.err {
+    border-color: var(--danger-color);
+}
+
+form > .login-form  > input:focus {
     outline: none;
     border-color: var(--choco-color);
 }
@@ -264,5 +278,18 @@ footer > a:visited {
     form > .login-form > button {
         width: 50%;
     }
+
+    header > h1 {
+        font-size: 3rem;
+        /* color: var(--main1-color); */
+    }
+
+    header > div.group > h4 {
+        font-size: 1.25rem;
+        /* color: var(--main1-color); */
+    }
     
+    form > .login-form > label > input {
+        font-size: 1.2rem;
+    }
 }
