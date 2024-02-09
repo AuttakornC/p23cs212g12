@@ -9,10 +9,15 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100))
     password = db.Column(db.String(255))
+    avatar_url = db.Column(db.String(255))
     # use for check bruteforce
     failround = db.Column(db.Integer)
 
     def __init__(self, email:str, password:str):
         self.email = email
         self.password = hashpw(password.encode(), gensalt())
+        self.avatar_url = f'https://ui-avatars.com/api/?name={email[0]}+{email[1]}&background=f6d394&color=725c3a'
         self.failround = 0
+    
+    def updateAVT(self, avatar_url):
+        self.avatar_url = avatar_url

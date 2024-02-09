@@ -29,3 +29,5 @@ db = SQLAlchemy(app)
 
 
 from app import route  # noqa
+from app.routes.api import api
+app.register_blueprint(api)
