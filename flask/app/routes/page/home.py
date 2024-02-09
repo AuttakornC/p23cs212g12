@@ -1,10 +1,9 @@
 from app import app
-from flask import session, redirect
-from app.routes.page.login import login
+from flask import session, redirect, render_template
 
 @app.route("/")
 def home():
     if "token" in session:
-        return "Home"
+        return render_template("home.html")
     else:
         return redirect("/login")

@@ -1,6 +1,10 @@
 #!/bin/sh
 
 if [ "$APP_ENV" = "development" ]; then
+    echo "Creating Database..."
+    python3 manage.py create_db
+    echo "Complete."
+    
     if [ "$FLASK_DEBUG" = "1" ]; then
         echo "Running on Flask Development Server"
         python3 main.py

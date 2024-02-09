@@ -1,1 +1,1 @@
-from app.routes.page import home, login, register
+from app.routes.page import home, login, register, notfound

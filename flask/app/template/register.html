@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block cssimp %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+<header style="margin-top: 0;">
+    <h1>Banana Choco</h1>
+    <div class="group">
+        <hr>
+        <h4>flash card</h4>
+        <hr>
+    </div>
+    <div class="bg"></div>
+</header>
+<form>
+    <h1>Register</h1>
+    <label for="email">Email</label>
+    <input type="text" name="email" placeholder="Email...">
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Password...">
+    <label for="c_password">Confirm Password</label>
+    <input type="password" name="c_password" placeholder="Confirm Password...">
+    <button type="submit">Sign Up</button>
+    <div class="or">
+        <hr style="border-top-right-radius: 1rem;border-bottom-right-radius: 1rem;">
+        <h3>or</h3>
+        <hr style="border-top-left-radius: 1rem;border-bottom-left-radius: 1rem;">
+    </div>
+    <div class="sso-group">
+        <button type="button" class="icon-btn" style="background-image: url(/static/image/google-icon.png);"></button>
+        <button type="button" class="icon-btn" style="background-image: url(/static/image/ms-icon.png);"></button>
+    </div>
+</form>
+<footer>Already have an account? <a href="/login"><b><u>Sign In</u></b></a></footer>
+{% endblock %}
