@@ -23,19 +23,20 @@
     <div class="login-banner">
         <div>
             <h1>Hello,<br>Welcome!</h1>
-            <h5>Plase Login to continue</h5>
+            <h5 id="subtitle">Plase Login to continue</h5>
         </div>
     </div>
     <div class="line-stand"></div>
     <div class="login-form">
-        <h1>Login</h1>
+        <h1 id="title">Login</h1>
+        <input type="text" name="type" value="login" hidden>
         <label id="email" for="email">Email <br>
             <input type="text" name="email" placeholder="Email...">
         </label>
         <label id="password" for="password">Password <br>
             <input type="password" name="password" placeholder="Password...">
         </label>
-        <button type="submit">Login</button>
+        <button id="submit-btn" type="submit">Login</button>
         <div class="or">
             <hr style="border-top-right-radius: 1rem;border-bottom-right-radius: 1rem;">
             <h3>or</h3>
@@ -49,10 +50,10 @@
             <button type="button"><img src="/static/image/google-icon.png" alt=""> Login with Google</button>
             <button type="button"><img src="/static/image/ms-icon.png" alt=""> Login with Microsoft</button>
         </div>
-        <div class="dont-have">Don't have an account? <a href="/register"><b><u>Sign Up</u></b></a></div>
+        <div id="account-status" class="dont-have">Don't have an account? <b id="change_type"><u>Sign Up</u></b></a></div>
     </div>
 </form>
-<footer>Don't have an account? <a href="/register"><b><u>Sign Up</u></b></a></footer>
+<footer id="account-status">Don't have an account? <b id="change_type"><u>Sign Up</u></b></footer>
 {% endblock %}
 
 {% block script %}

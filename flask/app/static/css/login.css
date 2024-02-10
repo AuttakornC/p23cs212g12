@@ -97,7 +97,7 @@ form > .login-form > label > input {
     width: 100%;
     margin-top: 0.5rem;
     font-size: 0.9rem;
-    padding: 0.3rem;
+    padding: 0.3rem 0.6rem;
     color: var(--choco-color);
     background-color: var(--main3-color);
     border-radius: 0.75rem;
@@ -177,8 +177,12 @@ footer {
     color: var(--choco-color);
 }
 
-footer > a:visited {
-    color: var(--choco-color);
+footer b {
+    cursor: pointer;
+}
+
+footer b:hover {
+    color: var(--banana-color);
 }
 
 @media screen and (min-width: 601px) {
@@ -190,8 +194,12 @@ footer > a:visited {
         display: block;
     }
 
-    form > .login-form > .dont-have > a:visited {
-        color: var(--choco-color);
+    form > .login-form > .dont-have b {
+        cursor: pointer;
+    }
+
+    form > .login-form > .dont-have b:hover {
+        color: var(--banana-color);
     }
 
     form {

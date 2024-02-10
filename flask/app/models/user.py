@@ -17,7 +17,7 @@ class User(db.Model, SerializerMixin):
     def __init__(self, email:str, username:str, password:str):
         self.email = email
         self.username = username;
-        self.password = hashpw(password.encode(), gensalt())
+        self.password = hashpw(password.encode(), gensalt()).decode()
         self.avatar_url = f'https://ui-avatars.com/api/?name={email[0]}+{email[1]}&background=f6d394&color=725c3a'
         self.failround = 0
     

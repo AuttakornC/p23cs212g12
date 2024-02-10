@@ -1,27 +1,94 @@
+// Switch Login And Sign Up
+
+function createInputElement(id, label, type, placeh) {
+    const label_t = document.createElement("label");
+    label_t.appendChild(document.createTextNode(label));
+    label_t.appendChild(document.createElement("br"));
+    label_t.setAttribute("for", id);
+    label_t.setAttribute("id", id);
+    const input_t = document.createElement("input");
+    input_t.name = id;
+    input_t.type = type;
+    input_t.placeholder = placeh;
+    label_t.appendChild(input_t);
+    return label_t
+}
+
+const change_type_button = document.getElementById("change_type");
+change_type_button.addEventListener("click", (e)=>{
+    const current_type = document.getElementById("login-form");
+    const title = document.getElementById("title");
+    const submit_btn = document.getElementById("submit-btn");
+    const account_status = document.getElementById("account-status");
+    const sub_title = document.getElementById("subtitle");
+    if (current_type[0].value==="login") {
+        current_type[0].value="register";
+        document.getElementById("email").insertAdjacentElement("beforebegin", createInputElement("username", "Username", "text", "Username..."));
+        document.getElementById("password").insertAdjacentElement("afterend", createInputElement("c_password", "Confirm Password", "password", "Confirm Password..."));
+        title.innerHTML = "Register";
+        submit_btn.innerHTML = "Register";
+        change_type_button.firstChild.innerHTML = "Sign In";
+        account_status.firstChild.replaceWith(document.createTextNode("Already have accounts? "));
+        sub_title.innerHTML = "Plase Register to continue"
+    } else {
+        current_type[0].value="login";
+        try {document.getElementById("username").remove();} catch (error) {}
+        try {document.getElementById("c_password").remove();} catch (error) {}
+        title.innerHTML = "Login";
+        submit_btn.innerHTML = "Login"
+        change_type_button.firstChild.innerHTML = "Sign Up";
+        account_status.firstChild.replaceWith(document.createTextNode("Don't have an account? "));
+        sub_title.innerHTML = "Plase Login to continue"
+    }
+    clearErr();
+
+});
+
+// on submit form
 
 const login_f = document.getElementById("login-form");
 login_f.addEventListener("submit", (e)=>{
     e.preventDefault();
-
-    const form_object = {
-        email: e.target.email.value,
-        password: e.target.password.value
-    };
-    clearErr();
-    const form_checked = formValidate(form_object);
-    if (form_checked[0]) {
-        // not pass
-        errHandle(form_checked[1]);
+    if (e.target.type.value==="login") {
+        const form_object = {
+            email: e.target.email.value,
+            password: e.target.password.value
+        };
+        clearErr();
+        const form_checked = formValidateLogin(form_object);
+        if (form_checked[0]) {
+            // not pass
+            errHandle(form_checked[1]);
+        } else {
+            // pass
+            onLogin(form_object);
+        }
     } else {
-        // pass
-        onLogin(form_object);
+        const form_object = {
+            username: e.target.username.value,
+            email: e.target.email.value,
+            password: e.target.password.value,
+            c_password: e.target.c_password.value
+        }
+        clearErr();
+        const form_checked = formValidateRegister(form_object);
+        if (form_checked[0]) {
+            // not pass
+            errHandle(form_checked[1]);
+        } else {
+            onRegister(form_object);
+        }
     }
 });
 
+
+// Log In //
+
+// function send login
 async function onLogin(body) {
-    const res = await fetch("/api/login", body);
-    const result = await res.json();
+    const res = await fetch("/api/login", { method: "POST", body: JSON.stringify(body), headers: {"Content-Type": "application/json"} });
     if (res.status===400) {
+        const result = await res.json();
         let err_message = {}
         result.err.forEach(err_code=>{
             if (err_code==="EMAIL_NFOUND") {
@@ -32,14 +99,12 @@ async function onLogin(body) {
         });
         errHandle(err_message);
     } else if (res.status===200) {
-        const token = result.data.token;
-        sessionStorage.setItem("token", token);
         window.location.reload()
     }
 }
 
-// function for validate form
-function formValidate(data) {
+// function for validate login form
+function formValidateLogin(data) {
     let have_err = false;
     let err_message = {};
     
@@ -51,16 +116,75 @@ function formValidate(data) {
     // password check
     if (!data.password || data.password.length < 8 || data.password.length > 20) {
         have_err = true;
-        err_message["password"] = "password must be in range 8-20 charactors";
+        err_message["password"] = "password must be in range 8-20 charactors.";
     }
 
     return [have_err, err_message];
 }
 
+// Register //
+
+// function send register
+async function onRegister(body) {
+    const res = await fetch("/api/register", {method: "POST", body: JSON.stringify(body), headers: {"Content-Type": "application/json"}});
+    
+    if (res.status===200) {
+        window.location.reload();
+    } else if (res.status===400) {
+        const result = await res.json();
+        const err = result.err;
+        let err_message = {}
+        err.forEach(err_code=>{
+            if (err_code==="EMAIL_INVALID") {
+                err_message["email"] = "email's invalid.";
+            } else if (err_code==="EMAIL_ALREADY") {
+                err_message["email"] = "this email's already used.";
+            } else if (err_code==="PASS_LEN") {
+                err_message["password"] = "password must be in range 8-20 charactors.";
+            } else if (err_code==="PASS_NEQUAL") {
+                err_message["c_password"] = "confirm password must match with password.";
+            } else if (err_code==="NAME_LEN") {
+                err_message["username"] = "username must be in range 8-20 charactors.";
+            }
+        });
+        errHandle(err_message);
+    }
+}
+
+// function for validate register form
+function formValidateRegister(data) {
+    let have_err = false;
+    let err_message = {};
+
+    if (!data.username || data.username.length < 8 || data.username.length > 20) {
+        have_err = true;
+        err_message["username"] = "username must be in range 8-20 charactors.";
+    }
+    
+    // email check
+    if (!data.email || data.email.split("@").length!==2 || !data.email.split("@")[1].includes(".") || data.email[data.email.length-1]==".") {
+        have_err = true;
+        err_message["email"] = "email's invalid.";
+    }
+    // password check
+    if (!data.password || data.password.length < 8 || data.password.length > 20) {
+        have_err = true;
+        err_message["password"] = "password must be in range 8-20 charactors.";
+    }
+
+    if (!data.password || !data.c_password || data.password!=data.c_password) {
+        have_err = true;
+        err_message["c_password"] = "confirm password must match with password.";
+    }
+
+    return [have_err, err_message];
+}
+
+// Lib //
+
 // function for err show
 function errHandle(data) {
     for (const key in data) {
-        console.log(key);
         const element = document.getElementById(key);
 
         // console.log(element.children);
@@ -86,3 +210,5 @@ function clearErr() {
     }
     
 }
+
+login_f.reset();
