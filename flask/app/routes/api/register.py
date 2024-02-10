@@ -2,23 +2,32 @@ from app.routes.api import api
 from flask import request, jsonify
 from app.models.user import User
 from app import db
-
-def checkEmail(email:str):
-    return len(email.split("@")) == 2 and email.split("@")[1].count(".")>0
+from app.lib.validate import emailValidate, lengthCheck, EMAIL_ERR, PASS_LEN, USERNAME_LEN, PASS_NOT_EQUAL, BODY_NOT_CORRECT
+from app.lib.request import badRequest, success
 
 @api.route("/register", methods=["POST"])
 def register():
+    # check form body
     body = request.data
-    email, password, c_password = "", "", ""
+    username, email, password, c_password = "", "", "", ""
     try:
-        email, password, c_password = body["email"], body["password"], body["c_password"]
-        if not checkEmail(email):
-            raise "wrong format email."
+        username, email, password, c_password = body["username"], body["email"], body["password"], body["c_password"]
     except:
-        return jsonify({ "message": "bad request." }), 400
+        return badRequest([BODY_NOT_CORRECT])
     
-    if password == c_password:
-        db.session.add(User(email, password))
-        db.session.commit()
-        return jsonify({ "message": "success" }), 200
-    return jsonify({ "message": "password and confirm password not equal." }), 400
+    # validate form
+    fail_form = []
+    if not emailValidate(email):
+        fail_form.append(EMAIL_ERR)
+    if not lengthCheck(password):
+        fail_form.append(PASS_LEN)
+    if not lengthCheck(username):
+        fail_form.append(USERNAME_LEN)
+    if password != c_password:
+        fail_form.append(PASS_NOT_EQUAL)
+    if len(fail_form) != 0:
+        return badRequest(fail_form)
+
+    db.session.add(User(email, username, password))
+    db.session.commit()
+    return success()

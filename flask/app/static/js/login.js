@@ -8,17 +8,35 @@ login_f.addEventListener("submit", (e)=>{
         password: e.target.password.value
     };
     clearErr();
-    console.log(form_object);
     const form_checked = formValidate(form_object);
     if (form_checked[0]) {
         // not pass
         errHandle(form_checked[1]);
     } else {
         // pass
-        console.log("Pass");
+        onLogin(form_object);
     }
-
 });
+
+async function onLogin(body) {
+    const res = await fetch("/api/login", body);
+    const result = await res.json();
+    if (res.status===400) {
+        let err_message = {}
+        result.err.forEach(err_code=>{
+            if (err_code==="EMAIL_NFOUND") {
+                err_message["email"] = "Not found this email."
+            } else if (err_code==="PASS_WRONG") {
+                err_message["password"] = "Password's not correct."
+            }
+        });
+        errHandle(err_message);
+    } else if (res.status===200) {
+        const token = result.data.token;
+        sessionStorage.setItem("token", token);
+        window.location.reload()
+    }
+}
 
 // function for validate form
 function formValidate(data) {

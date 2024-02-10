@@ -1,1 +1,0 @@
-from app.routes.page import home, login, register, notfound

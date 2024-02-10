@@ -1,6 +1,6 @@
-from app import app
+from app.routes.page import main
 from flask import render_template
 
-@app.route("/register")
+@main.route("/register")
 def register():
     return render_template("register.html")

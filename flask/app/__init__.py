@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from werkzeug.debug import DebuggedApplication
 from flask_sqlalchemy import SQLAlchemy
+from app.middleware.authen import authen
 
 app = Flask(__name__, static_folder='static', template_folder='template')
 app.url_map.strict_slashes = False
@@ -28,6 +29,13 @@ if app.debug:
 db = SQLAlchemy(app)
 
 
-from app import route  # noqa
+# from app import route  # noqa
+from app.routes.page import notfound
+from app.routes.page import main
 from app.routes.api import api
+app.before_request_funcs = {
+    "main": [authen],
+    "api": []
+}
+app.register_blueprint(main)
 app.register_blueprint(api)

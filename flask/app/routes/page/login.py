@@ -1,6 +1,6 @@
-from app import app
+from app.routes.page import main
 from flask import render_template
 
-@app.route("/login")
+@main.route("/login")
 def login():
     return render_template("login.html")
