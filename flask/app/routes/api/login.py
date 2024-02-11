@@ -1,6 +1,6 @@
-from app import app
+from app import app, oauth
 from app.routes.api import api
-from flask import request, current_app, session
+from flask import request, current_app, session, url_for
 from app.models.user import User
 from bcrypt import checkpw
 from jwt import encode

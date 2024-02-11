@@ -26,3 +26,9 @@ class User(db.Model, SerializerMixin):
     
     def updateName(self, name:str):
         self.name = name;
+
+    def updatePass(self, password:str, _bycrypt=True):
+        if _bycrypt:
+            self.password = hashpw(password.encode(), gensalt()).decode()
+        else:
+            self.password = password
