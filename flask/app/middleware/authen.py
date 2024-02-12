@@ -1,6 +1,5 @@
-from app import app
+# lib from py
 from flask import session, render_template
-from jwt import decode
 
 def authen():
     if "token" not in session:

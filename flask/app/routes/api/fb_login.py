@@ -1,9 +1,12 @@
+# lib from py
+from flask import redirect, url_for
+from datetime import datetime, timezone
+
+# my lib
 from app.routes.api import api
 from app import oauth, app, db
-from flask import redirect, url_for, session
 from app.models.user import User
-from datetime import datetime, timezone
-from jwt import encode
+from app.lib.token import encodeJWT
 
 @api.route("/login/fb")
 def login_fb():
@@ -45,7 +48,6 @@ def login_fb_auth():
 
     # encode with jwt (json web token)
     data = { "id": user.id, "email": user.email, "username": user.username, "exp": int(datetime.now(timezone.utc).timestamp()) }
-    session["token"] = encode(data, app.config["SECRET_KEY"])
-    
+    encodeJWT(data)
     
     return redirect(url_for("main.home"))

@@ -1,12 +1,15 @@
-from app import app, oauth
-from app.routes.api import api
-from flask import request, current_app, session, url_for
-from app.models.user import User
+# lib from py
 from bcrypt import checkpw
-from jwt import encode
+from datetime import datetime, timezone
+from flask import request
+
+# my lib
+from app import app
+from app.routes.api import api
+from app.models.user import User
 from app.lib.validate import emailValidate, lengthCheck, EMAIL_ERR, PASS_LEN, EMAIL_NOT_FOUND, BODY_NOT_CORRECT, PASS_WRONG
 from app.lib.request import success, badRequest
-from datetime import datetime, timezone
+from app.lib.token import encodeJWT
 
 @api.route("/login", methods=["POST"])
 def api_login():
@@ -35,10 +38,8 @@ def api_login():
     
     # check password in database
     if checkpw(str(password).encode(), user.password.encode()):
-        secret = current_app.config['SECRET_KEY']               # get secret key at app/__init__.py
         payload = { "id": user.id, "email": user.email, "username": user.username, "exp": int(datetime.now(timezone.utc).timestamp()) }
-        encoded = encode(payload, secret)
-        session["token"] = encoded                              # use jwt encode to get token
+        encodeJWT(payload)
         return success()
 
     return badRequest(PASS_WRONG)

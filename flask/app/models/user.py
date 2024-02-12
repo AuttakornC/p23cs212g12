@@ -1,6 +1,9 @@
-from app import db
+# lib from py
 from sqlalchemy_serializer import SerializerMixin
 from bcrypt import gensalt, hashpw
+
+# my lib
+from app import db
 
 # Model of User
 class User(db.Model, SerializerMixin):

@@ -1,9 +1,12 @@
+# lib from py
 import os
 from flask import Flask
 from werkzeug.debug import DebuggedApplication
 from flask_sqlalchemy import SQLAlchemy
-from app.middleware.authen import authen
 from authlib.integrations.flask_client import OAuth
+
+# my lib
+from app.middleware.authen import authen
 
 app = Flask(__name__, static_folder='static', template_folder='template')
 app.url_map.strict_slashes = False
