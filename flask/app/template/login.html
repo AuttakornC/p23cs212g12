@@ -43,12 +43,12 @@
             <hr style="border-top-left-radius: 1rem;border-bottom-left-radius: 1rem;">
         </div>
         <div class="sso-group-sm">
-            <button type="button" class="icon-btn" style="background-image: url(/static/image/google-icon.png);"></button>
-            <button type="button" class="icon-btn" style="background-image: url(/static/image/ms-icon.png);"></button>
+            <button onclick="window.location.href='/api/login/google'" type="button" class="icon-btn" style="background-image: url(/static/image/google-icon.png);"></button>
+            <button onclick="window.location.href='/api/login/fb'" type="button" class="icon-btn" style="background-image: url(/static/image/fb-icon.png);"></button>
         </div>
         <div class="sso-group-dk">
-            <button type="button" onclick="window.location.href='/api/login/google'"><img src="/static/image/google-icon.png" alt=""> Login with Google</button>
-            <button type="button"><img src="/static/image/ms-icon.png" alt=""> Login with Microsoft</button>
+            <button id="google-login-btn" type="button" onclick="window.location.href='/api/login/google'"><img src="/static/image/google-icon.png" alt=""> Login with Google</button>
+            <button id="fb-login-btn" type="button" onclick="window.location.href='/api/login/fb'"><img src="/static/image/fb-icon.png" alt=""> Login with Facebook</button>
         </div>
         <div id="account-status" class="dont-have">Don't have an account? <b id="change_type"><u>Sign Up</u></b></a></div>
     </div>

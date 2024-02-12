@@ -1,0 +1,51 @@
+from app.routes.api import api
+from app import oauth, app, db
+from flask import redirect, url_for, session
+from app.models.user import User
+from datetime import datetime, timezone
+from jwt import encode
+
+@api.route("/login/fb")
+def login_fb():
+    oauth.register(
+        "facebook",
+        client_id=app.config["FB_CLIENT_ID"],
+        client_secret=app.config["FB_CLIENT_SECRET"],
+        access_token_url='https://graph.facebook.com/oauth/access_token',
+        access_token_params=None,
+        authorize_url='https://www.facebook.com/dialog/oauth',
+        authorize_params=None,
+        api_base_url='https://graph.facebook.com/',
+        client_kwargs={'scope': 'email'},
+    )
+    
+    redirected_uri = url_for("api.login_fb_auth", _external=True)
+    return oauth.facebook.authorize_redirect(redirected_uri)
+
+@api.route("/login/fb/auth")
+def login_fb_auth():
+    token = oauth.facebook.authorize_access_token()
+    resp = oauth.facebook.get('https://graph.facebook.com/me?fields=id,name,email,picture{url}')
+    user_info = resp.json() # { "email": "", "id": 0, "name": "", "picture": { "data": { "url": "" } } }
+
+    try:
+        name = user_info["name"]
+        email = user_info["email"]
+        picture = user_info["picture"]["data"]["url"]
+    except:
+        return redirect(url_for("main.home"))
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        db.session.add(User(email, name, picture))
+        db.session.commit()
+    
+    user = User.query.filter_by(email=email).first()
+
+    # encode with jwt (json web token)
+    data = { "id": user.id, "email": user.email, "username": user.username, "exp": int(datetime.now(timezone.utc).timestamp()) }
+    session["token"] = encode(data, app.config["SECRET_KEY"])
+    
+    
+    return redirect(url_for("main.home"))

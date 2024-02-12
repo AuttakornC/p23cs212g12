@@ -21,6 +21,8 @@ change_type_button.addEventListener("click", (e)=>{
     const submit_btn = document.getElementById("submit-btn");
     const account_status = document.getElementById("account-status");
     const sub_title = document.getElementById("subtitle");
+    const google_btn = document.getElementById("google-login-btn");
+    const facebook_btn = document.getElementById("fb-login-btn");
     if (current_type[0].value==="login") {
         current_type[0].value="register";
         document.getElementById("email").insertAdjacentElement("beforebegin", createInputElement("username", "Username", "text", "Username..."));
@@ -30,6 +32,8 @@ change_type_button.addEventListener("click", (e)=>{
         change_type_button.firstChild.innerHTML = "Sign In";
         account_status.firstChild.replaceWith(document.createTextNode("Already have accounts? "));
         sub_title.innerHTML = "Plase Register to continue"
+        google_btn.lastChild.replaceWith(document.createTextNode("Register with Google"));
+        facebook_btn.lastChild.replaceWith(document.createTextNode("Register with Facebook"));
     } else {
         current_type[0].value="login";
         try {document.getElementById("username").remove();} catch (error) {}
@@ -38,7 +42,9 @@ change_type_button.addEventListener("click", (e)=>{
         submit_btn.innerHTML = "Login"
         change_type_button.firstChild.innerHTML = "Sign Up";
         account_status.firstChild.replaceWith(document.createTextNode("Don't have an account? "));
-        sub_title.innerHTML = "Plase Login to continue"
+        sub_title.innerHTML = "Plase Login to continue";
+        google_btn.lastChild.replaceWith(document.createTextNode("Login with Google"));
+        facebook_btn.lastChild.replaceWith(document.createTextNode("Login with Facebook"));
     }
     clearErr();
 

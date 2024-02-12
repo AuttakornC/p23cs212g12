@@ -36,7 +36,7 @@ def api_login():
     # check password in database
     if checkpw(str(password).encode(), user.password.encode()):
         secret = current_app.config['SECRET_KEY']               # get secret key at app/__init__.py
-        payload = { "id": user.id, "email": user.email, "exp": int(datetime.now(timezone.utc).timestamp()) }
+        payload = { "id": user.id, "email": user.email, "username": user.username, "exp": int(datetime.now(timezone.utc).timestamp()) }
         encoded = encode(payload, secret)
         session["token"] = encoded                              # use jwt encode to get token
         return success()

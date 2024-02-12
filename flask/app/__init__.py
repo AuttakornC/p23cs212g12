@@ -21,7 +21,8 @@ app.config['JSON_AS_ASCII'] = False
 app.config['GOOGLE_CLIENT_ID'] = os.getenv("GOOGLE_CLIENT_ID", None)
 app.config['GOOGLE_CLIENT_SECRET'] = os.getenv("GOOGLE_CLIENT_SECRET", None)
 app.config['GOOGLE_DISCOVERY_URL'] = os.getenv("GOOGLE_RECOVERY", None)
-
+app.config['FB_CLIENT_ID']= os.getenv("FB_CLIENT_ID", None)
+app.config['FB_CLIENT_SECRET'] = os.getenv("FB_CLIENT_SECRET", None)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite://")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

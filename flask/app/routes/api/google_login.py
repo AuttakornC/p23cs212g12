@@ -38,8 +38,7 @@ def login_google_auth():
         db.session.commit()
 
     user = User.query.filter_by(email=user_info["email"]).first()
-    payload = { "id": user.id, "email": user.email, "exp":  int(datetime.now(timezone.utc).timestamp())}
-    encoded = encode(payload, app.config["SECRET_KEY"])
-    session["token"] = encoded
+    data = { "id": user.id, "email": user.email, "exp":  int(datetime.now(timezone.utc).timestamp())}
+    session["token"] = encode(data, app.config["SECRET_KEY"])
     return redirect(url_for("main.home"))
     
