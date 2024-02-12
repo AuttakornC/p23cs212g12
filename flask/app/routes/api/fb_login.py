@@ -41,7 +41,10 @@ def login_fb_auth():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        db.session.add(User(email, name, picture))
+        new_user = User(email, name, "-")
+        new_user.updateAVT(picture)
+        new_user.updatePass("-", False)
+        db.session.add(new_user)
         db.session.commit()
     
     user = User.query.filter_by(email=email).first()
