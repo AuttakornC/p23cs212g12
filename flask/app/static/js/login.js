@@ -31,7 +31,7 @@ change_type_button.addEventListener("click", (e)=>{
         submit_btn.innerHTML = "Register";
         change_type_button.firstChild.innerHTML = "Sign In";
         account_status.firstChild.replaceWith(document.createTextNode("Already have accounts? "));
-        sub_title.innerHTML = "Plase Register to continue"
+        sub_title.innerHTML = "Please Register to continue"
         google_btn.lastChild.replaceWith(document.createTextNode("Register with Google"));
         facebook_btn.lastChild.replaceWith(document.createTextNode("Register with Facebook"));
     } else {
@@ -42,7 +42,7 @@ change_type_button.addEventListener("click", (e)=>{
         submit_btn.innerHTML = "Login"
         change_type_button.firstChild.innerHTML = "Sign Up";
         account_status.firstChild.replaceWith(document.createTextNode("Don't have an account? "));
-        sub_title.innerHTML = "Plase Login to continue";
+        sub_title.innerHTML = "Please Login to continue";
         google_btn.lastChild.replaceWith(document.createTextNode("Login with Google"));
         facebook_btn.lastChild.replaceWith(document.createTextNode("Login with Facebook"));
     }
