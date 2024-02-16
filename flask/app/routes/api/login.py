@@ -1,6 +1,6 @@
 # lib from py
 from bcrypt import checkpw
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from flask import request
 
 # my lib
@@ -38,7 +38,8 @@ def api_login():
     
     # check password in database
     if checkpw(str(password).encode(), user.password.encode()):
-        payload = { "id": user.id, "email": user.email, "username": user.username, "exp": int(datetime.now(timezone.utc).timestamp()) }
+        exp = int((datetime.now(timezone.utc)+timedelta(days=1)).timestamp())
+        payload = { "id": user.id, "email": user.email, "username": user.username, "exp": exp }
         encodeJWT(payload)
         db.session.commit()
         return success()
