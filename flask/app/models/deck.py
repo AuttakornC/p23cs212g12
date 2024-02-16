@@ -9,7 +9,8 @@ class Deck(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    type = db.Column(db.String(7))
+    code = db.Column(db.String(10))
+    public = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(self, name, type, user_id):

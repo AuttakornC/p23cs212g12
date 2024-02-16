@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from flask import request
 
 # my lib
-from app import app
+from app import app, db
 from app.routes.api import api
 from app.models.user import User
 from app.lib.validate import emailValidate, lengthCheck, EMAIL_ERR, PASS_LEN, EMAIL_NOT_FOUND, BODY_NOT_CORRECT, PASS_WRONG
@@ -40,6 +40,6 @@ def api_login():
     if checkpw(str(password).encode(), user.password.encode()):
         payload = { "id": user.id, "email": user.email, "username": user.username, "exp": int(datetime.now(timezone.utc).timestamp()) }
         encodeJWT(payload)
+        db.session.commit()
         return success()
-
     return badRequest(PASS_WRONG)
