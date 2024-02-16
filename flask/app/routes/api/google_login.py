@@ -1,6 +1,6 @@
 # lib from py
 from flask import url_for, redirect
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 # my lib
 from app import app, oauth, db
@@ -30,7 +30,6 @@ def login_google_auth():
     token = oauth.google.authorize_access_token()
 
     user_info = token['userinfo']
-    app.logger.debug(user_info)
     user = User.query.filter_by(email=user_info["email"]).first()
     if not user:
         name = user_info.get('given_name','') + " " + user_info.get('family_name','')
@@ -41,7 +40,8 @@ def login_google_auth():
         db.session.commit()
 
     user = User.query.filter_by(email=user_info["email"]).first()
-    data = { "id": user.id, "email": user.email, "exp":  int(datetime.now(timezone.utc).timestamp())}
+    exp = int((datetime.now(timezone.utc)+timedelta(days=1)).timestamp())
+    data = { "id": user.id, "email": user.email, "exp": exp }
     encodeJWT(data)
     return redirect(url_for("main.home"))
     

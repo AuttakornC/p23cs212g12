@@ -1,6 +1,6 @@
 # lib from py
 from flask import redirect, url_for
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 # my lib
 from app.routes.api import api
@@ -50,7 +50,8 @@ def login_fb_auth():
     user = User.query.filter_by(email=email).first()
 
     # encode with jwt (json web token)
-    data = { "id": user.id, "email": user.email, "username": user.username, "exp": int(datetime.now(timezone.utc).timestamp()) }
+    exp = int((datetime.now(timezone.utc)+timedelta(days=1)).timestamp())
+    data = { "id": user.id, "email": user.email, "username": user.username, "exp": exp }
     encodeJWT(data)
     
     return redirect(url_for("main.home"))

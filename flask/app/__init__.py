@@ -1,5 +1,5 @@
 # lib from py
-import os
+from os import getenv
 from flask import Flask
 from werkzeug.debug import DebuggedApplication
 from flask_sqlalchemy import SQLAlchemy
@@ -18,16 +18,15 @@ app.jinja_options.update({
 })
 
 app.config['DEBUG'] = True
-app.config['SECRET_KEY'] = \
-    'ce9262b39d8efd3757681a63ea7a6f97e4da7bcc10871a17'
+app.config['SECRET_KEY'] = getenv("SECRET_KEY", None)
 app.config['JSON_AS_ASCII'] = False
-app.config['GOOGLE_CLIENT_ID'] = os.getenv("GOOGLE_CLIENT_ID", None)
-app.config['GOOGLE_CLIENT_SECRET'] = os.getenv("GOOGLE_CLIENT_SECRET", None)
-app.config['GOOGLE_DISCOVERY_URL'] = os.getenv("GOOGLE_RECOVERY", None)
-app.config['FB_CLIENT_ID']= os.getenv("FB_CLIENT_ID", None)
-app.config['FB_CLIENT_SECRET'] = os.getenv("FB_CLIENT_SECRET", None)
+app.config['GOOGLE_CLIENT_ID'] = getenv("GOOGLE_CLIENT_ID", None)
+app.config['GOOGLE_CLIENT_SECRET'] = getenv("GOOGLE_CLIENT_SECRET", None)
+app.config['GOOGLE_DISCOVERY_URL'] = getenv("GOOGLE_RECOVERY", None)
+app.config['FB_CLIENT_ID']= getenv("FB_CLIENT_ID", None)
+app.config['FB_CLIENT_SECRET'] = getenv("FB_CLIENT_SECRET", None)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite://")
+app.config['SQLALCHEMY_DATABASE_URI'] = getenv("DATABASE_URL", "sqlite://")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 if app.debug:
@@ -46,5 +45,6 @@ app.before_request_funcs = {
     "main": [authen],
     "api": []
 }
+
 app.register_blueprint(main)
 app.register_blueprint(api)
