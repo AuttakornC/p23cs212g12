@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 # my lib
 from app import app, oauth, db
 from app.routes.api import api
-from app.models.user import User
+from app.models.player import Player
 from app.lib.token import encodeJWT
 
 @api.route("/login/google")
@@ -30,16 +30,16 @@ def login_google_auth():
     token = oauth.google.authorize_access_token()
 
     user_info = token['userinfo']
-    user = User.query.filter_by(email=user_info["email"]).first()
+    user = Player.query.filter_by(email=user_info["email"]).first()
     if not user:
         name = user_info.get('given_name','') + " " + user_info.get('family_name','')
-        new_user = User(user_info["email"], name, "-")
+        new_user = Player(user_info["email"], name, "-")
         new_user.updatePass("-", False)
         new_user.updateAVT(user_info["picture"])
         db.session.add(new_user)
         db.session.commit()
 
-    user = User.query.filter_by(email=user_info["email"]).first()
+    user = Player.query.filter_by(email=user_info["email"]).first()
     exp = int((datetime.now(timezone.utc)+timedelta(days=1)).timestamp())
     data = { "id": user.id, "email": user.email, "exp": exp }
     encodeJWT(data)

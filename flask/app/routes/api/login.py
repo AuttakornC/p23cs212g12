@@ -6,7 +6,7 @@ from flask import request
 # my lib
 from app import app, db
 from app.routes.api import api
-from app.models.user import User
+from app.models.player import Player
 from app.lib.validate import emailValidate, lengthCheck, EMAIL_ERR, PASS_LEN, EMAIL_NOT_FOUND, BODY_NOT_CORRECT, PASS_WRONG
 from app.lib.request import success, badRequest
 from app.lib.token import encodeJWT
@@ -31,7 +31,7 @@ def api_login():
     if len(fail_form) != 0:
         return badRequest(fail_form)
 
-    user = User.query.filter_by(email=email).first()
+    user = Player.query.filter_by(email=email).first()
     # don't found user
     if not user:
         return badRequest([EMAIL_NOT_FOUND])

@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 # my lib
 from app.routes.api import api
 from app import oauth, app, db
-from app.models.user import User
+from app.models.player import Player
 from app.lib.token import encodeJWT
 
 @api.route("/login/fb")
@@ -38,16 +38,16 @@ def login_fb_auth():
     except:
         return redirect(url_for("main.home"))
 
-    user = User.query.filter_by(email=email).first()
+    user = Player.query.filter_by(email=email).first()
 
     if not user:
-        new_user = User(email, name, "-")
+        new_user = Player(email, name, "-")
         new_user.updateAVT(picture)
         new_user.updatePass("-", False)
         db.session.add(new_user)
         db.session.commit()
     
-    user = User.query.filter_by(email=email).first()
+    user = Player.query.filter_by(email=email).first()
 
     # encode with jwt (json web token)
     exp = int((datetime.now(timezone.utc)+timedelta(days=1)).timestamp())

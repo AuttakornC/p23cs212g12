@@ -6,8 +6,8 @@ from bcrypt import gensalt, hashpw
 from app import db
 
 # Model of User
-class User(db.Model, SerializerMixin):
-    __tablename__ = "users"
+class Player(db.Model, SerializerMixin):
+    __tablename__ = "players"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))

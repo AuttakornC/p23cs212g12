@@ -9,9 +9,9 @@ class Deck(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    code = db.Column(db.String(10))
     public = db.Column(db.Boolean, default=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
+    deleted = db.Column(db.Boolean, default=False)
 
     def __init__(self, name, type, user_id):
         self.name = name
