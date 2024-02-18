@@ -17,7 +17,11 @@ class Deck(db.Model, SerializerMixin):
         self.name = name
         self.type = type
         self.user_id = user_id
+        self.deleted = False
     
     def update(self, name, type):
         self.name = name
         self.type = type
+
+    def delete(self):
+        self.deleted = True
