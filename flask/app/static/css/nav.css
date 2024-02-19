@@ -132,4 +132,7 @@ nav > .mobile-tab > li:first-child > .underline {
         background-position: center;
     }
 
+    nav > .desk-tab > li > a:hover {
+        filter: brightness(0) saturate(100%) invert(68%) sepia(95%) saturate(218%) hue-rotate(349deg) brightness(97%) contrast(93%);
+    }
 }
