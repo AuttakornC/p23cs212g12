@@ -19,6 +19,7 @@ body {
     --white-color: #fff;
 
     min-height: 100vh;
+    background-color: var(--banana-color);
 }
 
 
