@@ -10,16 +10,20 @@
         <h1>Banana Choco</h1>
     </a>
 
-    <div class="ham">
+    <div class="ham" id="ham-nav">
         <div class="in-ham"></div>
         <div class="in-ham"></div>
         <div class="in-ham"></div>
     </div>
-    <ul class="mobile-tab">
+    <ul class="mobile-tab" id="hidden-nav">
         <li>Menu <div class="underline"></div></li>
-        <li>Home</li>
-        <li>Explore</li>
-        <li>Log Out</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/explore">Explore</a></li>
+        <li><a href="/api/logout">Log Out</a></li>
     </ul>
 </nav>
+
+{% endblock %}
+{% block script %}
+<script src="/static/js/nav.js"></script>
 {% endblock %}
