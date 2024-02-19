@@ -14,11 +14,14 @@ body {
     --main1-color: #EEBA74;
     --main2-color: #F6D394;
     --main3-color: #FEECB3;
+    --danger-color: #ff4929;
     --banana-color: #FFE86E;
     --white-color: #fff;
 
     min-height: 100vh;
 }
+
+
 
 .icon-btn {
     border-radius: 50%;

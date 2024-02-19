@@ -1,5 +1,7 @@
+# lib from py
 from flask.cli import FlaskGroup
 
+# my lib
 from app import app, db
 from app.models.user import User
 from app.models.deck import Deck

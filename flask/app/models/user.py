@@ -1,18 +1,35 @@
-from app import db
+# lib from py
 from sqlalchemy_serializer import SerializerMixin
 from bcrypt import gensalt, hashpw
+
+# my lib
+from app import db
 
 # Model of User
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
     email = db.Column(db.String(100))
     password = db.Column(db.String(255))
-    # use for check bruteforce
-    failround = db.Column(db.Integer)
+    avatar_url = db.Column(db.String(255))
 
-    def __init__(self, email:str, password:str):
+    def __init__(self, email:str, username:str, password:str):
         self.email = email
-        self.password = hashpw(password.encode(), gensalt())
-        self.failround = 0
+        self.name = username;
+        self.password = hashpw(password.encode(), gensalt()).decode()
+        self.avatar_url = f'https://ui-avatars.com/api/?name={email[0]}+{email[1]}&background=f6d394&color=725c3a'
+    
+    def updateAVT(self, avatar_url):
+        self.avatar_url = avatar_url
+    
+    def updateName(self, name:str):
+        self.name = name;
+
+    def updatePass(self, password:str, _bycrypt=True):
+        if _bycrypt:
+            self.password = hashpw(password.encode(), gensalt()).decode()
+        else:
+            self.password = password
+    

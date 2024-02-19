@@ -1,5 +1,8 @@
-from app import db
+# lib from py
 from sqlalchemy_serializer import SerializerMixin
+
+# my lib
+from app import db
 
 class Card(db.Model, SerializerMixin):
     __tablename__ = "cards"
