@@ -21,6 +21,10 @@ nav > a:hover > h1 {
     color: var(--main1-color);
 }
 
+nav > .desk-tab {
+    display: none;
+}
+
 nav > .ham {
     width: 2.4rem;
     height: 1.8rem;
@@ -102,4 +106,30 @@ nav > .mobile-tab > li:first-child > .underline {
     height: 3px;
     border-radius: 1rem;
     background-color: var(--banana-color);
+}
+
+@media screen and (min-width: 601px) {
+    nav > .mobile-tab {
+        display: none;
+    }
+
+    nav > .ham {
+        display: none;
+    }
+
+    nav > .desk-tab {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    nav > .desk-tab > li > a {
+        display: block;
+        width: 2.5rem;
+        aspect-ratio: 1;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
 }
