@@ -41,7 +41,7 @@ def login_google_auth():
 
     user = Player.query.filter_by(email=user_info["email"]).first()
     exp = int((datetime.now(timezone.utc)+timedelta(days=1)).timestamp())
-    data = { "id": user.id, "email": user.email, "exp": exp }
+    data = { "id": user.id, "email": user.email, "username": user.name, "exp": exp }
     encodeJWT(data)
     return redirect(url_for("main.home"))
     

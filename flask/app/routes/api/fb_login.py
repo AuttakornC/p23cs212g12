@@ -51,7 +51,7 @@ def login_fb_auth():
 
     # encode with jwt (json web token)
     exp = int((datetime.now(timezone.utc)+timedelta(days=1)).timestamp())
-    data = { "id": user.id, "email": user.email, "username": user.username, "exp": exp }
+    data = { "id": user.id, "email": user.email, "username": user.name, "exp": exp }
     encodeJWT(data)
     
     return redirect(url_for("main.home"))

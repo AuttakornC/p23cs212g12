@@ -39,7 +39,7 @@ def api_login():
     # check password in database
     if checkpw(str(password).encode(), user.password.encode()):
         exp = int((datetime.now(timezone.utc)+timedelta(days=1)).timestamp())
-        payload = { "id": user.id, "email": user.email, "username": user.username, "exp": exp }
+        payload = { "id": user.id, "email": user.email, "username": user.name, "exp": exp }
         encodeJWT(payload)
         db.session.commit()
         return success()
