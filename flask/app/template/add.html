@@ -1,9 +1,46 @@
 {% extends 'nav.html' %}
 
+{% block cssimp %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/add.css">
+{% endblock %}
+
 {% block title %}Create New Deck{% endblock %}
 
 {% block content %}
+<header>
+    <h1>Create Deck</h1>
+    <div class="underline"></div>
+</header>
+<div class="add-nav">
+    <div class="add-grp-nav">
+        <h2 class="activate" id="prop-btn" onclick="onChangePage('prop')">Property</h2>
+        <h2 id="card-btn" onclick="onChangePage('card')">Cards</h2>
+        <div id="bg-btn"></div>
+    </div>
+    <div class="line"></div>
+</div>
+<div id="deck">
+    <div id="prop-form">
+        <label for="title">Title : </label>
+        <input type="text" name="title" placeholder="Title..." style="text-align: center;">
+        <div class="status-tab">
+            <label for="status">Deck Status : </label>
+            <input id="status" type="text" name="status" value="private" hidden>
+            <div id="status-toggle" onclick="onStatusToggle()" class="toggle">
+                <div>
+                    <div class="circle">
+                        <div>
+                            <b id="private-toggle" class="activate">Private</b>
+                            <b id="public-toggle">Public</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>
 {% endblock %}
 
 {% block script %}

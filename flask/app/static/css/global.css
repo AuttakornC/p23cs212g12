@@ -20,6 +20,8 @@ body {
 
     min-height: 100vh;
     background-color: var(--banana-color);
+    width: 100%;
+    position: fixed;
 }
 
 
@@ -34,4 +36,15 @@ body {
     background-size: 70%;
     cursor: pointer;
     background-color: var(--main3-color);
+}
+
+input, textarea {
+    background: var(--main1-color);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem 0.8rem;
+}
+
+input:focus, textarea:focus {
+    outline: none;
 }

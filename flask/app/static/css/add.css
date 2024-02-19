@@ -1,0 +1,157 @@
+header {
+    color: var(--choco-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+    padding: 2rem 0;
+}
+
+header > .underline {
+    width: 75%;
+    height: 7px;
+    border-radius: 1rem;
+    background-color: var(--choco-color);
+}
+
+.add-nav > .line {
+    width: 100%;
+    height: 5px;
+    background-color: var(--choco-color);
+}
+
+.add-nav > .add-grp-nav {
+    display: flex;
+}
+
+.add-nav > .add-grp-nav > h2 {
+    text-align: center;
+    padding: 0.5rem;
+    width: 50%;
+    cursor: pointer;
+    color: var(--choco-color);
+    transition: color 0.25s ease-out;
+}
+
+.add-nav > .add-grp-nav > h2.activate {
+    color: var(--banana-color);    
+}
+
+.add-nav > .add-grp-nav > #bg-btn {
+    background-color: var(--choco-color);
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    transition: all 0.25s ease-out;
+}
+
+.add-nav > .add-grp-nav > #bg-btn.switch {
+    left: 50%;
+}
+
+#prop-form {
+    color: var(--choco-color);
+    font-weight: bold;
+    padding: 1rem;
+}
+
+#prop-form label {
+    font-size: 1.5rem;
+}
+
+#prop-form input {
+    font-size: 1.5rem;
+    color: var(--choco-color);
+    width: 100%;
+    font-weight: bold;
+}
+
+#prop-form > .status-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+#prop-form > div > .toggle {
+    cursor: pointer;
+    background-color: var(--choco-color);
+    width: 6rem;
+    height: 30px;
+    border-radius: 1rem;
+    overflow: hidden;
+    color: var(--main1-color);
+    padding: 0.2rem;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    
+}
+
+#prop-form > div > .toggle.activate {
+    background-color: var(--main1-color);
+}
+
+#prop-form > div > .toggle > div {
+    width: 100%;
+    height: 100%;
+}
+
+
+#prop-form > div > .toggle > div > .circle {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--main1-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(0);
+    transition: all 0.5s ease-in-out;
+}
+
+#prop-form > div > .toggle > div > .circle.switch {
+    /* right: 0; */
+    left: 100%;
+    transform: translateX(-100%);
+    background-color: var(--choco-color);
+}
+
+#prop-form > div > .toggle > div > .circle > div {
+    height: 100%;
+    width: 100%;
+}
+
+#prop-form > div > .toggle > div > .circle > div > b {
+    position: absolute;
+}
+
+#prop-form > div > .toggle > div > .circle > div > b#private-toggle {
+    right: 0;
+    top: 50%;
+    transform: translate(105%, -50%);
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+#prop-form > div > .toggle > div > .circle > div > b#private-toggle.activate {
+    opacity: 1;
+}
+
+#prop-form > div > .toggle > div > .circle > div > b#public-toggle {
+    top: 50%;
+    left: 0;
+    transform: translate(-105%, -50%);
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    color: var(--choco-color);
+}
+
+#prop-form > div > .toggle > div > .circle > div > b#public-toggle.activate {
+    opacity: 1;
+}
