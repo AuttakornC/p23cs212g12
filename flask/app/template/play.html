@@ -1,0 +1,24 @@
+{% extends 'nav.html' %}
+
+{% block cssimp %}
+<link rel="stylesheet" href="/static/css/play.css">
+{{ super() }}
+{% endblock %}
+
+{% block title %}
+Play
+{% endblock %}
+
+{% block content %}
+<header>
+    <h1>Banana Choco</h1>
+</header>
+<div class="deck-name">
+</div>
+<div class="ShowBackNextClose">
+    <button id="show-btn" type="button">Show</button>
+    <button id="back-btn" type="button">Back</button>
+    <button id="next-btn" type="button">Naxt</button>
+    <button id="close-btn" type="button">close</button>
+</div>
+{% endblock %}

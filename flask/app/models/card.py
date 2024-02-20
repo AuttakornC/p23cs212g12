@@ -17,7 +17,11 @@ class Card(db.Model, SerializerMixin):
         self.question = question
         self.answer = answer
         self.deck_id = deck_id
+        self.deleted = False
     
     def update(self, question, answer):
         self.question = question
         self.answer = answer
+    
+    def delete(self):
+        self.deleted = True
