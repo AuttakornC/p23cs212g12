@@ -13,6 +13,10 @@ class Tag(db.Model, SerializerMixin):
 
     def __init__(self, name):
         self.name = name
+        self.deleted = False
     
     def update(self, name):
         self.name = name
+    
+    def delete(self):
+        self.deleted = True

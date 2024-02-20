@@ -1,8 +1,138 @@
-li {
-    background-color: rebeccapurple;
+nav {
+    padding: 2rem;
+    background-color: var(--choco-color);
+    color: var(--banana-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
 }
 
-nav {
-    padding: 10px 0;
-    background-color: black;
+nav > a {
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+nav > a:visited {
+    color: var(--banana-color);
+}
+
+nav > a:hover > h1 {
+    color: var(--main1-color);
+}
+
+nav > .desk-tab {
+    display: none;
+}
+
+nav > .ham {
+    width: 2.4rem;
+    height: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+nav > .ham > .in-ham {
+    width: 100%;
+    height: 20%;
+    background-color: var(--banana-color);
+    border-radius: 1rem;
+}
+
+nav > .ham:hover > .in-ham {
+    background-color: var(--main1-color);
+}
+
+nav > .mobile-tab {
+    height: fit-content;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(100%, 100%);
+    background-color: var(--choco-color);
+    list-style: none;
+    color: var(--banana-color);
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: -1;
+    width: 60%;
+    overflow: hidden;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+nav > .mobile-tab.activate {
+    transform: translate(0, 100%);
+    display: block;
+}
+
+nav > .mobile-tab > li {
+    text-align: center;
+    width: 100%;
+    font-size: 1.2rem;
+    min-width: 12rem;
+    cursor: default;
+}
+
+nav > .mobile-tab > li > a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 1.3rem 1.5rem;
+    color: var(--banana-color);
+    text-decoration: none;
+}
+
+nav > .mobile-tab > li:hover > a:hover {
+    color: var(--main1-color);
+    cursor: pointer;
+}
+
+nav > .mobile-tab > li:first-child {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav > .mobile-tab > li:first-child > .underline {
+    width: 100%;
+    height: 3px;
+    border-radius: 1rem;
+    background-color: var(--banana-color);
+}
+
+@media screen and (min-width: 601px) {
+    nav > .mobile-tab {
+        display: none;
+    }
+
+    nav > .ham {
+        display: none;
+    }
+
+    nav > .desk-tab {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    nav > .desk-tab > li > a {
+        display: block;
+        width: 2.5rem;
+        aspect-ratio: 1;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    nav > .desk-tab > li > a:hover {
+        filter: brightness(0) saturate(100%) invert(68%) sepia(95%) saturate(218%) hue-rotate(349deg) brightness(97%) contrast(93%);
+    }
 }
