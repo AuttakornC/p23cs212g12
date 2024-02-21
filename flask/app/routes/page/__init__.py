@@ -1,6 +1,7 @@
 # lib from py
+
 from flask import Blueprint
 
 main = Blueprint("main", __name__, url_prefix="/")
 
-from app.routes.page import home
+from app.routes.page import home, explore

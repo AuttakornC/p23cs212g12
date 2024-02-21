@@ -1,0 +1,46 @@
+body {
+    background-color: var(--banana-color)
+}
+
+.topic {
+    max-width: 100%;
+    height: 42px;
+    flex-shrink: 0;
+    color: var(--choco-color);
+    text-align: center;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 10px
+}
+
+hr {
+    width: 320px;
+    height: 8px;
+    background: var(--choco-color);
+    /* align-items: center */
+    /* display: flex; */
+    border-radius: 15px 15px 15px 15px;
+    /* border: auto */
+    margin: 0 auto;
+    
+}
+
+.boxSearch {
+    background: var(--choco-color);
+    color: var(--banana-color);
+    text-align: left: 100;
+
+    margin: auto;
+    width: 72%;
+    height: 39px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    
+}
+
+.boxSearch > .search-icon {
+    align-items: right;
+}

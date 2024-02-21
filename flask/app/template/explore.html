@@ -1,0 +1,16 @@
+{% extends 'nav.html' %}
+
+{% block cssimp %}
+<link rel="stylesheet" href="/static/css/explore.css">
+{{ super() }}
+{% endblock %}
+{% block title %}Explore{% endblock %}
+
+
+{% block content %}
+<h1 class="topic">Explore flashcards</h1>
+<hr>
+<div class="boxSearch">
+    Search<img class="search-icon" src="/static/image/search-icon.png" alt="">
+</div>
+{% endblock %}
