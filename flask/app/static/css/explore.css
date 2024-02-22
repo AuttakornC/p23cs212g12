@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
 body {
     background-color: var(--banana-color) !important
 }
@@ -8,7 +11,7 @@ body {
     flex-shrink: 0;
     color: var(--choco-color);
     text-align: center;
-    font-family: Inter;
+    /* font-family: Inter; */
     font-size: 30px;
     font-style: normal;
     font-weight: 700;
@@ -19,22 +22,25 @@ body {
 .title {
     color: var(--choco-color);
     text-align: left;
+    left: 0;
     font-family: Inter;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-left: 10vw;
-    margin-top: 2.5vh;
+    /* margin-left: 10vw;
+    margin-top: 2.5vh; */
+    margin: 15px;
 }
 
-hr.divider {
+.divider {
     width: 320px;
     height: 8px;
     background-color: var(--choco-color);
-    /* align-items: center */
+    /* align-items: center; */
+    margin: auto;
     /* display: flex; */
-    opacity: 1;
+    /* opacity: 1; */
     border-radius: 15px 15px 15px 15px;
     margin-bottom: 25px;
     
@@ -45,14 +51,69 @@ hr.divider {
     color: var(--banana-color);
     /* text-align: left; */
 
-    /* margin: auto; */
+    margin: auto;
     width: 90%;
-    /* height: 39px; */
+    /* align-items: right; */
+    height: 39px;
     /* flex-shrink: 0; */
     border-radius: 30px;
+    /* display: block; */
+}
+
+.search-icon{
+    height: 18px;
+    /* left: 500; */
+    /* margin-left: 10px;  */
+    float: right;
+    margin: 12px; 
     
 }
 
-/* .search-icon {
-    align-items: right;
+.search{
+    text-align: center;
+    /* align-items: center; */
+    margin: 16px;
+    /* margin-top: 50px; */
+    top: 10px;
+}
+
+.container {
+    display: flex;
+    /* border: 2px solid rgb(214, 210, 210); */
+}
+
+.box {
+    flex: 1;
+    margin: 15px;
+    padding: 40px;
+    /* width: 60vw; */
+    height: 30vh;
+    border-radius: 30px;
+    flex-shrink: 0;
+    /* border: 2px solid #ccc; */
+    background-color: var(--main1-color);
+
+}
+/* .baCho {
+    font-family: 'Inter', sans-serif ; 
+    color: var(--banana-color);
+    padding: 0.5px !important; */
+    /* padding: 1rem !important; */
+    /* height: 0.1rem; */
+    /* font-weight: bold;
+    font-size: 1.5em ;
+    margin: 0.5px !important; */
+    /* border: 70px !important; */
+    /* padding: 2rem; */
+/* }
+.nav-bg {
+    background-color: var(--choco-color); */
+    /* position: absolute; */
+    /* max-width: 100% !important; */
+    /* height: 6.5rem !important; */
+    /* z-index: -1; */
+    /* left: 0; */
+    /* top: 0; */
+    /* margin: auto !important; */
+    /* border-radius: 0px 0px 15px 15px;
 } */

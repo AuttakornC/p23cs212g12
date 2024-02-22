@@ -1,12 +1,16 @@
 nav {
     padding: 2rem;
-    background-color: var(--choco-color);
     color: var(--banana-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 2;
-    border-radius: 0px 0px 15px 15px;
+/* <<<<<<< HEAD */
+    /* z-index: 2;
+    border-radius: 0px 0px 15px 15px; */
+/* ======= */
+    z-index: 5;
+    user-select: none;
+/* >>>>>>> origin/navbar */
 }
 
 nav > a {
@@ -28,6 +32,16 @@ nav > a:hover > h1 {
 
 nav > .desk-tab {
     display: none;
+}
+
+nav > .nav-bg {
+    background-color: var(--choco-color);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    left: 0;
+    border-radius: 0px 0px 15px 15px;
 }
 
 nav > .ham {
@@ -55,7 +69,7 @@ nav > .mobile-tab {
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(100%, 100%);
+    transform: translateY(-100%);
     background-color: var(--choco-color);
     list-style: none;
     color: var(--banana-color);
@@ -63,9 +77,8 @@ nav > .mobile-tab {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: -1;
+    z-index: -2;
     width: 60%;
-    overflow: hidden;
     border-bottom-left-radius: 1.5rem;
     border-bottom-right-radius: 1.5rem;
     transition: all 0.3s ease-in-out;
@@ -73,7 +86,6 @@ nav > .mobile-tab {
 
 nav > .mobile-tab.activate {
     transform: translate(0, 100%);
-    display: block;
 }
 
 nav > .mobile-tab > li {
@@ -82,6 +94,14 @@ nav > .mobile-tab > li {
     font-size: 1.2rem;
     min-width: 12rem;
     cursor: default;
+}
+
+nav > .mobile-tab > li:last-child {
+    background-color: var(--choco-color);
+    position: absolute;
+    top: 0;
+    transform: translateY(-100%);
+    height: 60px;
 }
 
 nav > .mobile-tab > li > a {
@@ -113,7 +133,31 @@ nav > .mobile-tab > li:first-child > .underline {
     background-color: var(--banana-color);
 }
 
+#block-nav {
+    /* display: none; */
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.493);
+    position: fixed;
+    top: 0;
+    z-index: 4;
+    user-select: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0s 0.5s;
+}
+
+#block-nav.activate {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0s;
+}
+ 
 @media screen and (min-width: 601px) {
+    #block-nav {
+        display: none;
+    }
+    
     nav > .mobile-tab {
         display: none;
     }
