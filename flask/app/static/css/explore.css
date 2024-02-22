@@ -1,5 +1,5 @@
 body {
-    background-color: var(--banana-color)
+    background-color: var(--banana-color) !important
 }
 
 .topic {
@@ -9,38 +9,50 @@ body {
     color: var(--choco-color);
     text-align: center;
     font-family: Inter;
-    font-size: 32px;
+    font-size: 30px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     margin: 10px
 }
 
-hr {
+.title {
+    color: var(--choco-color);
+    text-align: left;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 10vw;
+    margin-top: 2.5vh;
+}
+
+hr.divider {
     width: 320px;
     height: 8px;
-    background: var(--choco-color);
+    background-color: var(--choco-color);
     /* align-items: center */
     /* display: flex; */
+    opacity: 1;
     border-radius: 15px 15px 15px 15px;
-    /* border: auto */
-    margin: 0 auto;
+    margin-bottom: 25px;
     
 }
 
 .boxSearch {
     background: var(--choco-color);
     color: var(--banana-color);
-    text-align: left: 100;
+    /* text-align: left; */
 
-    margin: auto;
-    width: 72%;
-    height: 39px;
-    flex-shrink: 0;
+    /* margin: auto; */
+    width: 90%;
+    /* height: 39px; */
+    /* flex-shrink: 0; */
     border-radius: 30px;
     
 }
 
-.boxSearch > .search-icon {
+/* .search-icon {
     align-items: right;
-}
+} */
