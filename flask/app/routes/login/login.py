@@ -5,14 +5,14 @@ from flask import request
 
 # my lib
 from app import app, db
-from app.routes.api import api
+from app.routes.login import login_b
 from app.models.player import Player
 from app.lib.validate import emailValidate, lengthCheck, EMAIL_ERR, PASS_LEN, EMAIL_NOT_FOUND, BODY_NOT_CORRECT, PASS_WRONG
 from app.lib.request import success, badRequest
 from app.lib.token import encodeJWT
 
-@api.route("/login", methods=["POST"])
-def api_login():
+@login_b.route("/login", methods=["POST"])
+def login():
 
     # check request body
     try:

@@ -15,3 +15,4 @@ def getDataFromSession():
 def encodeJWT(data):
     '''Function for encode data to token and set to session["token"]'''
     session["token"] = encode(data, getenv("SECRET_KEY"))
+    # token schema { "id": int, "email": str, "username": str, "exp": timestamp (int) }

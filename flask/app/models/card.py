@@ -11,14 +11,14 @@ class Card(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String())
     answer = db.Column(db.String())
-    deck_id = db.Column(db.Integer, db.ForeignKey('decks.id'))
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
     is_deleted = db.Column(db.Boolean, default=False)
     delete_at = db.Column(db.DateTime)
 
-    def __init__(self, question, answer):
+    def __init__(self, question, answer, player_id):
         self.question = question
         self.answer = answer
+        self.player_id = player_id
         self.is_deleted = False
         self.delete_at = None
     

@@ -4,7 +4,7 @@ from sqlalchemy_serializer import SerializerMixin
 # my lib
 from app import db
 
-class DeckTag(db.Model, SerializerMixin):
+class DeckCard(db.Model, SerializerMixin):
     __tablename__ = "deck_card"
 
     deck_id = db.Column(db.Integer, db.ForeignKey("decks.id"), primary_key=True)
@@ -13,3 +13,6 @@ class DeckTag(db.Model, SerializerMixin):
     def __init__(self, card_id, deck_id):
         self.card_id = card_id
         self.deck_id = deck_id
+    
+    def update(self, card_id):
+        self.card_id = card_id
