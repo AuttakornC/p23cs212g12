@@ -2,13 +2,13 @@
 from flask import request
 
 # my lib
-from app.routes.api import api
+from app.routes.login import login_b
 from app.models.user import User
 from app import db
 from app.lib.validate import emailValidate, lengthCheck, EMAIL_ERR, PASS_LEN, USERNAME_LEN, PASS_NOT_EQUAL, BODY_NOT_CORRECT, EMAIL_ALREADY
 from app.lib.request import badRequest, success
 
-@api.route("/register", methods=["POST"])
+@login_b.route("/register", methods=["POST"])
 def register():
     # check form body
     try:

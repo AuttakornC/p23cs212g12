@@ -42,9 +42,11 @@ oauth = OAuth(app)
 from app.routes.page import notfound
 from app.routes.page import main
 from app.routes.api import api
+from app.routes.login import login_b
 app.before_request_funcs = {
     "main": [authen],
-    "api": []
+    "api": [authen]
 }
 app.register_blueprint(main)
 app.register_blueprint(api)
+app.register_blueprint(login_b)
