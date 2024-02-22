@@ -1,3 +1,5 @@
+// Switch Page
+
 class MyData {
 
     constructor() {
@@ -38,6 +40,8 @@ function onChangePage(page) {
     }
 }
 
+// toggle status
+
 const status_toggle = document.getElementById("status-toggle");
 const status_input = document.getElementById("status");
 
@@ -60,3 +64,41 @@ function onStatusToggle() {
         status_toggle.classList.remove("activate");
     }
 }
+
+// Add
+const form_add = document.getElementById("card-form");
+
+function onAdd() {
+    let number_input = 0;
+    if (form_add.lastElementChild) {
+        const last_number = parseInt(form_add.lastElementChild.getAttribute("order_"));
+        if (!isNaN(last_number)) {
+            number_input = last_number+1;
+        }
+    }
+    const tag = `<div class="card-form-grp" order_="${number_input}">
+        <input style="grid-area: in1;" id="question${number_input}" name="question${number_input}" type="text">
+        <input style="grid-area: in2;" id="answer${number_input}" name="answer${number_input}" type="text">
+        <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);">Sug</button>
+        <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);">-</button>
+        <input type="text" name="is_recom${number_input}" value="f" hidden>
+        <input type="text" name="own_recom${number_input}" value="f" hidden>
+        <input type="text" name="edit_origin${number_input}" value="f" hidden>
+        <input type="text" name="ref${number_input}" value="0" hidden>
+    </div>`
+    form_add.innerHTML+=tag;
+}
+
+
+function onRemoveClick(element) {
+    const parent = element.parentElement;
+    if (parent) {
+        parent.remove();
+    }
+}
+
+function onSuggestClick(element) {
+    console.log("Hello");
+}
+
+// footer

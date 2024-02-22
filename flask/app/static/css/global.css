@@ -21,7 +21,7 @@ body {
     min-height: 100vh;
     background-color: var(--banana-color);
     width: 100%;
-    position: fixed;
+    /* position: fixed; */
 }
 
 
