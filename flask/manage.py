@@ -3,9 +3,11 @@ from flask.cli import FlaskGroup
 
 # my lib
 from app import app, db
-from app.models.user import User
+from app.models.player import Player
 from app.models.deck import Deck
 from app.models.card import Card
+from app.models.deck_tag import DeckTag
+from app.models.tag import Tag
 
 cli = FlaskGroup(app)
 

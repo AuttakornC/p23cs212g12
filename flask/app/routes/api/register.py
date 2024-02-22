@@ -3,7 +3,7 @@ from flask import request
 
 # my lib
 from app.routes.api import api
-from app.models.user import User
+from app.models.player import Player
 from app import db
 from app.lib.validate import emailValidate, lengthCheck, EMAIL_ERR, PASS_LEN, USERNAME_LEN, PASS_NOT_EQUAL, BODY_NOT_CORRECT, EMAIL_ALREADY
 from app.lib.request import badRequest, success
@@ -18,7 +18,7 @@ def register():
         print(err)
         return badRequest([BODY_NOT_CORRECT])
     
-    user = User.query.filter_by(email=email).first()
+    user = Player.query.filter_by(email=email).first()
     
     if not user:
         # validate form
@@ -34,7 +34,7 @@ def register():
         if len(fail_form) != 0:
             return badRequest(fail_form)
 
-        db.session.add(User(email, username, password))
+        db.session.add(Player(email, username, password))
         db.session.commit()
         return success()
     else:
