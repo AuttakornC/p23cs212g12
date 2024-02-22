@@ -4,7 +4,7 @@ from flask import request
 # my lib
 from app.routes.api import api
 from app.lib.token import getDataFromSession
-from .deck.create import create_deck
+from app.routes.api._deck.create import create_deck
 
 @api.route("/deck", methods=["POST", "DELETE", "PUT"])
 def deck():

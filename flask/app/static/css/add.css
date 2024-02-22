@@ -17,6 +17,31 @@
         background-color: var(--choco-color);
     }
 
+    .x {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        right: 0.5rem;
+        transform: translateY(-50%);
+    }
+
+    .x > div {
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        background-color: var(--banana-color);
+    }
+    
+    .x > div:first-child {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .x > div:last-child {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
 /* Mini Nav */
 
     .add-nav > .line {
@@ -216,13 +241,30 @@
         color: var(--main1-color);
     }
 
-    #tag-field {
+    #prop-form > #tag-field {
         width: 100%;
         background-color: var(--main1-color);
-        padding: 1rem;
+        padding: 0.5rem;
         border-radius: 1rem;
         height: 8rem;
         overflow: auto;
+    }
+
+    #prop-form > #tag-field > div {
+        display: inline-block;
+        background-color: var(--choco-color);
+        color: var(--banana-color);
+        width: fit-content;
+        padding: 0.2rem 2rem 0.2rem 0.4rem;
+        font-size: 1.2rem;
+        border-radius: 1rem;
+        margin: 0.5rem;
+    }
+
+    #prop-form > #tag-field > div > .x {
+        width: 1.2rem;
+        height: 1.2rem;
+        /* aspect-ratio: 1; */
     }
 
 

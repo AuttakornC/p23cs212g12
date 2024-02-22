@@ -1,16 +1,24 @@
 // Switch Page
 
+const tag_field = document.getElementById("tag-field");
+
 class MyData {
 
     constructor() {
         this.currentPage = "prop";
         this.tags = []; // { id: number, tag: string, dbid: number # 0 is to insert } 
         this.db_tags = [];
-        this.getDBtag()
+        this.getDBtagFromServer();
     }
 
-    async getDBtag() {
-        const response = await fetch("/api/tag")
+    async getDBtagFromServer() {
+        const response = await fetch("/api/tag", {method: "GET"});
+        const result = await response.json();
+        this.db_tags = result.data.map(val=>{return {id: val.id, name: val.name};});
+    }
+
+    getDBtag() {
+        return this.db_tags;
     }
 
     getPage() {
@@ -33,12 +41,28 @@ class MyData {
         this.tags = this.tags.filter(val=>val.id!==id);
     }
 
-    addTag(name) {
+    addTag(name, dbid=0) {
         let id = 0;
         if (this.tags.length!==0) {
-            id = this.tags[this.tags.length-1].id+1;
+            id = this.tags[this.tags.length-1].id + 1;
         }
-        this.tags.push({ id: id, tag: name });
+        const tag_tag = document.createElement("div");
+        tag_tag.append(document.createTextNode(name));
+        const delete_tag = document.createElement("div");
+        delete_tag.classList.add("x");
+        delete_tag.addEventListener("click", (e)=>{
+            this.tags.filter(val=>{
+                if (val.id===id) {
+                    val.element.remove();
+                    return false;
+                }
+                return true;
+            });
+        });
+        delete_tag.innerHTML = "<div></div><div></div>";
+        tag_tag.append(delete_tag);
+        tag_field.append(tag_tag);
+        this.tags.push({ id, tag: name, dbid, element: tag_tag });
     }
 
 }
@@ -138,13 +162,47 @@ const tag_input = document.getElementById("tag-insert");
 const rec_tab = document.getElementById("tag-recm");
 
 function onSearchTag(word) {
-    
+    const word_length = word.length;
+    const db_tags = my_state.getDBtag();
+    let result = [];
+    for (const val of db_tags) {
+        if (val.name.slice(0, word_length)===word) {
+            result.push(val);
+            if (result.length===3) {
+                return result;
+            }
+        }
+    }
+    return result;
 }
 
-tag_input.addEventListener("change", (e)=>{
-    if (e.target.value.length > 0) {
-        
+function deleteAllChildren(element) {
+    while (element.firstChild) {
+        element.removeChild(element.lastChildren);
     }
+}
+
+tag_input.addEventListener("input", (e)=>{
+    // deleteAllChildren(rec_tab);
+    rec_tab.replaceChildren()
+    if (e.target.value.length > 0) {
+        onSearchTag(e.target.value).forEach(element => {
+            const li_tag = document.createElement("li");
+            li_tag.addEventListener("click", (e)=>{
+                my_state.addTag(element.name, element.id);
+                tag_input.value = "";
+                rec_tab.replaceChildren();
+            });
+            li_tag.innerHTML = element.name;
+            rec_tab.append(li_tag);
+        });
+    }
+});
+
+const tag_form = document.getElementById("tag-form");
+tag_form.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    my_state.addTag(tag_input.value, 0);
 });
 
 // footer
