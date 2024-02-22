@@ -1,5 +1,6 @@
 # lib from py
 from sqlalchemy_serializer import SerializerMixin
+from datetime import datetime, timezone
 
 # my lib
 from app import db
@@ -9,14 +10,17 @@ class Tag(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    deleted = db.Column(db.Boolean, default=False)
+    is_deleted = db.Column(db.Boolean, default=False)
+    delete_at = db.Column(db.DateTime())
 
     def __init__(self, name):
         self.name = name
-        self.deleted = False
+        self.is_deleted = False
+        self.delete_at = None
     
     def update(self, name):
         self.name = name
     
     def delete(self):
-        self.deleted = True
+        self.is_deleted = True
+        self.delete_at = datetime.now(timezone.utc)
