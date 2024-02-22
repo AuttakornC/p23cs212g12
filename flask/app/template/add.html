@@ -21,7 +21,7 @@
     <div class="line"></div>
 </div>
 <div id="deck">
-    <div id="prop-form">
+    <div id="prop-form" class="activate">
         <label for="title">Title : </label>
         <input type="text" name="title" placeholder="Title..." style="text-align: center;">
         <div class="status-tab">
@@ -40,24 +40,27 @@
         </div>
         <label for="tag">Tags : </label>
         <form id="tag-form">
-            <input type="text" name="tag" placeholder="Tag...">
+            <div>
+                <ul id="tag-recm">
+                </ul>
+                <input type="text" id="tag-insert" name="tag" placeholder="Tag...">
+            </div>
             <button type="submit">+</button>
         </form>
         <div id="tag-field">
         </div>
     </div>
-    <form id="card-form">
-        <!-- <div class="card-form-grp">
-            <input style="grid-area: in1;" type="text">
-            <input style="grid-area: in2;" type="text">
-            <button style="grid-area: btn1;" type="button"></button>
-            <button style="grid-area: btn2;" type="button"></button>
-            <input type="text" name="is_recom" value="f" hidden>
-            <input type="text" name="own_recom" value="f" hidden>
-            <input type="text" name="edit_origin" value="f" hidden>
-            <input type="text" name="ref" value="0" hidden>
-        </div> -->
-    </form>
+    <div id="card-mng">
+        <form id="search">
+            <div>
+                <input type="text" placeholder="search...">
+                <img src="/static/image/search-icon.png" id="search-btn" alt="Click to Search">
+            </div>
+        </form>
+        <form id="card-form">
+        </form>
+        <div class="block"></div>
+    </div>
 </div>
 <div class="add-footer">
     <button onclick="onAdd();" type="button" style="grid-area: plus;">+</button>
