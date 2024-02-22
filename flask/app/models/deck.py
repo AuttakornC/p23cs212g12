@@ -1,5 +1,6 @@
 # lib from py
 from sqlalchemy_serializer import SerializerMixin
+from datetime import datetime, timezone
 
 # my lib
 from app import db
@@ -9,19 +10,26 @@ class Deck(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    public = db.Column(db.Boolean, default=False)
+    is_public = db.Column(db.Boolean, default=False)
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
-    deleted = db.Column(db.Boolean, default=False)
+    is_deleted = db.Column(db.Boolean, default=False)
+    delete_at = db.Column(db.DateTime())
 
     def __init__(self, name, type, user_id):
         self.name = name
         self.type = type
+        self.is_public = False
         self.user_id = user_id
-        self.deleted = False
+        self.is_deleted = False
+        self.delete_at = None
+
+    def public_status(self, public):
+        self.is_public = public
     
     def update(self, name, type):
         self.name = name
         self.type = type
 
     def delete(self):
-        self.deleted = True
+        self.is_deleted = True
+        self.delete_at = datetime.now(timezone.utc)

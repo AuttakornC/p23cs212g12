@@ -5,11 +5,11 @@ from sqlalchemy_serializer import SerializerMixin
 from app import db
 
 class DeckTag(db.Model, SerializerMixin):
-    __tablename__ = "deck_tag"
+    __tablename__ = "deck_card"
 
-    tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"), primary_key=True)
     deck_id = db.Column(db.Integer, db.ForeignKey("decks.id"), primary_key=True)
+    card_id = db.Column(db.Integer, db.ForeignKey("cards.id"), primary_key=True)
 
-    def __init__(self, tag_id, deck_id):
-        self.tag_id = tag_id
+    def __init__(self, card_id, deck_id):
+        self.card_id = card_id
         self.deck_id = deck_id
