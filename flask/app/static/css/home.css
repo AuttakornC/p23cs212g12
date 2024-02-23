@@ -1,0 +1,54 @@
+body {
+    background-color: var(--banana-color);
+
+}
+
+header {
+    color: var(--choco-color);
+    text-align: center;
+    margin: 1rem 0rem;
+}
+
+.hr-container {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+hr {
+    margin: 0%;
+    width: 20.5rem;
+    height: 0.3rem;
+    background-color: var(--choco-color);
+    border: var(--choco-color);
+    border-radius: 5px;
+}
+
+.container {
+    /* width: 20rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type=text] {
+    border: none;
+    color: var(--banana-color);
+    background-color: var(--choco-color);
+}
+.input-group-append {
+    z-index: 1;
+}
+
+.btn {
+    border: none;
+    background-color: var(--choco-color);
+    color: var(--banana-color);
+    border-radius: 1rem;
+}
+
+
+
+
+
