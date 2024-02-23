@@ -1,0 +1,342 @@
+/* Title */
+
+    header {
+        color: var(--choco-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem;
+        padding: 2rem 0;
+    }
+
+    header > .underline {
+        width: 75%;
+        height: 7px;
+        border-radius: 1rem;
+        background-color: var(--choco-color);
+    }
+
+/* Mini Nav */
+
+    .add-nav > .line {
+        width: 100%;
+        height: 5px;
+        background-color: var(--choco-color);
+    }
+
+    .add-nav > .add-grp-nav {
+        display: flex;
+    }
+
+    .add-nav > .add-grp-nav > h2 {
+        text-align: center;
+        padding: 0.5rem;
+        width: 50%;
+        cursor: pointer;
+        color: var(--choco-color);
+        transition: color 0.25s ease-out;
+    }
+
+    .add-nav > .add-grp-nav > h2.activate {
+        color: var(--banana-color);    
+    }
+
+    .add-nav > .add-grp-nav > #bg-btn {
+        background-color: var(--choco-color);
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        transition: all 0.25s ease-out;
+    }
+
+    .add-nav > .add-grp-nav > #bg-btn.switch {
+        left: 50%;
+    }
+
+/* Property Page */
+
+    #prop-form {
+        color: var(--choco-color);
+        font-weight: bold;
+        padding: 1rem;
+        display: none;
+    }
+
+    #prop-form.activate {
+        display: block;
+    }
+
+    #prop-form label {
+        font-size: 1.5rem;
+    }
+
+    #prop-form input {
+        font-size: 1.5rem;
+        color: var(--choco-color);
+        width: 100%;
+        font-weight: bold;
+        margin-top: 0.5rem;
+    }
+
+    #prop-form > .status-tab {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1rem 0;
+    }
+
+    #prop-form > div > .toggle {
+        cursor: pointer;
+        background-color: var(--choco-color);
+        width: 6rem;
+        height: 30px;
+        border-radius: 1rem;
+        overflow: hidden;
+        color: var(--main1-color);
+        padding: 0.4rem;
+        position: relative;
+        transition: all 0.5s ease-in-out;
+        
+    }
+
+    #prop-form > div > .toggle.activate {
+        background-color: var(--main1-color);
+    }
+
+    #prop-form > div > .toggle > div {
+        width: 100%;
+        height: 100%;
+    }
+
+
+    #prop-form > div > .toggle > div > .circle {
+        height: 100%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: var(--main1-color);
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateX(0);
+        transition: all 0.5s ease-in-out;
+    }
+
+    #prop-form > div > .toggle > div > .circle.switch {
+        /* right: 0; */
+        left: 100%;
+        transform: translateX(-100%);
+        background-color: var(--choco-color);
+    }
+
+    #prop-form > div > .toggle > div > .circle > div {
+        height: 100%;
+        width: 100%;
+    }
+
+    #prop-form > div > .toggle > div > .circle > div > b {
+        position: absolute;
+        user-select: none;
+    }
+
+    #prop-form > div > .toggle > div > .circle > div > b#private-toggle {
+        right: 0;
+        top: 50%;
+        transform: translate(105%, -50%);
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+    }
+
+    #prop-form > div > .toggle > div > .circle > div > b#private-toggle.activate {
+        opacity: 1;
+    }
+
+    #prop-form > div > .toggle > div > .circle > div > b#public-toggle {
+        top: 50%;
+        left: 0;
+        transform: translate(-105%, -50%);
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+        color: var(--choco-color);
+    }
+
+    #prop-form > div > .toggle > div > .circle > div > b#public-toggle.activate {
+        opacity: 1;
+    }
+
+    #prop-form > #tag-form {
+        display: flex;
+        gap: 1rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    #prop-form > #tag-form > div > #tag-recm {
+        position: absolute;
+        width: 100%;
+        list-style: none;
+        top: 0;
+        transform: translateY(-108%);
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+    
+    #prop-form > #tag-form > div > #tag-recm > li {
+        padding: 0.5rem;
+        cursor: pointer;
+        background-color: var(--main1-color);
+    }
+
+    #prop-form > #tag-form > div > #tag-recm > li:hover {
+        background-color: var(--main2-color);
+    }
+
+    #prop-form > #tag-form > div > input {
+        margin-top: 0;
+    }
+
+    #prop-form > #tag-form > button {
+        width: 8rem;
+        background-color: var(--choco-color);
+        color: var(--banana-color);
+        font-size: 1.5rem;
+        font-weight: bold;
+        border-radius: 1rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    #prop-form > #tag-form > button:hover {
+        color: var(--main1-color);
+    }
+
+    #tag-field {
+        width: 100%;
+        background-color: var(--main1-color);
+        padding: 1rem;
+        border-radius: 1rem;
+        height: 8rem;
+        overflow: auto;
+    }
+
+
+/* Card Form */
+
+    /* Search */
+
+        #card-mng {
+            display: none;
+        }
+
+        #card-mng.activate {
+            display: block;
+        }
+
+        #card-mng > #search {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        #card-mng > #search > div {
+            width: 100%;
+        }
+
+        #card-mng > #search > div > input {
+            width: 100%;
+            font-size: 1.25rem;
+            padding-right: 2.5rem;
+            color: var(--choco-color);
+        }
+
+        #card-mng > #search > div > img {
+            width: 1.25rem;
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            filter: var(--choco-filter);
+        }
+
+        /* Add Card */
+            
+        #card-mng > #card-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0 1rem;
+            padding-bottom: 1rem;
+        }
+
+        #card-mng > #card-form > .card-form-grp {
+            background-color: var(--choco-color);
+            border-radius: 1rem;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-areas: "in1 in1 in1 btn1" "in2 in2 in2 btn2";
+            gap: 1rem;
+        }
+
+        #card-mng > #card-form > .card-form-grp button {
+            background-color: var(--main1-color);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            color: var(--choco-color);
+            border: none;
+            font-weight: bold;
+        }
+
+        #card-mng > #card-form > .card-form-grp input {
+            background-color: var(--main1-color);
+            border-radius: 0.5rem;
+            color: var(--choco-color);
+            font-size: 1rem;
+            border: none;
+        }
+
+        #card-mng > .block {
+            width: 100%;
+            height: 141px;
+        }
+
+/* Footer */
+
+    .add-footer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: "plus plus""save cancel";
+        gap: 1rem;
+        padding: 1rem;
+        border-top: 3px solid var(--choco-color);
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        position: fixed;
+        height: 141px;
+        background-color: var(--banana-color);
+    }
+
+    .add-footer button {
+        width: 100%;
+        padding: 0.5rem;
+        border: none;
+        outline: none;
+        background-color: var(--choco-color);
+        color: var(--banana-color);
+        font-size: 1.5rem;
+        font-weight: bold;
+        border-radius: 1rem;
+        transition: all 0.25s ease-in;
+        cursor: pointer;
+    }
+
+    .add-footer button:hover {
+        color: var(--main1-color);
+    }

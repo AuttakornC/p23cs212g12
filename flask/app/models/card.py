@@ -1,5 +1,6 @@
 # lib from py
 from sqlalchemy_serializer import SerializerMixin
+from datetime import datetime, timezone
 
 # my lib
 from app import db
@@ -10,18 +11,21 @@ class Card(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String())
     answer = db.Column(db.String())
-    deck_id = db.Column(db.Integer, db.ForeignKey('decks.id'))
-    deleted = db.Column(db.Boolean, default=False)
+    player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
+    is_deleted = db.Column(db.Boolean, default=False)
+    delete_at = db.Column(db.DateTime)
 
-    def __init__(self, question, answer, deck_id):
+    def __init__(self, question, answer, player_id):
         self.question = question
         self.answer = answer
-        self.deck_id = deck_id
-        self.deleted = False
+        self.player_id = player_id
+        self.is_deleted = False
+        self.delete_at = None
     
     def update(self, question, answer):
         self.question = question
         self.answer = answer
     
     def delete(self):
-        self.deleted = True
+        self.is_deleted = True
+        self.delete_at = datetime.now(timezone.utc)

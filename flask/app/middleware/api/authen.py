@@ -1,13 +1,16 @@
 # lib from py
-from flask import session, render_template
+from flask import session
 from datetime import datetime, timezone
 from jwt import decode
 from os import getenv
 
-def authen():
+# my lib
+from app.lib.request import unauthen
+
+def authen_api():
     # check for token in session
     if "token" not in session:
-        return render_template("login.html")
+        return unauthen
 
     current = datetime.now(timezone.utc)
     try:
@@ -16,6 +19,6 @@ def authen():
         # check for exp
         if "exp" not in payload or payload["exp"] <= int(current.timestamp()):
             session.clear()
-            return render_template("login.html")
+            return unauthen
     except:
-        return render_template("login.html")
+        return unauthen

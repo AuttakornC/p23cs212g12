@@ -1,0 +1,75 @@
+{% extends 'nav.html' %}
+
+{% block cssimp %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/add.css">
+{% endblock %}
+
+{% block title %}Create New Deck{% endblock %}
+
+{% block content %}
+<header>
+    <h1>Create Deck</h1>
+    <div class="underline"></div>
+</header>
+<div class="add-nav">
+    <div class="add-grp-nav">
+        <h2 class="activate" id="prop-btn" onclick="onChangePage('prop')">Property</h2>
+        <h2 id="card-btn" onclick="onChangePage('card')">Cards</h2>
+        <div id="bg-btn"></div>
+    </div>
+    <div class="line"></div>
+</div>
+<div id="deck">
+    <div id="prop-form" class="activate">
+        <label for="title">Title : </label>
+        <input type="text" name="title" placeholder="Title..." style="text-align: center;">
+        <div class="status-tab">
+            <label for="status">Deck Status : </label>
+            <input id="status" type="text" name="status" value="private" hidden>
+            <div id="status-toggle" onclick="onStatusToggle()" class="toggle">
+                <div>
+                    <div class="circle">
+                        <div>
+                            <b id="private-toggle" class="activate">Private</b>
+                            <b id="public-toggle">Public</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <label for="tag">Tags : </label>
+        <form id="tag-form">
+            <div>
+                <ul id="tag-recm">
+                </ul>
+                <input type="text" id="tag-insert" name="tag" placeholder="Tag...">
+            </div>
+            <button type="submit">+</button>
+        </form>
+        <div id="tag-field">
+        </div>
+    </div>
+    <div id="card-mng">
+        <form id="search">
+            <div>
+                <input type="text" placeholder="search...">
+                <img src="/static/image/search-icon.png" id="search-btn" alt="Click to Search">
+            </div>
+        </form>
+        <form id="card-form">
+        </form>
+        <div class="block"></div>
+    </div>
+</div>
+<div class="add-footer">
+    <button onclick="onAdd();" type="button" style="grid-area: plus;">+</button>
+    <button type="button" style="grid-area: save;">Save</button>
+    <button type="button" style="grid-area: cancel;">Cancel</button>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script src="/static/js/add.js"></script>
+{% endblock %}

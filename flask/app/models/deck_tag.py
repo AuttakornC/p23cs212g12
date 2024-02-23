@@ -13,6 +13,3 @@ class DeckTag(db.Model, SerializerMixin):
     def __init__(self, tag_id, deck_id):
         self.tag_id = tag_id
         self.deck_id = deck_id
-    
-    def updateTag(self, tag_id):
-        self.tag_id = tag_id

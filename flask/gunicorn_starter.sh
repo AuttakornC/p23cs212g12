@@ -3,6 +3,8 @@
 if [ "$APP_ENV" = "development" ]; then
     echo "Creating Database..."
     python3 manage.py create_db
+    python3 manage.py seed_db
+    python3 manage.py test_db
     echo "Complete."
     
     if [ "$FLASK_DEBUG" = "1" ]; then
