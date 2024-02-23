@@ -43,7 +43,7 @@
             <div>
                 <ul id="tag-recm">
                 </ul>
-                <input type="text" id="tag-insert" name="tag" placeholder="Tag...">
+                <input type="text" id="tag-insert" name="tag" placeholder="Tag..." autocomplete="off">
             </div>
             <button type="submit">+</button>
         </form>
@@ -53,7 +53,7 @@
     <div id="card-mng">
         <form id="search">
             <div>
-                <input type="text" placeholder="search...">
+                <input type="text" name="search_input" id="search-input" placeholder="search...">
                 <img src="/static/image/search-icon.png" id="search-btn" alt="Click to Search">
             </div>
         </form>
@@ -62,10 +62,28 @@
         <div class="block"></div>
     </div>
 </div>
+<div id="suggest">
+    <div class="sug-window">
+        <h1>Suggestion<div class="x"><div></div><div></div></div></h1>
+        <ul class="sug-nav">
+            <li class="activate">My Deck</li> 
+            <li>Dictionary</li> 
+            <li>Other Deck</li>
+            <li></li>
+        </ul>
+        <div class="underline"></div>
+        <ul class="sug-list">
+            <li><b>test</b><b>a</b></li>
+            <li><b>test</b><b>a</b></li>
+            <li><b>test</b><b>a</b></li>
+            <li><b>test</b><b>a</b></li>
+        </ul>
+    </div>
+</div>
 <div class="add-footer">
     <button onclick="onAdd();" type="button" style="grid-area: plus;">+</button>
     <button type="button" style="grid-area: save;">Save</button>
-    <button type="button" style="grid-area: cancel;">Cancel</button>
+    <button type="button" style="grid-area: cancel;" onclick="window.location.href='/'">Cancel</button>
 </div>
 {% endblock %}
 

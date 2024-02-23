@@ -20,8 +20,7 @@
     .x {
         cursor: pointer;
         position: absolute;
-        top: 50%;
-        right: 0.5rem;
+        /* top: 50%; */
         transform: translateY(-50%);
     }
 
@@ -264,6 +263,8 @@
     #prop-form > #tag-field > div > .x {
         width: 1.2rem;
         height: 1.2rem;
+        top: 50%;
+        right: 0.5rem;
         /* aspect-ratio: 1; */
     }
 
@@ -353,7 +354,10 @@
     .add-footer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-areas: "plus plus""save cancel";
+        grid-template-areas: 
+            "plus plus"
+            "save cancel"
+        ;
         gap: 1rem;
         padding: 1rem;
         border-top: 3px solid var(--choco-color);
@@ -381,4 +385,81 @@
 
     .add-footer button:hover {
         color: var(--main1-color);
+    }
+
+/* Suggest */
+
+    #suggest {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        /* display: none; */
+        background-color: rgba(0, 0, 0, 0.514);
+        top: 0;
+        left: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    #suggest > .sug-window {
+        background-color: var(--main1-color);
+        border-radius: 1rem;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #suggest > .sug-window > h1 {
+        background-color: var(--choco-color);
+        color: var(--banana-color);
+        padding: 2.5rem 1rem 1.5rem 1rem;
+        width: 100%;
+    }
+
+    #suggest > .sug-window > h1 > .x {
+        width: 2rem;
+        height: 2rem;
+        top: 2rem;
+        right: 1rem;
+    }
+
+    #suggest > .sug-window > .sug-nav {
+        list-style: none;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 1rem;
+    }
+
+    #suggest > .sug-window > .sug-nav > li {
+        text-align: center;
+        color: var(--choco-color);
+        font-size: 1.25rem;
+        font-weight: bold;
+        padding: 1rem 0;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    #suggest > .sug-window > .sug-nav > li.activate {
+        color: var(--banana-color);
+    }
+
+    #suggest > .sug-window > .sug-nav > li:last-child {
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 33.33%;
+        background-color: var(--choco-color);
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        z-index: 1;
+    }
+
+    #suggest > .sug-window > .underline {
+        width: 100%;
+        border-bottom: 3px solid var(--choco-color);
     }

@@ -9,6 +9,7 @@ class MyData {
         this.tags = []; // { id: number, tag: string, dbid: number # 0 is to insert } 
         this.db_tags = [];
         this.getDBtagFromServer();
+        this.input_tag = []; // { order_id: number, element: element }
     }
 
     async getDBtagFromServer() {
@@ -63,6 +64,47 @@ class MyData {
         tag_tag.append(delete_tag);
         tag_field.append(tag_tag);
         this.tags.push({ id, tag: name, dbid, element: tag_tag });
+    }
+
+    addInputTag(order_id, node) {
+        this.input_tag.push({ order_id, element: node });
+    }
+
+    removeInputTag(order_id) {
+        this.input_tag = this.input_tag.filter((val)=>{
+            if (order_id===val.order_id) {
+                val.element.remove();
+                return false;
+            }
+            return true;
+        });
+    }
+
+    searchInput(word) {
+        tag_field.ch
+        if (word.length!==0) {
+            word = word.toLowerCase();
+            const word_len = word.length;
+            this.input_tag.forEach(val=>{
+                const qus = val.element.children[0].value.toLowerCase();
+                const ans = val.element.children[1].value.toLowerCase();
+                if (qus.length < word_len && ans.length < word_len) {
+                    val.element.style.display = "none";
+                } else if (qus.slice(0, word_len)!==word && ans.slice(0, word_len)!==word) {
+                    val.element.style.display = "none";
+                } else {
+                    val.element.style.display = "grid";
+                }
+            });
+        } else {
+            this.clearSearch()
+        }
+    }
+
+    clearSearch() {
+        this.input_tag.forEach(val=>{
+            val.element.style.display = "grid";
+        });
     }
 
 }
@@ -122,6 +164,12 @@ function onStatusToggle() {
 // Add
 const form_add = document.getElementById("card-form");
 
+function createElementFromStr(string) {
+    const div = document.createElement("div");
+    div.innerHTML = string.trim();
+    return div.firstChild;
+}
+
 function onAdd() {
     let number_input = 0;
     onChangePage("card");
@@ -141,20 +189,36 @@ function onAdd() {
         <input type="text" name="edit_origin${number_input}" value="f" hidden>
         <input type="text" name="ref${number_input}" value="0" hidden>
     </div>`
-    form_add.innerHTML+=tag;
+    const node = createElementFromStr(tag);
+    my_state.addInputTag(number_input, node);
+    form_add.append(node);
 }
 
 
 function onRemoveClick(element) {
     const parent = element.parentElement;
-    if (parent) {
-        parent.remove();
-    }
+    const order_id = parseInt(parent.getAttribute("order_"));
+    my_state.removeInputTag(order_id);
 }
 
 function onSuggestClick(element) {
     console.log("Hello");
 }
+
+const search_btn = document.getElementById("search-btn");
+const search_form = document.getElementById("search");
+const search_input = document.getElementById("search-input");
+
+search_btn.addEventListener("click", (e)=>{
+    console.log(search_input.value);
+    my_state.searchInput(search_input.value);
+});
+
+search_form.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    
+    my_state.searchInput(e.target.search_input.value);
+});
 
 // tag inclease
 
@@ -166,7 +230,7 @@ function onSearchTag(word) {
     const db_tags = my_state.getDBtag();
     let result = [];
     for (const val of db_tags) {
-        if (val.name.slice(0, word_length)===word) {
+        if (val.name.toLowerCase().slice(0, word_length)===word.toLowerCase()) {
             result.push(val);
             if (result.length===3) {
                 return result;
