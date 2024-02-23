@@ -1,0 +1,201 @@
+body{
+    background-color: var(--banana-color);
+}
+
+.BackNextClose {
+    grid-template-areas:
+        "a s b"
+        "s c s";
+    grid-template-rows: 50rem 1rem 30rem;
+    grid-template-columns: 150px 1fr;
+}
+.BackNextClose>button {
+    cursor: pointer;
+    padding: 1rem;
+    border: none;
+    border-radius: 10rem;
+    background-color: var(--main2-color);
+    color: var(--choco-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 30%;
+    margin: 5rem 2.2rem;
+    transition: 0.25s all ease-in;
+}
+
+.BackNextClose>#back-btn{
+    grid-area: a;
+}
+.BackNextClose>#next-btn {
+    grid-area: b;
+}
+.BackNextClose>#close-btn {
+    grid-area: c;
+}
+
+.BackNextClose>#close-btn {
+    /* right: -6.7rem;
+    top: -3.2rem; */
+    cursor: pointer;
+    padding: 1rem;
+    border: none;
+    border-radius: 10rem;
+    background-color: var(--choco-color);
+    color: var(--banana-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 40%;
+    margin: 0.7rem 0;
+    transition: 0.25s all ease-in;
+}
+
+
+.cards{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1rem;
+    padding: 10rem;
+    margin: auto;
+    width: full;
+    font-weight: bold;
+    background-color: var(--choco-color);
+    max-width: 10%;
+    transition: 0.25s all ease-in;
+    
+}
+
+.cards>.card-name{
+    /* text-align: center; */
+    color: var(--banana-color);
+    font-size: 2.2rem;
+    font-weight: bold;
+    /* margin: auto; */
+}
+
+.cards > #show-btn {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    cursor: pointer;
+    justify-items: center;
+    height: fit-content;
+    padding: 1rem;
+    border: none;
+    border-radius: 10rem;
+    background-color: var(--main2-color);
+    color: var(--choco-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 60%;
+    transition: 0.25s all ease-in;
+}
+
+
+.deck-name{
+    color: var(--choco-color);
+    font-weight: bold;
+    font-size: 2.2rem;
+    text-align: center;
+    margin: 2rem 0 0.2rem;
+    font-style: normal;
+    line-height: normal;
+    transition: 0.25s all ease-in;
+}
+
+.number {
+    color: var(--choco-color);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 0 2rem;
+    font-style: normal;
+    line-height: normal;
+    transition: 0.25s all ease-in;
+}
+
+@media screen and (min-width: 601px) {
+body{
+    background-color: var(--banana-color);
+}
+
+.BackNextClose>button {
+    cursor: pointer;
+    padding: 1rem;
+    border: none;
+    border-radius: 10rem;
+    background-color: var(--main2-color);
+    color: var(--choco-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 15%;
+    transition: 0.25s all ease-in;
+}
+/* .BackNextClose>#back-btn { 
+    margin: 5rem 35rem 20rem 15rem;
+    transition: 0.25s all ease-in;
+} */
+
+
+.cards {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1rem;
+    padding: 10rem;
+    margin: auto;
+    width: full;
+    font-weight: bold;
+    background-color: var(--choco-color);
+    max-width: 50%;
+    flex-shrink: 0;
+    transition: 0.25s all ease-in;
+
+}
+/* .cards>#show-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    cursor: pointer;
+    justify-items: center;
+    height: fit-content;
+    padding: 1rem;
+    border: none;
+    border-radius: 10rem;
+    background-color: var(--main2-color);
+    color: var(--choco-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 45%;
+    transition: 0.25s all ease-in;
+} */
+
+.cards>.card-name {
+    /* text-align: center; */
+    color: var(--banana-color);
+    font-size: 3rem;
+    font-weight: bold;
+    /* margin: auto; */
+}
+/* 
+.BackNextClose>#close-btn {
+    right: -36.2rem;
+    top: -15rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: none;
+    border-radius: 10rem;
+    background-color: var(--choco-color);
+    color: var(--banana-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 25%;
+    margin: 0.7rem 0;
+    transition: 0.25s all ease-in;
+} */
+}
