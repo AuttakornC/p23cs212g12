@@ -182,12 +182,12 @@ function onAdd() {
     const tag = `<div class="card-form-grp" order_="${number_input}">
         <input style="grid-area: in1;" id="question${number_input}" name="question${number_input}" type="text" placeholder="Question...">
         <input style="grid-area: in2;" id="answer${number_input}" name="answer${number_input}" type="text" placeholder="Answer...">
-        <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);">Sug</button>
-        <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);">-</button>
         <input type="text" name="is_recom${number_input}" value="f" hidden>
         <input type="text" name="own_recom${number_input}" value="f" hidden>
         <input type="text" name="edit_origin${number_input}" value="f" hidden>
         <input type="text" name="ref${number_input}" value="0" hidden>
+        <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);">Sug</button>
+        <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);">-</button>
     </div>`
     const node = createElementFromStr(tag);
     my_state.addInputTag(number_input, node);
@@ -202,7 +202,9 @@ function onRemoveClick(element) {
 }
 
 function onSuggestClick(element) {
-    console.log("Hello");
+    if (element.parentElement.children[0].value) {
+        suggest.onSuggest(element.parentElement, element.parentElement.children[0].value);
+    }
 }
 
 const search_btn = document.getElementById("search-btn");
@@ -268,5 +270,54 @@ tag_form.addEventListener("submit", (e)=>{
     e.preventDefault();
     my_state.addTag(tag_input.value, 0);
 });
+
+// suggest
+
+class Suggest {
+    sug_close = document.getElementById("sug-close");
+    sug_window = document.getElementById("suggest");
+
+    sug_own = document.getElementById("sug-own");
+    sug_dict = document.getElementById("sug-dict");
+    sug_other = document.getElementById("sug-other");
+
+    constructor() {
+        this.sug_close.addEventListener("click", (e)=>{
+            this.sug_window.style.display = "none"
+            this.sug_own.replaceChild()
+            this.sug_dict.replaceChild()
+            this.sug_other.replaceChild()
+        });
+    }
+
+    onSuggest(element, word) {
+        const sug_own = document.getElementById("sug-own");
+        const sug_other = document.getElementById("sug-other");
+        const sug_dict = document.getElementById("sug-dict");
+        const sug_window = document.getElementById("suggest");
+
+        async function getSuggest() {    
+            const response = await fetch(`/api/suggest?search=${word}`);
+            const result = await response.json();
+            console.log(result);
+            result.data.owner.forEach(val=>{
+                sug_own.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
+                sug_own.lastChild.addEventListener("click", (e)=>{
+                    element.children[0].value = val.question;
+                    element.children[1].value = val.answer;
+                    console.log("Hello");
+                    sug_window.style.display = "none";
+                });
+            });
+        }
+
+        this.sug_window.style.display = "flex";
+        getSuggest();
+    }
+
+}
+
+const suggest = new Suggest()
+
 
 // footer

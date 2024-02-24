@@ -12,6 +12,7 @@ class Deck(db.Model, SerializerMixin):
     name = db.Column(db.String(255))
     is_public = db.Column(db.Boolean, default=False)
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
+    create_at = db.Column(db.DateTime())
     is_deleted = db.Column(db.Boolean, default=False)
     delete_at = db.Column(db.DateTime())
 
