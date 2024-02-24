@@ -12,14 +12,14 @@ class Deck(db.Model, SerializerMixin):
     name = db.Column(db.String(255))
     is_public = db.Column(db.Boolean, default=False)
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
+    create_at = db.Column(db.DateTime())
     is_deleted = db.Column(db.Boolean, default=False)
     delete_at = db.Column(db.DateTime())
 
-    def __init__(self, name, type, user_id):
+    def __init__(self, name, is_pulic, user_id):
         self.name = name
-        self.type = type
-        self.is_public = False
-        self.user_id = user_id
+        self.is_public = is_pulic
+        self.player_id = user_id
         self.is_deleted = False
         self.delete_at = None
 
