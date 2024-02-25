@@ -41,6 +41,10 @@
         transform: translate(-50%, -50%) rotate(-45deg);
     }
 
+    #deck > hr.line {
+        display: none;
+    }
+
 /* Mini Nav */
 
     .add-nav > .line {
@@ -493,3 +497,115 @@
         width: 100%;
         border-bottom: 3px solid var(--choco-color);
     }
+
+/* Edit Own */
+    #edit-own {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 9;
+        background-color: rgba(0, 0, 0, 0.514);
+        padding: 1rem;
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #edit-own > .edit-own-window {
+        max-width: 30rem;
+        width: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+        background-color: var(--main2-color);
+    }
+
+    #edit-own > .edit-own-window > h2 {
+        background-color: var(--choco-color);
+        color: var(--banana-color);
+        padding: 1rem 1.5rem;
+        width: 100%;
+    }
+
+    #edit-own > .edit-own-window > p {
+        width: 100%;
+        color: var(--choco-color);
+        padding: 1rem 1.5rem;
+        text-indent: 2rem;
+        font-size: 1.2rem;
+    }
+
+    #edit-own > .edit-own-window > .edit-own-btn-grp {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        padding: 1rem;
+        margin: 0 auto;
+        max-width: 25rem;
+    }
+
+    #edit-own > .edit-own-window > .edit-own-btn-grp > button {
+        padding: 0.75rem 0.5rem;
+        border: none;
+        outline: none;
+        font-weight: bold;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        background-color: var(--main1-color);
+        color: var(--choco-color);
+    }
+
+    #edit-own > .edit-own-window > .edit-own-btn-grp > button:not(:first-child):hover {
+        background-color: var(--main3-color);
+    }
+
+
+
+    #edit-own > .edit-own-window > .edit-own-btn-grp > button:first-child {
+        background-color: var(--choco-color);
+        color: var(--banana-color);
+    }
+
+    #edit-own > .edit-own-window > .edit-own-btn-grp > button:first-child:hover {
+        color: var(--main1-color);
+    }
+
+@media screen and (min-width: 601px) {
+    .add-nav {
+        display: none;
+    }
+
+    #deck {
+        width: 100%;
+    }
+
+    #deck > hr.line {
+        display: block;
+        margin: 1rem 0;
+        width: 100%;
+        height: 5px;
+        background-color: var(--choco-color);
+    }
+
+    #prop-form {
+        width: 100%;
+        max-width: 90rem;
+        margin: 0 auto;
+        display: block;
+    }
+
+    #card-mng {
+        display: block;
+        width: 100%;
+        max-width: 90rem;
+        margin: 0 auto;
+    }
+
+    .add-footer {
+        grid-template-columns: 1fr minmax(0, 30rem) minmax(0, 30rem) minmax(0, 30rem) 1fr;
+        grid-template-areas: ". plus save cancel .";
+        padding: 2.5rem 0;
+    }
+}

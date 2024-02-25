@@ -51,20 +51,20 @@ def create_deck(body, user_data):
         if card["is_recom"]:
             if card["own_recom"] and card["edit_origin"]:
                 to_edit = Card.query.get(card["ref"])
-                if to_edit.player_id == user_data.id:
+                if to_edit.player_id == user_data["id"]:
                     
                     # Select all deck that contain this card
                     all_deck_card = DeckCard.query.filter_by(card_id=to_edit.id)
                     all_deck_card_id = list(map(lambda x: x.to_dict()["deck_id"], all_deck_card))
                     
                     # Select all deck that contain this card and is owner
-                    all_deck_data = Deck.query.filter(Deck.id.in_(all_deck_card_id), Deck.player_id==user_data.id)
+                    all_deck_data = Deck.query.filter(Deck.id.in_(all_deck_card_id), Deck.player_id==user_data["id"])
                     all_deck_data_id = list(map(lambda x: x.to_dict()["id"], all_deck_data))
                     all_deck_data_len = len(all_deck_data_id)
                     
                     # if not equal so it going to duplicate new for our.
                     if len(all_deck_card_id) != all_deck_data_len:
-                        new_card = Card(card["question"], card["answer"], user_data.id)
+                        new_card = Card(card["question"], card["answer"], user_data["id"])
                         db.session.add(new_card)
                         db.session.flush()
                         db.session.commit()
@@ -80,7 +80,7 @@ def create_deck(body, user_data):
             else:
                 card_list.append(card["ref"])
         else:
-            new_card = Card(card["question"], card["answer"], user_data.id)
+            new_card = Card(card["question"], card["answer"], user_data["id"])
             new_card_list.append(new_card)    
             db.session.add(new_card)
 

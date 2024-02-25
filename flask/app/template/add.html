@@ -23,7 +23,7 @@
 <div id="deck">
     <div id="prop-form" class="activate">
         <label for="title">Title : </label>
-        <input type="text" name="title" placeholder="Title..." style="text-align: center;">
+        <input id="title" type="text" name="title" placeholder="Title..." style="text-align: center;">
         <div class="status-tab">
             <label for="status">Deck Status : </label>
             <input id="status" type="text" name="status" value="private" hidden>
@@ -40,7 +40,7 @@
         </div>
         <label for="tag">Tags : </label>
         <form id="tag-form">
-            <div>
+            <div style="width: 100%;">
                 <ul id="tag-recm">
                 </ul>
                 <input type="text" id="tag-insert" name="tag" placeholder="Tag..." autocomplete="off">
@@ -50,6 +50,7 @@
         <div id="tag-field">
         </div>
     </div>
+    <hr class='line'>
     <div id="card-mng">
         <form id="search">
             <div>
@@ -60,6 +61,17 @@
         <form id="card-form">
         </form>
         <div class="block"></div>
+    </div>
+</div>
+<div id="edit-own">
+    <div class="edit-own-window">
+        <h2>Do you want to change?</h2>
+        <p>this card references from your card in other deck(s). if you confirm to change other card, this card in every deck will change too.</p>
+        <div class="edit-own-btn-grp">
+            <button id="edit-own-change" type="button">change</button>
+            <button id="edit-own-nchange" type="button">not change</button>
+            <button id="edit-own-cancel" type="button">cancel</button>
+        </div>
     </div>
 </div>
 <div id="suggest">
@@ -82,7 +94,7 @@
 </div>
 <div class="add-footer">
     <button onclick="onAdd();" type="button" style="grid-area: plus;">+</button>
-    <button type="button" style="grid-area: save;">Save</button>
+    <button onclick="onSave();" type="button" style="grid-area: save;">Save</button>
     <button type="button" style="grid-area: cancel;" onclick="window.location.href='/'">Cancel</button>
 </div>
 {% endblock %}

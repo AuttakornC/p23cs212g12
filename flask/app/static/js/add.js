@@ -6,7 +6,7 @@ class MyData {
 
     constructor() {
         this.currentPage = "prop";
-        this.tags = []; // { id: number, tag: string, dbid: number # 0 is to insert } 
+        this.tags = []; // { id: number, tag: string, dbid: number # 0 is to insert, element: Node } 
         this.db_tags = [];
         this.getDBtagFromServer();
         this.input_tag = []; // { order_id: number, element: element }
@@ -52,7 +52,7 @@ class MyData {
         const delete_tag = document.createElement("div");
         delete_tag.classList.add("x");
         delete_tag.addEventListener("click", (e)=>{
-            this.tags.filter(val=>{
+            this.tags = this.tags.filter(val=>{
                 if (val.id===id) {
                     val.element.remove();
                     return false;
@@ -68,6 +68,10 @@ class MyData {
 
     addInputTag(order_id, node) {
         this.input_tag.push({ order_id, element: node });
+    }
+
+    getInputTag() {
+        return this.input_tag;
     }
 
     removeInputTag(order_id) {
@@ -184,7 +188,7 @@ function onAdd() {
         <input style="grid-area: in2;" id="answer${number_input}" name="answer${number_input}" type="text" placeholder="Answer...">
         <input type="text" name="is_recom${number_input}" value="f" hidden>
         <input type="text" name="own_recom${number_input}" value="f" hidden>
-        <input type="text" name="edit_origin${number_input}" value="f" hidden>
+        <input type="text" name="edit_origin${number_input}" value="t" hidden>
         <input type="text" name="ref${number_input}" value="0" hidden>
         <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);">Sug</button>
         <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);">-</button>
@@ -204,7 +208,7 @@ function onRemoveClick(element) {
 function onSuggestClick(element) {
     // console.log(element.parentElement.children[0].value);
     if (element.parentElement.children[0].value) {
-        suggest.onSuggest(element.parentElement, element.parentElement.children[0].value);
+        suggest.onSuggest(element, element.parentElement.children[0].value);
     }
 }
 
@@ -213,7 +217,6 @@ const search_form = document.getElementById("search");
 const search_input = document.getElementById("search-input");
 
 search_btn.addEventListener("click", (e)=>{
-    console.log(search_input.value);
     my_state.searchInput(search_input.value);
 });
 
@@ -326,11 +329,17 @@ class Suggest {
         });
     }
 
-    onSuggest(element, word) {
+    onSuggest(element_btn, word) {
+        const element = element_btn.parentElement;
         const sug_own = document.getElementById("sug-own");
         const sug_other = document.getElementById("sug-other");
         const sug_dict = document.getElementById("sug-dict");
         const sug_window = document.getElementById("suggest");
+
+        function changeBTN() {
+            element_btn.innerHTML = "Edit";
+            element_btn.setAttribute("onclick", "onEdit(this);");
+        }
 
         async function getSuggest() {    
             const response = await fetch(`/api/suggest?search=${word}`);
@@ -344,22 +353,24 @@ class Suggest {
                     element.children[1].disabled = true;
                     element.children[2].value = 't';
                     element.children[3].value = 't';
-                    element.children[4].value = val.id;
+                    element.children[5].value = val.id;
                     sug_window.style.display = "none";
+                    changeBTN();
                 });
             });
 
             result.data.other.forEach(val=>{
-                sug_own.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
-                sug_own.lastChild.addEventListener("click", (e)=>{
+                sug_other.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
+                sug_other.lastChild.addEventListener("click", (e)=>{
                     element.children[0].value = val.question;
                     element.children[0].disabled = true;
                     element.children[1].value = val.answer;
                     element.children[1].disabled = true;
                     element.children[2].value = 't';
                     element.children[3].value = 'f';
-                    element.children[4].value = val.id;
+                    element.children[5].value = val.id;
                     sug_window.style.display = "none";
+                    changeBTN();
                 });
             });
         }
@@ -370,7 +381,89 @@ class Suggest {
 
 }
 
+class EditCheck {
+    change_btn = document.getElementById("edit-own-change");
+    nchange_btn = document.getElementById("edit-own-nchange");
+    close_btn = document.getElementById("edit-own-cancel");
+
+    edit_window = document.getElementById("edit-own");
+
+    constructor() {
+        this.close_btn.addEventListener("click", (e)=>{
+            this.edit_window.style.display = "none";
+        });
+    }
+
+    onActivate(element) {
+        const parent = element.parentElement;
+        this.edit_window.style.display = "flex";
+
+        function changeBTN() {
+            element.innerHTML = "sug";
+            element.setAttribute("onclick", "onSuggestClick(this);");
+        }
+
+        this.change_btn.addEventListener("click", (e)=>{
+            parent.children[0].disabled = false;
+            parent.children[1].disabled = false;
+            changeBTN();
+        }, {once: true});
+
+        this.nchange_btn.addEventListener("click", (e)=>{
+            parent.children[0].disabled = false;
+            parent.children[1].disabled = false;
+            parent.children[4].value = "f";
+            changeBTN();
+        }, {once: true});
+    }
+}
+
+function onEdit(element) {
+    const parent = element.parentElement;
+    if (parent.children[2]==="t" && parent.children[3]==="t") {
+        edit_check.onActivate(element);
+    } else {
+        parent.children[0].disabled = false;
+        parent.children[1].disabled = false;
+        parent.children[4].value = "f";
+        element.innerHTML = "sug";
+        element.setAttribute("onclick", "onSuggestClick(this);");
+    }
+}
+
 const suggest = new Suggest()
+const edit_check = new EditCheck()
 
 
-// footer
+// on submit
+function onSave() {
+    const form_data = {};
+    console.log(my_state.getInputTag())
+    form_data["title"] = document.getElementById("title").value;
+    form_data["is_public"] = document.getElementById("status").value==="public";
+    form_data["tags"] = my_state.getTags().map(val=>{return {dbid: val.dbid, tag: val.tag};});
+    form_data["cards"] = my_state.getInputTag().map(val=>{
+        const element = val.element;
+        return {
+            is_recom: element.children[2].value==="t",
+            own_recom: element.children[3].value==="t",
+            edit_origin: element.children[4].value==="t",
+            ref: parseInt(element.children[5].value),
+            question: element.children[0].value,
+            answer: element.children[1].value
+        }
+    });
+
+    async function sendData() {
+        const response = await fetch("/api/deck", {
+            method: "POST",
+            body: JSON.stringify(form_data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const result = await response.json()
+    }
+
+    sendData();
+}
