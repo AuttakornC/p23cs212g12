@@ -344,6 +344,11 @@
             border: none;
         }
 
+        #card-mng > #card-form > .card-form-grp input:disabled {
+            background-color: #be9f75;
+            user-select: none;
+        }
+
         #card-mng > .block {
             width: 100%;
             height: 141px;
@@ -481,6 +486,7 @@
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         z-index: 1;
+        transition: left 0.25s ease-in-out;
     }
 
     #suggest > .sug-window > .underline {

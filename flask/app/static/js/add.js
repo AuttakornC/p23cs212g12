@@ -202,6 +202,7 @@ function onRemoveClick(element) {
 }
 
 function onSuggestClick(element) {
+    // console.log(element.parentElement.children[0].value);
     if (element.parentElement.children[0].value) {
         suggest.onSuggest(element.parentElement, element.parentElement.children[0].value);
     }
@@ -281,12 +282,47 @@ class Suggest {
     sug_dict = document.getElementById("sug-dict");
     sug_other = document.getElementById("sug-other");
 
+    sug_nav_own = document.getElementById("sug-nav-own");
+    sug_nav_dict = document.getElementById("sug-nav-dict");
+    sug_nav_other = document.getElementById("sug-nav-other");
+    sug_nav_bg = document.getElementById("sug-nav-bg");
+
     constructor() {
         this.sug_close.addEventListener("click", (e)=>{
             this.sug_window.style.display = "none"
             this.sug_own.replaceChild()
             this.sug_dict.replaceChild()
             this.sug_other.replaceChild()
+        });
+
+        this.sug_nav_own.addEventListener("click", (e)=>{
+            this.sug_own.style.display = "block";
+            this.sug_dict.style.display = "none";
+            this.sug_other.style.display = "none";
+            this.sug_nav_bg.style.left = "0";
+            this.sug_nav_own.classList.add("activate");
+            this.sug_nav_dict.classList.remove("activate");
+            this.sug_nav_other.classList.remove("activate");
+        });
+
+        this.sug_nav_dict.addEventListener("click", (e)=>{
+            this.sug_own.style.display = "none";
+            this.sug_dict.style.display = "block";
+            this.sug_other.style.display = "none";
+            this.sug_nav_bg.style.left = "33.33%";
+            this.sug_nav_own.classList.remove("activate");
+            this.sug_nav_dict.classList.add("activate");
+            this.sug_nav_other.classList.remove("activate");
+        });
+
+        this.sug_nav_other.addEventListener("click", (e)=>{
+            this.sug_own.style.display = "none";
+            this.sug_dict.style.display = "none";
+            this.sug_other.style.display = "block";
+            this.sug_nav_bg.style.left = "66.66%";
+            this.sug_nav_own.classList.remove("activate");
+            this.sug_nav_dict.classList.remove("activate");
+            this.sug_nav_other.classList.add("activate");
         });
     }
 
@@ -299,19 +335,36 @@ class Suggest {
         async function getSuggest() {    
             const response = await fetch(`/api/suggest?search=${word}`);
             const result = await response.json();
-            console.log(result);
             result.data.owner.forEach(val=>{
                 sug_own.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
                 sug_own.lastChild.addEventListener("click", (e)=>{
                     element.children[0].value = val.question;
+                    element.children[0].disabled = true;
                     element.children[1].value = val.answer;
-                    console.log("Hello");
+                    element.children[1].disabled = true;
+                    element.children[2].value = 't';
+                    element.children[3].value = 't';
+                    element.children[4].value = val.id;
+                    sug_window.style.display = "none";
+                });
+            });
+
+            result.data.other.forEach(val=>{
+                sug_own.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
+                sug_own.lastChild.addEventListener("click", (e)=>{
+                    element.children[0].value = val.question;
+                    element.children[0].disabled = true;
+                    element.children[1].value = val.answer;
+                    element.children[1].disabled = true;
+                    element.children[2].value = 't';
+                    element.children[3].value = 'f';
+                    element.children[4].value = val.id;
                     sug_window.style.display = "none";
                 });
             });
         }
 
-        this.sug_window.style.display = "flex";
+        this.sug_window.style.display = "grid";
         getSuggest();
     }
 

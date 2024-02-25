@@ -30,7 +30,7 @@ def seed_db():
     db.session.add(Tag("aut"))
     db.session.add(Tag("food"))
     db.session.add(Tag("sci"))
-    db.session.add(Deck("Test1", False, 1))
+    db.session.add(Deck("Test1", True, 1))
     db.session.add(Deck("Test2", False, 2))
     db.session.commit()
     db.session.add(Card("ANT", "มด", 1))

@@ -10,6 +10,8 @@ from app.models.deck_card import DeckCard
 from app.lib.token import getDataFromSession
 from app.lib.request import successBody
 
+# Written by Auttakorn Camsoi
+# route for get a suggest
 @api.route("/suggest")
 def suggest():
     user_data = getDataFromSession()
