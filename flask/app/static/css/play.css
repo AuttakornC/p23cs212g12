@@ -2,12 +2,20 @@ body{
     background-color: var(--banana-color);
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem;
+}
+
 .BackNextClose {
-    grid-template-areas:
-        "a s b"
-        "s c s";
-    grid-template-rows: 50rem 1rem 30rem;
-    grid-template-columns: 150px 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "a . b" ". c .";
+    margin: 5rem 0 6rem;
+    width: 100%;
+    max-width: 900px;
 }
 .BackNextClose>button {
     cursor: pointer;
@@ -18,8 +26,6 @@ body{
     color: var(--choco-color);
     font-weight: bold;
     font-size: 1.2rem;
-    width: 30%;
-    margin: 5rem 2.2rem;
     transition: 0.25s all ease-in;
 }
 
@@ -29,23 +35,18 @@ body{
 .BackNextClose>#next-btn {
     grid-area: b;
 }
-.BackNextClose>#close-btn {
-    grid-area: c;
-}
+
 
 .BackNextClose>#close-btn {
-    /* right: -6.7rem;
-    top: -3.2rem; */
+    grid-area: c;
     cursor: pointer;
-    padding: 1rem;
     border: none;
     border-radius: 10rem;
     background-color: var(--choco-color);
     color: var(--banana-color);
     font-weight: bold;
     font-size: 1.2rem;
-    width: 40%;
-    margin: 0.7rem 0;
+    top: 5rem;
     transition: 0.25s all ease-in;
 }
 
@@ -58,7 +59,6 @@ body{
     justify-content: space-between;
     border-radius: 1rem;
     padding: 10rem;
-    margin: auto;
     width: full;
     font-weight: bold;
     background-color: var(--choco-color);
@@ -68,11 +68,9 @@ body{
 }
 
 .cards>.card-name{
-    /* text-align: center; */
     color: var(--banana-color);
     font-size: 2.2rem;
     font-weight: bold;
-    /* margin: auto; */
 }
 
 .cards > #show-btn {
@@ -117,27 +115,58 @@ body{
     transition: 0.25s all ease-in;
 }
 
-@media screen and (min-width: 601px) {
-body{
-    background-color: var(--banana-color);
+/* loading */
+
+.window-loader {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.311);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.BackNextClose>button {
-    cursor: pointer;
-    padding: 1rem;
-    border: none;
-    border-radius: 10rem;
-    background-color: var(--main2-color);
+.window-loader>.loader {
+    border: 16px solid var(--banana-color);
+    border-top: 16px solid var(--choco-color);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.window-loader>.PW {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -800%);
     color: var(--choco-color);
     font-weight: bold;
-    font-size: 1.2rem;
-    width: 15%;
-    transition: 0.25s all ease-in;
+    font-size: 1.7rem;
 }
-/* .BackNextClose>#back-btn { 
-    margin: 5rem 35rem 20rem 15rem;
+
+
+@media screen and (min-width: 601px) {
+
+.BackNextClose>button {
+    font-weight: bold;
+    font-size: 1.2rem;
     transition: 0.25s all ease-in;
-} */
+
+}
 
 
 .cards {
@@ -148,54 +177,28 @@ body{
     justify-content: space-between;
     border-radius: 1rem;
     padding: 10rem;
-    margin: auto;
-    width: full;
-    font-weight: bold;
-    background-color: var(--choco-color);
-    max-width: 50%;
+    margin: 1rem;
+    width: 100%;
+    max-width: 1000px;
     flex-shrink: 0;
     transition: 0.25s all ease-in;
 
 }
-/* .cards>#show-btn {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    cursor: pointer;
-    justify-items: center;
-    height: fit-content;
-    padding: 1rem;
-    border: none;
-    border-radius: 10rem;
-    background-color: var(--main2-color);
-    color: var(--choco-color);
-    font-weight: bold;
-    font-size: 1.2rem;
-    width: 45%;
-    transition: 0.25s all ease-in;
-} */
+
 
 .cards>.card-name {
-    /* text-align: center; */
     color: var(--banana-color);
     font-size: 3rem;
     font-weight: bold;
-    /* margin: auto; */
 }
-/* 
-.BackNextClose>#close-btn {
-    right: -36.2rem;
-    top: -15rem;
-    cursor: pointer;
-    padding: 1rem;
-    border: none;
-    border-radius: 10rem;
-    background-color: var(--choco-color);
-    color: var(--banana-color);
-    font-weight: bold;
-    font-size: 1.2rem;
-    width: 25%;
-    margin: 0.7rem 0;
-    transition: 0.25s all ease-in;
-} */
 }
+
+
+/* loading */
+
+.window-loader > .PW{
+    transform: translate(-50%, -600%);
+}
+
+
+

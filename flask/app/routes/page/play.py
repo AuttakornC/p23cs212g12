@@ -6,5 +6,5 @@ from app.routes.page import main
 
 @main.route("/play")
 def play():
-    return render_template("play.html")
+    return render_template("play.html", deck_detail={"name": "Hello"})
     # return "hello"
