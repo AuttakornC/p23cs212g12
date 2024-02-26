@@ -8,11 +8,4 @@ from app.models.player import Player
 
 @main.route("/")
 def home():
-    status, payload = getDataFromSession()
-    if status:
-        # print(payload["id"])
-        player_data = Player.query.get(payload["id"])
-        # print(player_data)
-        return render_template("home.html", player_data=player_data.to_dict())
-    else:
-        return player_data
+    return render_template("home.html")

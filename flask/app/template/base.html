@@ -6,6 +6,7 @@
     {% block cssimp %}{% endblock %}
     <link rel="stylesheet" href="/static/css/global.css">
     <link rel="stylesheet" href="/static/css/confirm.css">
+    <link rel="stylesheet" href="/static/css/load.css">
     <link rel="shortcut icon" href="/static/image/fav.ico">
     <title>{% block title %}{% endblock %} | Banana Choco The Flash Card</title>
 </head>
@@ -17,6 +18,10 @@
             <div class="confirm-grp">
             </div>
         </div>
+    </div>
+    <div id="window-loader">
+        <div class="loader"></div>
+        <div class="PW">Please Wait ...</div>
     </div>
     {% block nav %}
     {% endblock %}
