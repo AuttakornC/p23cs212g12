@@ -437,8 +437,16 @@ const edit_check = new EditCheck()
 
 // on submit
 function onSave() {
+    confirm_.open(
+        "Are you sure to create?",
+        "Please, recheck your deck's infomation. you can return to edit this deck soon. the same cards won't save to the database.",
+        saving
+    );
+}
+
+function saving() {
     const form_data = {};
-    console.log(my_state.getInputTag())
+
     form_data["title"] = document.getElementById("title").value;
     form_data["is_public"] = document.getElementById("status").value==="public";
     form_data["tags"] = my_state.getTags().map(val=>{return {dbid: val.dbid, tag: val.tag};});
@@ -462,8 +470,16 @@ function onSave() {
                 "Content-Type": "application/json"
             }
         });
-        const result = await response.json()
     }
 
     sendData();
+}
+
+// function cancel
+function onCancel() {
+    confirm_.open(
+        "Do you want to exit without saving?",
+        "You haven't saved this deck yet. if you want to discard this deck, choose 'confirm' for back to 'home page'.",
+        ()=>{window.location.href="/";}
+    );
 }

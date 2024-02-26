@@ -12,7 +12,8 @@ class Confirm {
             close_btn.innerHTML = "cancel";
             const to_do_btn = document.createElement("button");
             to_do_btn.innerHTML = "confirm";
-            to_do_btn.addEventListener("click", (e)=>{callback();});
+            to_do_btn.classList.add("highlight");
+            to_do_btn.addEventListener("click", (e)=>{callback();this.close();});
             this.confirm_btn_grp.append(to_do_btn);
         }
         this.confirm_head.innerHTML = head;
