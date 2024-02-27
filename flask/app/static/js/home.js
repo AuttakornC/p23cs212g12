@@ -25,7 +25,14 @@ class Deck {
         const deckContainner = document.getElementsByClassName('deck-bg');
         data["data"].forEach(element => {
             console.log(element);
-            deckContainner[0].innerHTML += `<span>${element.name}</span>`
+            deckContainner[0].innerHTML += `<div class="box">
+            <div class="profile">
+                <img class="profile-icon" src="/static/image/profile-icon.png" alt="">
+                <span class="people">${element.username}</span>
+            </div>
+            <div class="description"><h4 id="nameD" class="deckName">${element.name}</h4><h5 class="cardNum">${element.len_card} Cards</h5></div>
+            <button class="button">Preview</button>
+        </div>`
           
         });
         
