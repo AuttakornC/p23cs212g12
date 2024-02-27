@@ -16,6 +16,7 @@ body {
     --main3-color: #FEECB3;
     --danger-color: #ff4929;
     --banana-color: #FFE86E;
+    --banana-hover-color: #dac55e;
     --white-color: #fff;
 
     --cholo-filter: brightness(0) saturate(100%) invert(24%) sepia(24%) saturate(940%) hue-rotate(357deg) brightness(91%) contrast(96%);

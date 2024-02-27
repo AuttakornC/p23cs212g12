@@ -273,6 +273,8 @@ const tag_form = document.getElementById("tag-form");
 tag_form.addEventListener("submit", (e)=>{
     e.preventDefault();
     my_state.addTag(tag_input.value, 0);
+    rec_tab.replaceChildren();
+    tag_input.value = "";
 });
 
 // suggest
@@ -493,6 +495,8 @@ function saving() {
             question: element.children[0].value,
             answer: element.children[1].value
         }
+    }).filter(val=>{
+        return val.question && val.answer;
     });
 
     async function sendData() {
@@ -506,7 +510,7 @@ function saving() {
             });
         } catch (error) {}
         load.toggle();
-        
+        window.location.href = "/";
     }
 
     sendData();
