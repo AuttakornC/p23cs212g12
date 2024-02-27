@@ -1,7 +1,7 @@
 {% extends 'nav.html' %}
 
 {% block cssimp %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 <link rel="stylesheet" href="/static/css/home.css">
 {{ super() }}
 {% endblock %}
@@ -11,28 +11,36 @@
 {% block content %}
 <header>
     <h1>My Flash Cards</h1>
-    <div class="hr-container">
+    <div class="hr-container-home-page">
         <hr>
     </div>
 </header>
     
-<article class="container">
-    <section class="deck-container">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Button</button>
-            </div>
+<!-- <article class="container-home-page"> -->
+    
+<section class="deck-container-home-page">
+    <form id="search">
+        <div>
+            <input type="text" placeholder="search...">
+            <img src="/static/image/search-icon.png" id="search-btn" alt="Click to Search">
         </div>
-        <!-- static sample -->
-        <div class="deck">
-            
+    </form>
+    
+    <!-- static sample -->
+    <div class="deck-home-page">
+        <div class="deck-bg">
+            <span>Animal</span>
         </div>
-        
-        <button type="button" class="btn btn-block">+</button>
-    </section>
-</article>
-<!-- <div class="test">
-    <img src="/static/image/fb-icon.png" alt="">
-</div> -->
+        <div class="block"></div>
+    </div>
+</section>
+
+<div class="add-footer">
+    <button onclick="onAdd();" type="button">+</button>
+</div>
+
+{% endblock %}
+{% block script %}
+<script src="/static/js/home.js"></script>
+{{ super() }}
 {% endblock %}

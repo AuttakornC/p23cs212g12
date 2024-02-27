@@ -9,7 +9,7 @@ header {
     margin: 1rem 0rem;
 }
 
-.hr-container {
+.hr-container-home-page {
     margin: 0px;
     display: flex;
     justify-content: center;
@@ -17,14 +17,14 @@ header {
 
 hr {
     margin: 0%;
-    width: 20.5rem;
+    width: 16.5rem;
     height: 0.3rem;
     background-color: var(--choco-color);
     border: var(--choco-color);
     border-radius: 5px;
 }
 
-.container {
+.deck-container-home-page {
     /* width: 20rem; */
     display: flex;
     flex-direction: column;
@@ -32,23 +32,95 @@ hr {
     align-items: center;
 }
 
-input[type=text] {
-    border: none;
-    color: var(--banana-color);
-    background-color: var(--choco-color);
-}
-.input-group-append {
-    z-index: 1;
+
+/* search css */
+
+.deck-container-home-page > #search {
+    width: 100%;
+    padding: 1rem;
 }
 
-.btn {
+.deck-container-home-page > #search > div {
+    width: 100%;
+}
+
+.deck-container-home-page > #search > div > input {
+    width: 100%;
+    font-size: 1.25rem;
+    padding-right: 2.5rem;
+    color: var(--banana-color);
+    background-color: var(--choco-color);
+}
+
+.deck-container-home-page > #search > div > input::placeholder {
+    opacity: 1;
+}
+
+.deck-container-home-page > #search > div > input::placeholder {
+    color: var(--banana-color);
+}
+
+.deck-container-home-page > #search > div > img {
+    width: 1.25rem;
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    filter: var(--banana-filter);
+}
+
+/* footer */
+
+.add-footer {
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    /* grid-template-areas: "plus plus""save cancel"; */
+    gap: 1rem;
+    padding: 1rem;
+    /* border-top: 3px solid var(--choco-color); */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    height: 100px;
+    background-color: var(--banana-color);
+}
+
+.add-footer button {
+    width: 100%;
+    padding: 0.5rem;
     border: none;
+    outline: none;
     background-color: var(--choco-color);
     color: var(--banana-color);
+    font-size: 1.5rem;
+    font-weight: bold;
     border-radius: 1rem;
+    transition: all 0.25s ease-in;
+    cursor: pointer;
+}
+
+.add-footer button:hover {
+    color: var(--main1-color);
 }
 
 
+/* deck */
 
+.deck-home-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+}
 
+.deck-bg {
 
+    background-color: var(--choco-color);
+    color: var(--banana-color);
+}
+.deck-home-page > .block {
+    width: 100%;
+    height: 141px;
+}
