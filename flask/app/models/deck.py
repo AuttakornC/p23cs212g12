@@ -13,15 +13,15 @@ class Deck(db.Model, SerializerMixin):
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
     deleted = db.Column(db.Boolean, default=False)
 
-    def __init__(self, name, type, user_id):
+    def __init__(self, name, typeP, user_id):
         self.name = name
-        self.type = type
-        self.user_id = user_id
+        self.public = typeP  #
+        self.player_id = user_id
         self.deleted = False
     
-    def update(self, name, type):
+    def update(self, name, typeP):
         self.name = name
-        self.type = type
+        self.public = typeP
 
     def delete(self):
         self.deleted = True

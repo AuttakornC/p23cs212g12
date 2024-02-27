@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-
 body {
     background-color: var(--banana-color) !important
 }
@@ -22,15 +19,17 @@ body {
 .title {
     color: var(--choco-color);
     text-align: left;
-    left: 0;
+    /* left: 0; */
     font-family: Inter;
-    font-size: 22px;
-    font-style: normal;
+    font-size: 21px;
+    /* font-style: normal; */
     font-weight: 700;
     line-height: normal;
     /* margin-left: 10vw;
     margin-top: 2.5vh; */
-    margin: 15px;
+    /* margin: 15px; */
+    width: 100%;
+    padding: 1.6rem 0 0 1rem;
 }
 
 .divider {
@@ -78,42 +77,97 @@ body {
 }
 
 .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
     /* border: 2px solid rgb(214, 210, 210); */
 }
 
 .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     flex: 1;
-    margin: 15px;
-    padding: 40px;
+    /* margin: 15px; */
+    padding: 20px;
     /* width: 60vw; */
     height: 30vh;
     border-radius: 30px;
     flex-shrink: 0;
+    overflow: hidden;
     /* border: 2px solid #ccc; */
     background-color: var(--main1-color);
-
 }
-/* .baCho {
-    font-family: 'Inter', sans-serif ; 
+
+.description {
+    text-align: center;
+}
+
+.button {
+    background-color: var(--choco-color);
     color: var(--banana-color);
-    padding: 0.5px !important; */
-    /* padding: 1rem !important; */
-    /* height: 0.1rem; */
-    /* font-weight: bold;
-    font-size: 1.5em ;
-    margin: 0.5px !important; */
-    /* border: 70px !important; */
-    /* padding: 2rem; */
-/* }
-.nav-bg {
-    background-color: var(--choco-color); */
-    /* position: absolute; */
-    /* max-width: 100% !important; */
-    /* height: 6.5rem !important; */
-    /* z-index: -1; */
-    /* left: 0; */
-    /* top: 0; */
-    /* margin: auto !important; */
-    /* border-radius: 0px 0px 15px 15px;
-} */
+    border-radius: 6px;
+    padding: 10px 20px;
+    /* position: absolute;
+    bottom: 35px;
+    left: 50%; */
+    /* transform: translate(-50%, 60%); */
+    border-style:hidden;
+    font-size: 10px;
+    cursor: pointer;
+    /* font-weight: bold; */
+}
+
+.profile{
+    /* float: top; */
+    display: flex;
+    column-gap: 4px;
+}
+
+.profile-icon{
+    /* height: 18px; */
+    width: 20px;
+    /* left: 500; */
+    /* margin-left: 10px;  */
+    float: left;
+    /* margin: 12px;   */
+    filter: brightness(0) saturate(100%) invert(20%) sepia(15%) saturate(1929%) hue-rotate(357deg) brightness(94%) contrast(85%); 
+}
+
+.people{
+    font-weight: bold;
+    color: var(--choco-color);
+    /* text-align: center; */
+    /* align-items: center; */
+    /* margin: 16px; */
+    /* margin-top: 50px; */
+    /* top: 10px; */
+    /* float: left; */
+}
+
+.deckName {
+    color: var(--choco-color);
+    font-size: 15px;
+}
+
+.cardNum{
+    color: var(--choco-color);
+    font-size: 12px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (min-width: 601px) {
+    .container {
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
+        max-width: 1200px;
+        row-gap: 2rem;
+        column-gap: 3rem;
+    }
+}
