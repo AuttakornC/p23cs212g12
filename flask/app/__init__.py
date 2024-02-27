@@ -1,6 +1,6 @@
 # lib from py
 from os import getenv
-from flask import Flask
+from flask import Flask, session
 from werkzeug.debug import DebuggedApplication
 from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
@@ -36,7 +36,6 @@ if app.debug:
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
 oauth = OAuth(app)
-
 
 # from app import route  # noqa
 from app.routes.page import notfound
