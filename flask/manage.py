@@ -11,19 +11,24 @@ from app.models.tag import Tag
 
 cli = FlaskGroup(app)
 
+
 @cli.command("create_db")
 def create_db():
     db.drop_all()
     db.create_all()
     db.session.commit()
 
+
 @cli.command("seed_db")
 def seed_db():
-#     db.session.add(BlogEntry("เทสเตอร์","นี้คือเสียงจากเด็กคอม", "test@test.com"))
-    db.session.add(Player(email='didi@gmail.com',username='Didi', password='012345'))
-    db.session.add(Deck(name='Computer', typeP=True, user_id=1))
-    
+    #     db.session.add(BlogEntry("เทสเตอร์","นี้คือเสียงจากเด็กคอม", "test@test.com"))
+    db.session.add(Player(email='didi@gmail.com',
+                   username='Didi', password='012345'))
     db.session.commit()
+    db.session.add(Deck(name='Computer', is_pulic=True, user_id=1))
+
+    db.session.commit()
+
 
 if __name__ == "__main__":
     cli()

@@ -30,6 +30,7 @@ body {
     /* margin: 15px; */
     width: 100%;
     padding: 1.6rem 0 0 1rem;
+    text-indent: 3.8vw
 }
 
 .divider {
@@ -51,7 +52,7 @@ body {
     /* text-align: left; */
 
     margin: auto;
-    width: 90%;
+    width: 87%;
     /* align-items: right; */
     height: 39px;
     /* flex-shrink: 0; */
@@ -169,5 +170,13 @@ main {
         max-width: 1200px;
         row-gap: 2rem;
         column-gap: 3rem;
+    }
+
+    .boxSearch{
+        width: 80.5%;
+    }
+
+    .title{
+        text-indent: 8.7vw;
     }
 }
