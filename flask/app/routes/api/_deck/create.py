@@ -5,7 +5,7 @@ from app.models.deck_card import DeckCard
 from app.models.deck_tag import DeckTag
 from app.models.card import Card
 from app.models.tag import Tag
-from app.lib.request import badRequest, success
+from app.lib.request import badRequest, successBody
 from app.lib.check import checkDictKey, checkListDictKey
 from app.lib.validate import BODY_NOT_CORRECT
 
@@ -47,7 +47,18 @@ def create_deck(body, user_data):
     # create Card
     card_list = []
     new_card_list = []
+
+    ref_set = set()
+    err_card = []
+
     for card in body["cards"]:
+        # check for repeat card
+        if card["is_recom"] and card["ref"] in ref_set:
+            err_card.append(card)
+            continue
+        else:
+            ref_set.add(card["ref"])
+        
         if card["is_recom"]:
             if card["own_recom"] and card["edit_origin"]:
                 to_edit = Card.query.get(card["ref"])
@@ -77,6 +88,10 @@ def create_deck(body, user_data):
                         to_edit.update(card["question"], card["answer"])
                     
                     db.session.commit()
+            elif not card["own_recom"] and not card["edit_origin"]:
+                new_card = Card(card["question"], card["answer"], user_data["id"])
+                new_card_list.append(new_card)
+                db.session.add(new_card)
             else:
                 card_list.append(card["ref"])
         else:
@@ -90,8 +105,8 @@ def create_deck(body, user_data):
     for card in card_list:
         db.session.add(DeckCard(card, new_deck.id))
     db.session.commit()
-    return success()
-    
+    return successBody(err_card)
+
 # Schema
 
 # body = {

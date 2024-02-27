@@ -10,4 +10,4 @@ class Loader {
     }
 }
 
-const load = Loader();
+const load = new Loader();

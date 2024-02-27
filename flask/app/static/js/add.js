@@ -292,10 +292,8 @@ class Suggest {
 
     constructor() {
         this.sug_close.addEventListener("click", (e)=>{
-            this.sug_window.style.display = "none"
-            this.sug_own.replaceChild()
-            this.sug_dict.replaceChild()
-            this.sug_other.replaceChild()
+            this.sug_window.style.display = "none";
+            this.clearList();
         });
 
         this.sug_nav_own.addEventListener("click", (e)=>{
@@ -329,6 +327,12 @@ class Suggest {
         });
     }
 
+    clearList() {
+        document.getElementById("sug-own").replaceChildren([]);
+        document.getElementById("sug-dict").replaceChildren([]);
+        document.getElementById("sug-other").replaceChildren([]);
+    }
+
     onSuggest(element_btn, word) {
         const element = element_btn.parentElement;
         const sug_own = document.getElementById("sug-own");
@@ -341,41 +345,68 @@ class Suggest {
             element_btn.setAttribute("onclick", "onEdit(this);");
         }
 
+        const clear_list = this.clearList;
+
+        function checkRefRepeat(id_) {
+            for (const input_data of my_state.getInputTag()) {
+                if (input_data.element.children[2].value==="t" && parseInt(input_data.element.children[5].value)===id_) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         async function getSuggest() {    
             const response = await fetch(`/api/suggest?search=${word}`);
             const result = await response.json();
             result.data.owner.forEach(val=>{
                 sug_own.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
                 sug_own.lastChild.addEventListener("click", (e)=>{
-                    element.children[0].value = val.question;
-                    element.children[0].disabled = true;
-                    element.children[1].value = val.answer;
-                    element.children[1].disabled = true;
-                    element.children[2].value = 't';
-                    element.children[3].value = 't';
-                    element.children[5].value = val.id;
-                    sug_window.style.display = "none";
-                    changeBTN();
+                    if (checkRefRepeat(val.id)) {
+                        element.children[0].value = val.question;
+                        element.children[0].disabled = true;
+                        element.children[1].value = val.answer;
+                        element.children[1].disabled = true;
+                        element.children[2].value = 't';
+                        element.children[3].value = 't';
+                        element.children[5].value = val.id;
+                        sug_window.style.display = "none";
+                        changeBTN();
+                        clear_list();
+                    } else {
+                        confirm_.open(
+                            "Repeat Alert!!",
+                            "There're some repeat suggestion. The system'll not add this card to the deck. Please create new card or edit that suggest card."
+                        );
+                    }
                 });
             });
 
             result.data.other.forEach(val=>{
                 sug_other.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
                 sug_other.lastChild.addEventListener("click", (e)=>{
-                    element.children[0].value = val.question;
-                    element.children[0].disabled = true;
-                    element.children[1].value = val.answer;
-                    element.children[1].disabled = true;
-                    element.children[2].value = 't';
-                    element.children[3].value = 'f';
-                    element.children[5].value = val.id;
-                    sug_window.style.display = "none";
-                    changeBTN();
+                    if (checkRefRepeat(val.id)) {
+                        element.children[0].value = val.question;
+                        element.children[0].disabled = true;
+                        element.children[1].value = val.answer;
+                        element.children[1].disabled = true;
+                        element.children[2].value = 't';
+                        element.children[3].value = 'f';
+                        element.children[5].value = val.id;
+                        sug_window.style.display = "none";
+                        changeBTN();
+                        clear_list();
+                    } else {
+                        confirm_.open(
+                            "Repeat Alert!!",
+                            "There're some repeat suggestion. The system'll not add this card to the deck. Please create new card or edit that suggest card."
+                        );
+                    }
                 });
             });
         }
 
-        this.sug_window.style.display = "grid";
+        this.sug_window.style.display = "flex";
         getSuggest();
     }
 
@@ -419,10 +450,11 @@ class EditCheck {
 }
 
 function onEdit(element) {
+    console.log(element)
     const parent = element.parentElement;
-    if (parent.children[2]==="t" && parent.children[3]==="t") {
+    if (parent.children[2].value==="t" && parent.children[3].value==="t") {
         edit_check.onActivate(element);
-    } else {
+    } else if (parent.children[2].value==="t" && parent.children[3].value==="f") {
         parent.children[0].disabled = false;
         parent.children[1].disabled = false;
         parent.children[4].value = "f";
@@ -445,6 +477,7 @@ function onSave() {
 }
 
 function saving() {
+    load.toggle();
     const form_data = {};
 
     form_data["title"] = document.getElementById("title").value;
@@ -463,13 +496,17 @@ function saving() {
     });
 
     async function sendData() {
-        const response = await fetch("/api/deck", {
-            method: "POST",
-            body: JSON.stringify(form_data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        try {
+            const response = await fetch("/api/deck", {
+                method: "POST",
+                body: JSON.stringify(form_data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+        } catch (error) {}
+        load.toggle();
+        
     }
 
     sendData();
