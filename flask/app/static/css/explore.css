@@ -87,21 +87,203 @@ body {
     /* border: 2px solid rgb(214, 210, 210); */
 }
 
-.preview{
-    display: grid;
-    /* flex-direction: column; */
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+#preview {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    /* display: none; */
+    background-color: rgba(0, 0, 0, 0.514);
+    top: 0;
+    left: 0;
+    z-index: 10;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
 }
 
-.head{
-    background-color: var(--choco-color);
-
-}
-
-.tail{
+#preview > .sug-window {
     background-color: var(--main1-color);
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: fit-content(50rem) fit-content(50rem) fit-content(50rem) 1fr;
+    overflow: hidden;
 }
+
+#preview > .sug-window > div {
+    background-color: var(--choco-color);
+    padding: 1rem 1rem 1rem 1rem;
+    width: 100%;
+}
+
+#preview > .sug-window > div > h1 {
+    color: var(--banana-color);
+    padding-bottom: 0.7rem;
+    margin-top: 1rem;
+}
+
+#preview > .sug-window > div > h4 {
+    color: var(--main1-color);
+}
+
+
+#preview > .sug-window > div > h1 > .x {
+    width: 1rem;
+    height: 2rem;
+    top: 1rem;
+    right: 1rem;
+}
+
+#preview > .sug-window > .sug-nav {
+    list-style: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 1rem;
+}
+
+#preview > .sug-window > .sug-nav > li {
+    text-align: center;
+    color: var(--choco-color);
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 1rem 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#preview > .sug-window > .sug-list {
+    overflow-y: scroll;
+}
+
+#preview > .sug-window > .sug-list > li {
+    width: 100%;
+    /* cursor: pointer; */
+    display: flex;
+    font-size: large;
+
+}
+
+#preview > .sug-window > .sug-list > li > b {
+    overflow-x: hidden;
+    text-align: center;
+    padding: 0.5rem;
+    width: 50%;
+    color: var(--choco-color);
+}
+
+#preview > .sug-window > .sug-list > hr {
+    width: 100%;
+    /* cursor: pointer; */
+    display: flex;
+    font-size: large;
+    border: none;
+    background-color: var(--choco-color);
+    height: 2px;
+}
+
+/* #preview > .sug-window > .sug-list > li:hover > b {
+    background-color: rgba(0, 0, 0, 0.192);
+} */
+
+#preview > .sug-window > .sug-nav > li.activate {
+    color: var(--banana-color);
+}
+
+#preview > .sug-window > .sug-nav > li:last-child {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 33.33%;
+    background-color: var(--choco-color);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    z-index: 1;
+    transition: left 0.25s ease-in-out;
+}
+
+#preview > .sug-window > .underline {
+    width: 100%;
+    border-bottom: 3px solid var(--choco-color);
+}
+
+/* Footer */
+
+.add-footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+        "plus plus"
+        "save cancel"
+    ;
+    gap: 1rem;
+    padding: 1rem;
+    border-top: 3px solid var(--choco-color);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    height: 141px;
+    background-color: var(--banana-color);
+}
+
+.add-footer button {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    background-color: var(--choco-color);
+    color: var(--banana-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    transition: all 0.25s ease-in;
+    cursor: pointer;
+}
+
+.add-footer button.secondary {
+    background-color: var(--banana-color);
+    color: var(--choco-color);
+    border: 2px solid var(--choco-color);
+}
+
+.add-footer button.secondary:hover {
+    background-color: var(--banana-hover-color);
+    color: var(--choco-color);
+}
+
+.add-footer button:hover {
+    color: var(--main1-color);
+}
+
+
+
+.x {
+    cursor: pointer;
+    position: absolute;
+    /* top: 50%; */
+    transform: translateY(-50%);
+}
+
+.x > div {
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    background-color: var(--banana-color);
+}
+
+.x > div:first-child {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.x > div:last-child {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
 
 .box {
     display: flex;
@@ -207,9 +389,5 @@ main {
         /* padding: 1rem 0; */
     }
 
-    .box{
-        /* margin-left: 30%; */
-        /* margin-right: 30%; */
-        
-    }
+
 }
