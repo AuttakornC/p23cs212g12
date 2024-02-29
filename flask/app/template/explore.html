@@ -33,33 +33,21 @@
     
     <div id="preview">
         <div class="sug-window">
-            <div>
-                <h1>Irregular Verbs<div id="sug-close" class="x"><div></div><div></div></div></h1>
+            <div class="header">
+                <h1>Irregular Verbs<div id="sug-close" class="x" onclick="onClose()"><div></div><div></div></div></h1>
                 <h4>25 Cards</h4> 
             </div>
-            <!-- <ul class="sug-nav">
-                <li id="sug-nav-own" class="activate">My Deck</li> 
-                <li id="sug-nav-dict">Dictionary</li> 
-                <li id="sug-nav-other">Other Deck</li>
-                <li id="sug-nav-bg"></li>
-            </ul> -->
-            <!-- <div class="underline"></div> -->
             <ul id="sug-own" class="sug-list">
-                <li><b>${val.question}</b><b>${val.answer}</b></li>
-                <hr>
+                
             </ul>
-            <!-- <ul id="sug-dict" style="display: none;" class="sug-list">
-            </ul>
-            <ul id="sug-other" style="display: none;" class="sug-list">
-            </ul> -->
-        </div>
+            <div class="add-footer">
+                <button onclick="onCopy();" type="button">Copy Desk</button>
+            </div>
 
+        </div>
+        
     </div>
-    <div class="add-footer">
-        <button onclick="onAdd();" type="button" style="grid-area: plus;">+</button>
-        <button onclick="onSave();" type="button" style="grid-area: save;">Save</button>
-        <button onclick="onCancel();" class="secondary" type="button" style="grid-area: cancel;">Cancel</button>
-    </div>
+    
 
 </main>
 {% endblock %}
