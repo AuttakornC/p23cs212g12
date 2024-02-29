@@ -1,5 +1,5 @@
 # python lib
-from flask import render_template
+from flask import render_template 
 
 # my lib
 from app.routes.page import main

@@ -3,4 +3,4 @@ from flask import Blueprint
 
 main = Blueprint("main", __name__, url_prefix="/")
 
-from app.routes.page import home, add, play
+from app.routes.page import home, add, play, profile
