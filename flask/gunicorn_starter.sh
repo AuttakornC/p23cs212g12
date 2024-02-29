@@ -1,11 +1,19 @@
 #!/bin/sh
 
 if [ "$APP_ENV" = "development" ]; then
-    echo "Creating Database..."
+    echo -n "Waiting for the DBMS to accept connection "
+    while [ 1 ]; do
+        if nc -vz db "$DATABASE_PORT"; then
+            break
+        fi
+        echo -n "."
+        sleep 1     # sleep for 1 sec
+    done
+    echo ""
+    echo "Creating the database tables..."
     python3 manage.py create_db
     python3 manage.py seed_db
-    python3 manage.py test_db
-    echo "Complete."
+    echo "Tables created"
     
     if [ "$FLASK_DEBUG" = "1" ]; then
         echo "Running on Flask Development Server"

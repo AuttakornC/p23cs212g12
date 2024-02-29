@@ -4,13 +4,22 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+/* <<<<<<< HEAD */
+    /* z-index: 2;
+    border-radius: 0px 0px 15px 15px; */
+/* ======= */
     z-index: 5;
     user-select: none;
+/* >>>>>>> origin/navbar */
 }
 
 nav > a {
     text-decoration: none;
     font-size: 1.2rem;
+}
+
+nav > a{
+    color: var(--banana-color);
 }
 
 nav > a:visited {
