@@ -1,3 +1,4 @@
+// Rachata
 class Deck {
     constructor() {
         /* deck_lst schema:
@@ -17,14 +18,14 @@ class Deck {
         this.deck_lst = [];
         this.getDeck();
     }
-
+    // Rachata create function for generate deck from database 
     async getDeck() {
         const respond = await fetch("/api/deck");
         const data = await respond.json();
-        console.log(data);
+        // console.log(data);
         const deckContainner = document.getElementsByClassName('deck-bg');
         data["data"].forEach(element => {
-            console.log(element);
+            // console.log(element);
             deckContainner[0].innerHTML += `
             <div class="box">
                 <div class="profile">
@@ -48,8 +49,15 @@ class Deck {
                 </div>
 
             </div>`
-          
+            
+            
         });
+        // add event to deck
+        let card = $('.box');
+        console.log(card)
+        card.foreach(element => {
+            console.log(1)
+        })
         
     }
 }
@@ -61,5 +69,3 @@ function onChange(redirectUrl)
 }
 
 const handler = new Deck();
-
-console.log($('.title-deck'))
