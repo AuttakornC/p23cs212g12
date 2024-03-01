@@ -1,3 +1,6 @@
+/* write by Mesanee Laihueang 650510676 */
+
+
 body {
     background-color: var(--banana-color) !important
 }
@@ -191,8 +194,9 @@ main {
     border-radius: 1rem;
     width: 100%;
     height: 100%;
-    /* display: grid; */
-    grid-template-rows: fit-content(50rem) fit-content(50rem) fit-content(50rem) 1fr;
+    display: flex;
+    flex-direction: column;
+    /* grid-template-rows: fit-content(50rem) fit-content(50rem) fit-content(50rem) 1fr; */
     overflow: hidden;
 }
 
@@ -219,25 +223,27 @@ main {
     top: 1rem;
     right: 1rem;
 }
-
-
-#preview > .sug-window > .sug-list > li {
-    width: 100%;
-    margin: 1rem 1rem 1rem 1rem;
-    /* position: absolute; */
-    /* cursor: pointer; */
-    display: flex;
-    font-size: large;
-
+#preview > .sug-window > .sug-list {
+    flex-grow: 1;
+    padding: 1rem;
 }
 
-#preview > .sug-window > .sug-list > li > b {
-    word-wrap: break-word;
+#preview > .sug-window > .sug-list > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#preview > .sug-window > .sug-list > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#preview > .sug-window > .sug-list > table tbody tr th {
     text-align: center;
+    width: 50%;
     padding: 1rem;
-    /* gap: 5px; */
-    width: 41.5vw;
     color: var(--choco-color);
+    border-bottom: var(--choco-color) solid 3px;
 }
 
 #preview > .sug-window > .sug-list > hr {
@@ -254,8 +260,10 @@ main {
 }
 
 #preview > .sug-window > .sug-list {
-    overflow:scroll;
-    overflow-x:hidden;
+    overflow-y:scroll;
+    /* overflow-x:hidden; */
+    /* height: 60%; */
+    /* padding-bottom: 12vh; */
 }
 /* #preview > .sug-window > .sug-list > li:hover > b {
     background-color: rgba(0, 0, 0, 0.192);
@@ -274,10 +282,10 @@ main {
     /* gap: 1rem; */
     padding: 2rem 1.5rem 2rem 1.5rem;
     border-top: 3.9px solid var(--choco-color);
-    bottom: 0;
+    /* bottom: 0; */
     /* left: 0; */
     width: 100%;
-    position:absolute;
+    /* position:absolute; */
     /* height: 141px; */
     /* background-color: var(--banana-color); */
 }

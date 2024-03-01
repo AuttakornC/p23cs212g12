@@ -1,3 +1,6 @@
+//write by Mesanee Laihueang 650510676
+
+
 $(document).ready(function () {
     (function () {
         $.get("api/explore/all/decks", (decks)=>{
@@ -31,13 +34,21 @@ function addDataDecks(decks){
 function onPreview(data) {
     const decks = JSON.parse(data.getAttribute('dataDecks'));
     const cards = decks.cards
-    
 
+    //clear หน้า preview ส่วน head
+    $(".header").html("")
+    //clear หน้า preview ส่วน word
+    $("#sug-own").html("")
+
+
+
+    addPreview(decks)
+
+    console.log("decks:", decks)
     for (const key in cards){
         // console.log(key, cards[key])
         addWordPreview(key, cards[key])
     }
-
 
 
     $('#preview').show();
@@ -47,12 +58,18 @@ function onPreview(data) {
 function onClose() {
     $('#preview').hide();
     $('.box').show();
+    
+}
+
+function addPreview(decks) {
+    const head = `<h1>${decks.name}<div id="sug-close" class="x" onclick="onClose()"><div></div><div></div></div></h1>
+    <h4>${decks.num_card} Cards</h4> `;
+    $(".header").html($(".header").html() + head)
 }
 
 function addWordPreview(question, answer) {
-    const word = `<li><b>${question}</b><b>${answer}</b></li>
+    const word = `<tr><th>${question}</th><th>${answer}</th></tr>
     <hr>`;
-    $(".sug-list").html($(".sug-list").html()+word)
-
+    $("#sug-own").html($("#sug-own").html()+word)
 }
 
