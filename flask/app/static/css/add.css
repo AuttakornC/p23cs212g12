@@ -475,25 +475,35 @@
         z-index: 2;
     }
 
-    #suggest > .sug-window > .sug-list {
-        overflow-y: scroll;
-    }
-
-    #suggest > .sug-window > .sug-list > li {
+    #suggest > .sug-window > .table {
         width: 100%;
+        overflow: scroll;
+        padding: 0 0.75rem;
+    }
+
+    #suggest > .sug-window > .table > .sug-list {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #suggest > .sug-window > .table > .sug-list > tbody {
+        width: 100%;
+    }
+
+    #suggest > .sug-window > .table > .sug-list > tbody > tr {
         cursor: pointer;
-        display: flex;
+        border-bottom: var(--choco-color) solid 3px;
     }
 
-    #suggest > .sug-window > .sug-list > li > b {
-        overflow-x: hidden;
-        text-align: center;
-        padding: 0.5rem;
+    #suggest > .sug-window > .table > .sug-list > tbody > tr > th {
         width: 50%;
+        padding: 0.75rem;
         color: var(--choco-color);
+        margin: 0 0.5rem;
+        border-bottom: var(--choco-color) solid 3px;
     }
 
-    #suggest > .sug-window > .sug-list > li:hover > b {
+    #suggest > .sug-window > .table > .sug-list > tbody > tr:hover {
         background-color: rgba(0, 0, 0, 0.192);
     }
 

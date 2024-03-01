@@ -34,6 +34,7 @@ def seed_db():
     db.session.add(Deck("Test2", False, 2))
     db.session.commit()
     db.session.add(Card("ANT", "มด", 1))
+    db.session.add(Card("ANT", "มดดด", None, True))
     db.session.commit()
     db.session.add(DeckCard(1, 1))
     db.session.add(DeckCard(1, 2))

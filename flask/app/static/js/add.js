@@ -299,9 +299,9 @@ class Suggest {
         });
 
         this.sug_nav_own.addEventListener("click", (e)=>{
-            this.sug_own.style.display = "block";
-            this.sug_dict.style.display = "none";
-            this.sug_other.style.display = "none";
+            this.sug_own.parentElement.style.display = "table";
+            this.sug_dict.parentElement.style.display = "none";
+            this.sug_other.parentElement.style.display = "none";
             this.sug_nav_bg.style.left = "0";
             this.sug_nav_own.classList.add("activate");
             this.sug_nav_dict.classList.remove("activate");
@@ -309,9 +309,9 @@ class Suggest {
         });
 
         this.sug_nav_dict.addEventListener("click", (e)=>{
-            this.sug_own.style.display = "none";
-            this.sug_dict.style.display = "block";
-            this.sug_other.style.display = "none";
+            this.sug_own.parentElement.style.display = "none";
+            this.sug_dict.parentElement.style.display = "table";
+            this.sug_other.parentElement.style.display = "none";
             this.sug_nav_bg.style.left = "33.33%";
             this.sug_nav_own.classList.remove("activate");
             this.sug_nav_dict.classList.add("activate");
@@ -319,9 +319,9 @@ class Suggest {
         });
 
         this.sug_nav_other.addEventListener("click", (e)=>{
-            this.sug_own.style.display = "none";
-            this.sug_dict.style.display = "none";
-            this.sug_other.style.display = "block";
+            this.sug_own.parentElement.style.display = "none";
+            this.sug_dict.parentElement.style.display = "none";
+            this.sug_other.parentElement.style.display = "table";
             this.sug_nav_bg.style.left = "66.66%";
             this.sug_nav_own.classList.remove("activate");
             this.sug_nav_dict.classList.remove("activate");
@@ -341,7 +341,7 @@ class Suggest {
         const sug_other = document.getElementById("sug-other");
         const sug_dict = document.getElementById("sug-dict");
         const sug_window = document.getElementById("suggest");
-
+        load.toggle();
         function changeBTN() {
             element_btn.innerHTML = "Edit";
             element_btn.setAttribute("onclick", "onEdit(this);");
@@ -361,8 +361,9 @@ class Suggest {
         async function getSuggest() {    
             const response = await fetch(`/api/suggest?search=${word}`);
             const result = await response.json();
+
             result.data.owner.forEach(val=>{
-                sug_own.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
+                sug_own.innerHTML += `<tr><th>${val.question}</th><th>${val.answer}</th></tr>`;
                 sug_own.lastChild.addEventListener("click", (e)=>{
                     if (checkRefRepeat(val.id)) {
                         element.children[0].value = val.question;
@@ -384,8 +385,31 @@ class Suggest {
                 });
             });
 
+            result.data.dict.forEach(val=>{
+                sug_dict.innerHTML += `<tr><th>${val.question}</th><th>${val.answer}</th></tr>`;
+                sug_dict.lastChild.addEventListener("click", (e)=>{
+                    if (checkRefRepeat(val.id)) {
+                        element.children[0].value = val.question;
+                        element.children[0].disabled = true;
+                        element.children[1].value = val.answer;
+                        element.children[1].disabled = true;
+                        element.children[2].value = 't';
+                        element.children[3].value = 'f';
+                        element.children[5].value = val.id;
+                        sug_window.style.display = "none";
+                        changeBTN();
+                        clear_list();
+                    } else {
+                        confirm_.open(
+                            "Repeat Alert!!",
+                            "There're some repeat suggestion. The system'll not add this card to the deck. Please create new card or edit that suggest card."
+                        );
+                    }
+                });
+            });
+
             result.data.other.forEach(val=>{
-                sug_other.innerHTML += `<li><b>${val.question}</b><b>${val.answer}</b></li>`;
+                sug_other.innerHTML += `<tr><th>${val.question}</th><th>${val.answer}</th></tr>`;
                 sug_other.lastChild.addEventListener("click", (e)=>{
                     if (checkRefRepeat(val.id)) {
                         element.children[0].value = val.question;
@@ -406,10 +430,17 @@ class Suggest {
                     }
                 });
             });
+
+            load.toggle();
         }
 
         this.sug_window.style.display = "flex";
-        getSuggest();
+        try {
+            getSuggest();
+        } catch (error) {
+            load.toggle();
+            confirm_.open("Currently Unable to Provide Suggestions", "We apologize for the inconvenience caused by a system error. Kindly try your request again later. Thank you for your understanding.")
+        }
     }
 
 }
