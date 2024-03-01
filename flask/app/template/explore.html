@@ -1,7 +1,6 @@
 <!-- write by Mesanee Laihueang 650510676 -->
 
 
-
 {% extends 'nav.html' %}
 
 {% block cssimp %}
@@ -44,16 +43,6 @@
             <div class="sug-list">
                 <table>
                     <tbody id="sug-own">
-                        <!-- <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr>
-                        <tr><th>ant</th><th>มด</th></tr> -->
                     </tbody>
                 </table>
             </div>
@@ -71,5 +60,5 @@
 
 {% block script %}
     <script src="/static/js/explore.js"></script>
-    <script src="/static/js/nav.js"></script>
+    {{ super() }}
 {% endblock %}

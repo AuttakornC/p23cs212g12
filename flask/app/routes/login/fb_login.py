@@ -3,12 +3,12 @@ from flask import redirect, url_for
 from datetime import datetime, timezone, timedelta
 
 # my lib
-from app.routes.api import api
+from app.routes.login import login_b
 from app import oauth, app, db
 from app.models.player import Player
 from app.lib.token import encodeJWT
 
-@api.route("/login/fb")
+@login_b.route("/login/fb")
 def login_fb():
     oauth.register(
         "facebook",
@@ -22,10 +22,10 @@ def login_fb():
         client_kwargs={'scope': 'email'},
     )
     
-    redirected_uri = url_for("api.login_fb_auth", _external=True)
+    redirected_uri = url_for("login.login_fb_auth", _external=True)
     return oauth.facebook.authorize_redirect(redirected_uri)
 
-@api.route("/login/fb/auth")
+@login_b.route("/login/fb/auth")
 def login_fb_auth():
     token = oauth.facebook.authorize_access_token()
     resp = oauth.facebook.get('https://graph.facebook.com/me?fields=id,name,email,picture{url}')

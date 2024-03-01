@@ -15,20 +15,24 @@ $(document).ready(function () {
     })();
 });
 
+
 function addDataDecks(decks){
-    //console.log(decks["name"]);
-    //document.getElementsByClassName("deckName").innerHTML = decks["name"].innerHTML;
-   //console.log(document.getElementsByClassName("deckName").innerHTML)
-   const post_block = `<div class="box" onclick="onPreview(this)" dataDecks='${JSON.stringify(decks)}';>
+    console.log(decks.avatar_url)
+    let tagHtml = '';
+    for (let i in decks.tags) {
+        tagHtml += `<span class="tag">#${decks.tags[i]}</span><nobr></nobr>`;
+    }
+    const post_block = `<div class="box" onclick="onPreview(this)" dataDecks='${JSON.stringify(decks)}';>
     <div class="profile">
-        <img class="profile-icon" src="/static/image/profile-icon.png" alt="">
+        <img class="profile-icon" src="${decks.avatar_url}" alt="">
         <span class="people">${decks.player_name}</span>
     </div>
     <div class="description"><h4 class="deckName">${decks.name}</h4><h5 class="cardNum">${decks.num_card} Cards</h5></div>
-    <div></div>
+    <span class="tags">${tagHtml}</span> 
     </div>`;
     $(".container").html($(".container").html()+post_block);
 }
+
 
 
 function onPreview(data) {
@@ -44,7 +48,7 @@ function onPreview(data) {
 
     addPreview(decks)
 
-    console.log("decks:", decks)
+    // console.log("decks:", decks)
     for (const key in cards){
         // console.log(key, cards[key])
         addWordPreview(key, cards[key])

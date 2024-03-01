@@ -1,12 +1,13 @@
 # lib from py
-from os import getenv
+from os import getenv, path
 from flask import Flask, session
 from werkzeug.debug import DebuggedApplication
 from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
 
 # my lib
-from app.middleware.authen import authen
+from app.middleware.page.authen import authen_page
+from app.middleware.api.authen import authen_api
 
 app = Flask(__name__, static_folder='static', template_folder='template')
 app.url_map.strict_slashes = False
@@ -17,6 +18,7 @@ app.jinja_options.update({
     'lstrip_blocks': True
 })
 
+app.config['APP_PATH'] = path.dirname(path.realpath(__file__))
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = getenv("SECRET_KEY", None)
 app.config['JSON_AS_ASCII'] = False
@@ -40,10 +42,12 @@ oauth = OAuth(app)
 from app.routes.page import notfound
 from app.routes.page import main
 from app.routes.api import api
+from app.routes.login import login_b
 app.before_request_funcs = {
-    "main": [authen],
-    "api": []
+    "main": [authen_page],
+    "api": [authen_api]
 }
 
 app.register_blueprint(main)
 app.register_blueprint(api)
+app.register_blueprint(login_b)

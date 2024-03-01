@@ -4,11 +4,11 @@ from datetime import datetime, timezone, timedelta
 
 # my lib
 from app import app, oauth, db
-from app.routes.api import api
+from app.routes.login import login_b
 from app.models.player import Player
 from app.lib.token import encodeJWT
 
-@api.route("/login/google")
+@login_b.route("/login/google")
 def login_google():
 
     oauth.register(
@@ -22,10 +22,10 @@ def login_google():
     )
 
     # url to redirect to
-    redirect_url = url_for("api.login_google_auth", _external=True)
+    redirect_url = url_for("login.login_google_auth", _external=True)
     return oauth.google.authorize_redirect(redirect_url)
 
-@api.route("/login/google/auth")
+@login_b.route("/login/google/auth")
 def login_google_auth():
     token = oauth.google.authorize_access_token()
 
