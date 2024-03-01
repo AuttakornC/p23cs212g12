@@ -29,6 +29,10 @@ main {
     transition: 0.25s all ease-in;
 }
 
+button.disable {
+    background-color: var(--choco-color);
+}
+
 .BackNextClose>#back-btn{
     grid-area: a;
 }
@@ -73,6 +77,12 @@ main {
     font-weight: bold;
 }
 
+/* .cards>h2 {
+    color: var(--banana-color);
+    font-size: 2.2rem;
+    font-weight: bold;
+} */
+
 .cards > #show-btn {
     position: absolute;
     bottom: 0;
@@ -98,65 +108,25 @@ main {
     font-weight: bold;
     font-size: 2.2rem;
     text-align: center;
-    margin: 2rem 0 0.2rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
     font-style: normal;
     line-height: normal;
     transition: 0.25s all ease-in;
 }
 
-.number {
+/* h1 {
     color: var(--choco-color);
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     text-align: center;
-    margin: 0 0 2rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
     font-style: normal;
     line-height: normal;
     transition: 0.25s all ease-in;
-}
+} */
 
-/* loading */
-
-.window-loader {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.311);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.window-loader>.loader {
-    border: 16px solid var(--banana-color);
-    border-top: 16px solid var(--choco-color);
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.window-loader>.PW {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, -800%);
-    color: var(--banana-color);
-    font-weight: bold;
-    font-size: 1.7rem;
-}
 
 
 @media screen and (min-width: 601px) {
@@ -191,14 +161,15 @@ main {
     font-size: 3rem;
     font-weight: bold;
 }
+
+/* .cards>h2 {
+    color: var(--banana-color);
+    font-size: 3rem;
+    font-weight: bold;
+} */
 }
 
 
-/* loading */
-
-.window-loader > .PW{
-    transform: translate(-50%, -600%);
-}
 
 
 
