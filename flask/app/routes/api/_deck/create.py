@@ -92,6 +92,10 @@ def create_deck(body, user_data):
                 new_card = Card(card["question"], card["answer"], user_data["id"])
                 new_card_list.append(new_card)
                 db.session.add(new_card)
+            elif card["ref"] == -1:
+                new_card = Card(card["question"], card["answer"], None, True)
+                new_card_list.append(new_card)
+                db.session.add(new_card)
             else:
                 card_list.append(card["ref"])
         else:
