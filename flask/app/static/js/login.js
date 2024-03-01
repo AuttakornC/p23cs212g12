@@ -15,7 +15,9 @@ function createInputElement(id, label, type, placeh) {
 }
 
 const change_type_button = document.getElementById("change_type");
-change_type_button.addEventListener("click", (e)=>{
+const change_type_moblie = document.getElementById("change_type_mobile")
+
+function onClickChange(e) {
     const current_type = document.getElementById("login-form");
     const title = document.getElementById("title");
     const submit_btn = document.getElementById("submit-btn");
@@ -47,8 +49,10 @@ change_type_button.addEventListener("click", (e)=>{
         facebook_btn.lastChild.replaceWith(document.createTextNode("Login with Facebook"));
     }
     clearErr();
+}
 
-});
+change_type_button.addEventListener("click", onClickChange);
+change_type_moblie.addEventListener("click", onClickChange);
 
 // on submit form
 

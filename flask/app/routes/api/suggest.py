@@ -35,7 +35,7 @@ def suggest():
     list_word = []
     for word_detail in dict_json:
         list_word+=dictAPIParse(word_detail)
-    print(list_word)
+    # print(list_word)
     all_dict_card = Card.query.filter(func.lower(Card.question) == func.lower(word), Card.form_dict == True)
     all_dict_card = list(map(lambda x: x.to_dict()["answer"], all_dict_card))
     list_word = list(filter(lambda x: x["answer"] not in all_dict_card, list_word))

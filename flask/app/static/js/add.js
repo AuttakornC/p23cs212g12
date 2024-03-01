@@ -43,9 +43,23 @@ class MyData {
     }
 
     addTag(name, dbid=0) {
+        if (!name) {
+            return;
+        }
         let id = 0;
         if (this.tags.length!==0) {
             id = this.tags[this.tags.length-1].id + 1;
+        }
+        let already_have = false;
+        for (const tag of this.tags) {
+            if (tag.tag.toLowerCase()===name || tag.dbid===dbid) {
+                already_have = true;
+                break;
+            }
+        }
+        if (already_have) {
+            confirm_.open("This tag is already there.", "The tag you mentioned is already present in the field. Could you please consider adding a different name tag?")
+            return;
         }
         const tag_tag = document.createElement("div");
         tag_tag.append(document.createTextNode(name));
@@ -386,8 +400,9 @@ class Suggest {
             });
 
             result.data.dict.forEach(val=>{
-                sug_dict.innerHTML += `<tr><th>${val.question}</th><th>${val.answer}</th></tr>`;
-                sug_dict.lastChild.addEventListener("click", (e)=>{
+                const tr_ = document.createElement("tr");
+                tr_.innerHTML += `<th>${val.question}</th><th>${val.answer}</th>`
+                tr_.addEventListener("click", (e)=>{
                     if (checkRefRepeat(val.id)) {
                         element.children[0].value = val.question;
                         element.children[0].disabled = true;
@@ -406,6 +421,7 @@ class Suggest {
                         );
                     }
                 });
+                sug_dict.append(tr_);
             });
 
             result.data.other.forEach(val=>{
