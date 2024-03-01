@@ -9,20 +9,22 @@ from app.models.deck_card import DeckCard
 from app.models.card import Card
 from app.models.deck_tag import DeckTag
 from app.models.tag import Tag
+from app.lib.token import getDataFromSession
 
 # Written by Auttakorn Camsoi
 # edit deck page
 @main.route("/edit/<path:path>")
 def edit_deck(path):
+    user_data = getDataFromSession()
+
     # deck_id is invalid
-    print(path)
     if not path.isnumeric():
         return render_template("notfound.html")
     deck_id = int(path)
     deck_detail = Deck.query.get(deck_id)
 
     # this deck id doesn't exit
-    if not deck_detail:
+    if not deck_detail or deck_detail.player_id!=user_data["id"]:
         return render_template("notfound.html")
 
     result = {}
@@ -34,7 +36,7 @@ def edit_deck(path):
     card_in_deck = DeckCard.query.filter_by(deck_id=deck_detail.id)
     card_id = list(map(lambda x: x.to_dict()["card_id"], card_in_deck))
     all_card_in_deck = Card.query.filter(Card.id.in_(card_id), Card.is_deleted == False)
-    result["cards"] = list(map(lambda x: x.to_dict(), all_card_in_deck))
+    result["cards"] = list(map(lambda x: { **x.to_dict(), "is_own": x.player_id==user_data["id"] }, all_card_in_deck))
 
     # query Tag
     tag_in_deck = DeckTag.query.filter_by(deck_id=deck_detail.id)

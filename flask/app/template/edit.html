@@ -60,6 +60,16 @@
             </div>
         </form>
         <form id="card-form">
+            <div class="card-form-grp" order_="${order}">
+                <input style="grid-area: in1;" id="question" name="question" value="${data.question}" type="text" placeholder="Question..." disabled>
+                <input style="grid-area: in2;" id="answer" name="answer" value="${data.answer}" type="text" placeholder="Answer..." disabled>
+                <input type="text" name="is_recom" value="t" hidden>
+                <input type="text" name="own_recom" value="${data.is_own ? "t" : "f"}" hidden>
+                <input type="text" name="edit_origin" value="f" hidden>
+                <input type="text" name="ref" value="${data.id}" hidden>
+                <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);"><div class="icon-img" style="background-image: url(/static/image/suggestion-icon.png);"></div></button>
+                <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);"><div class="icon-img" style="background-image: url(/static/image/recycle-bin.png);"></div></button>
+            </div>
         </form>
         <div class="block"></div>
     </div>

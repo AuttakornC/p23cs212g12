@@ -204,8 +204,8 @@ function onAdd() {
         <input type="text" name="own_recom${number_input}" value="f" hidden>
         <input type="text" name="edit_origin${number_input}" value="t" hidden>
         <input type="text" name="ref${number_input}" value="0" hidden>
-        <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);">Sug</button>
-        <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);">-</button>
+        <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);"><div class="icon-img" style="background-image: url(/static/image/suggestion-icon.png);"></div></button>
+        <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);"><div class="icon-img" style="background-image: url(/static/image/recycle-bin.png);"></div></button>
     </div>`
     const node = createElementFromStr(tag);
     my_state.addInputTag(number_input, node);

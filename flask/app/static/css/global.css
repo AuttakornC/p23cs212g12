@@ -46,6 +46,15 @@ body {
     background-color: var(--main3-color);
 }
 
+div.icon-img {
+    aspect-ratio: 1;
+    width: 2rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: var(--cholo-filter);
+}
+
 input, textarea {
     background: var(--main1-color);
     border: none;

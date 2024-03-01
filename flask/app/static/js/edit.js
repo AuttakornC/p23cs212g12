@@ -3,6 +3,7 @@
 class DataManage {
     title = document.getElementById("title");
     tag_field = document.getElementById("tag-field");
+    card_form = document.getElementById("card-form");
     tags = [];
     input_tags = [];
     old_data = {}
@@ -12,8 +13,10 @@ class DataManage {
         this.old_data = deck_data;
         this.title.value = deck_data.name;
         deck_data.tags.forEach(tag_data => {
-            console.log(tag_data)
             this.addTag(tag_data["name"], tag_data["id"]);
+        });
+        deck_data.cards.forEach((card, index)=>{
+            this.createInputTag(index, card);
         });
         this.getDBtagFromServer();
     }
@@ -74,17 +77,18 @@ class DataManage {
         this.tags.push({ id, tag: name, dbid, element: tag_tag });
     }
 
-    createInputTag() {
-        const tag = `<div class="card-form-grp" order_="${number_input}">
-            <input style="grid-area: in1;" id="question${number_input}" name="question${number_input}" type="text" placeholder="Question...">
-            <input style="grid-area: in2;" id="answer${number_input}" name="answer${number_input}" type="text" placeholder="Answer...">
-            <input type="text" name="is_recom${number_input}" value="f" hidden>
-            <input type="text" name="own_recom${number_input}" value="f" hidden>
-            <input type="text" name="edit_origin${number_input}" value="t" hidden>
-            <input type="text" name="ref${number_input}" value="0" hidden>
-            <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);">Sug</button>
-            <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);">-</button>
+    createInputTag(order, data) {
+        const tag = `<div class="card-form-grp" order_="${order}">
+            <input style="grid-area: in1;" id="question" name="question" value="${data.question}" type="text" placeholder="Question..." disabled>
+            <input style="grid-area: in2;" id="answer" name="answer" value="${data.answer}" type="text" placeholder="Answer..." disabled>
+            <input type="text" name="is_recom" value="t" hidden>
+            <input type="text" name="own_recom" value="${data.is_own ? "t" : "f"}" hidden>
+            <input type="text" name="edit_origin" value="f" hidden>
+            <input type="text" name="ref" value="${data.id}" hidden>
+            <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);"><div class="icon-img" style="background-image: url(/static/image/suggestion-icon.png);"></div></button>
+                <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);"><div class="icon-img" style="background-image: url(/static/image/recycle-bin.png);"></div></button>
         </div>`
+        this.card_form.innerHTML += tag;
     }
 }
 

@@ -345,6 +345,11 @@
             font-weight: bold;
             font-size: 1.25rem;
             padding: 0.5rem;
+            text-align: center;
+        }
+
+        #card-mng > #card-form > .card-form-grp button:hover > div {
+            filter: var(--banana-filter);
         }
 
         #card-mng > #card-form > .card-form-grp input {
