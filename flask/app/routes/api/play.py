@@ -50,7 +50,7 @@ def play_db_cards():
 
 
 @api.route("/play/all/decks")
-def check_card_in_deck_play():
+def play_check_card_in_deck():
 
     decks = play_db_decks()
     decks_cards = play_db_decks_cards()
