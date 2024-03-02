@@ -273,6 +273,10 @@
         /* aspect-ratio: 1; */
     }
 
+    #prop-form > .block {
+        width: 100%;
+        height: 141px;
+    }
 
 /* Card Form */
 
@@ -629,6 +633,10 @@
         max-width: 90rem;
         margin: 0 auto;
         display: block;
+    }
+
+    #prop-form > .block {
+        display: none;
     }
 
     #card-mng {

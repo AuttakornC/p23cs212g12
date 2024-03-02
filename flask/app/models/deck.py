@@ -27,9 +27,8 @@ class Deck(db.Model, SerializerMixin):
     def public_status(self, public):
         self.is_public = public
     
-    def update(self, name, type):
+    def update(self, name):
         self.name = name
-        self.type = type
 
     def delete(self):
         self.is_deleted = True

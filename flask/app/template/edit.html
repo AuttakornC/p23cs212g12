@@ -9,7 +9,7 @@
 
 {% block content %}
 <header>
-    <h1>Create Deck</h1>
+    <h1>Edit Deck</h1>
     <div class="underline"></div>
 </header>
 <div class="add-nav">
@@ -49,6 +49,7 @@
         </form>
         <div id="tag-field">
         </div>
+        <div class="block"></div>
     </div>
     <hr class='line'>
     <div id="card-mng">
@@ -60,16 +61,6 @@
             </div>
         </form>
         <form id="card-form">
-            <div class="card-form-grp" order_="${order}">
-                <input style="grid-area: in1;" id="question" name="question" value="${data.question}" type="text" placeholder="Question..." disabled>
-                <input style="grid-area: in2;" id="answer" name="answer" value="${data.answer}" type="text" placeholder="Answer..." disabled>
-                <input type="text" name="is_recom" value="t" hidden>
-                <input type="text" name="own_recom" value="${data.is_own ? "t" : "f"}" hidden>
-                <input type="text" name="edit_origin" value="f" hidden>
-                <input type="text" name="ref" value="${data.id}" hidden>
-                <button style="grid-area: btn1;" type="button" onclick="onSuggestClick(this);"><div class="icon-img" style="background-image: url(/static/image/suggestion-icon.png);"></div></button>
-                <button style="grid-area: btn2;" type="button" onclick="onRemoveClick(this);"><div class="icon-img" style="background-image: url(/static/image/recycle-bin.png);"></div></button>
-            </div>
         </form>
         <div class="block"></div>
     </div>
@@ -81,7 +72,7 @@
         <div class="edit-own-btn-grp">
             <button id="edit-own-change" type="button">change</button>
             <button id="edit-own-nchange" type="button">not change</button>
-            <button id="edit-own-cancel" type="button">cancel</button>
+            <button id="edit-own-cancel" onclick="datamng.closeEditOwn();" type="button">cancel</button>
         </div>
     </div>
 </div>
@@ -112,7 +103,7 @@
     </div>
 </div>
 <div class="add-footer">
-    <button onclick="onAdd();" type="button" style="grid-area: plus;">+</button>
+    <button onclick="datamng.onAddInput();" type="button" style="grid-area: plus;">+</button>
     <button onclick="onSave();" type="button" style="grid-area: save;">Save</button>
     <button onclick="onCancel();" class="secondary" type="button" style="grid-area: cancel;">Cancel</button>
 </div>

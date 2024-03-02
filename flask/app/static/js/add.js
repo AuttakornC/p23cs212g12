@@ -223,6 +223,8 @@ function onSuggestClick(element) {
     // console.log(element.parentElement.children[0].value);
     if (element.parentElement.children[0].value) {
         suggest.onSuggest(element, element.parentElement.children[0].value);
+    } else {
+        confirm_.open("Input your question.", "Please input your question before using suggestion. System will find that question for you.");
     }
 }
 
@@ -357,7 +359,7 @@ class Suggest {
         const sug_window = document.getElementById("suggest");
         load.toggle();
         function changeBTN() {
-            element_btn.innerHTML = "Edit";
+            element_btn.innerHTML = "<div class=\"icon-img\" style=\"background-image: url(/static/image/edit.png);\"></div>";
             element_btn.setAttribute("onclick", "onEdit(this);");
         }
 
@@ -532,19 +534,26 @@ function saving() {
     form_data["title"] = document.getElementById("title").value;
     form_data["is_public"] = document.getElementById("status").value==="public";
     form_data["tags"] = my_state.getTags().map(val=>{return {dbid: val.dbid, tag: val.tag};});
-    form_data["cards"] = my_state.getInputTag().map(val=>{
-        const element = val.element;
-        return {
+    form_data["cards"] = [];
+    for (const input_tag of my_state.getInputTag()) {
+        const element = input_tag.element;
+        const val = {
             is_recom: element.children[2].value==="t",
             own_recom: element.children[3].value==="t",
             edit_origin: element.children[4].value==="t",
             ref: parseInt(element.children[5].value),
             question: element.children[0].value,
-            answer: element.children[1].value
+            answer: element.children[1].value,
         }
-    }).filter(val=>{
-        return val.question && val.answer;
-    });
+        if (val.question && val.answer) {
+            -form_data["cards"].push(val);    
+        } else {
+            confirm_.open("An issue has arisen with certain cards!!", "Our system has detected that some of your cards are missing certain values.")
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            load.toggle();
+            return;
+        }
+    }
 
     async function sendData() {
         try {

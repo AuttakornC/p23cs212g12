@@ -80,7 +80,7 @@ def create_deck(body, user_data):
                         db.session.flush()
                         db.session.commit()
                         deck_card_owner = DeckCard.query.filter(DeckCard.deck_id.in_(all_deck_data_id), DeckCard.card_id == to_edit.id)
-                        new_card_list.append(new_card.id)
+                        card_list.append(new_card.id)
                         for i in deck_card_owner:
                             i.update(new_card.id)
                     else:
