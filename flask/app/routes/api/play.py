@@ -12,7 +12,7 @@ from app.lib.request import successBody
 
 
 @api.route("/play/decks")
-def explore_db_decks():
+def play_db_decks():
     decks = []
     db_decks = Deck.query.all()
 
@@ -26,7 +26,7 @@ def explore_db_decks():
 
 
 @api.route("/play/decks/cards")
-def explore_db_decks_cards():
+def play_db_decks_cards():
     decks_cards = []
     db_decks_cards = DeckCard.query.all()
     # app.logger.debug("db_decks_cards:", db_decks_cards)
@@ -38,7 +38,7 @@ def explore_db_decks_cards():
 
 
 @api.route("/play/cards")
-def explore_db_cards():
+def play_db_cards():
     cards = []
     db_cards = Card.query.all()
     # app.logger.debug("db_decks_cards:", db_decks_cards)
@@ -50,11 +50,11 @@ def explore_db_cards():
 
 
 @api.route("/play/all/decks")
-def check_card_in_deck():
+def play_check_card_in_deck():
 
-    decks = explore_db_decks()
-    decks_cards = explore_db_decks_cards()
-    cards = explore_db_cards()
+    decks = play_db_decks()
+    decks_cards = play_db_decks_cards()
+    cards = play_db_cards()
 
     each_deck = []
     # ลูปแต่ละ deck
