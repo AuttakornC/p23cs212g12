@@ -30,7 +30,7 @@ main {
 }
 
 button.disable {
-    background-color: var(--choco-color);
+    background-color: var(--main3-color);
 }
 
 .BackNextClose>#back-btn{
@@ -60,28 +60,26 @@ button.disable {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     border-radius: 1rem;
-    padding: 10rem;
+    /* padding: 10rem; */
+    height: 25rem;
     width: full;
     font-weight: bold;
     background-color: var(--choco-color);
-    max-width: 10%;
+    width: 100%;
+    max-width: 21rem;
     transition: 0.25s all ease-in;
     
 }
 
 .cards>.card-name{
+    /* width: 100%; */
     color: var(--banana-color);
     font-size: 2.2rem;
     font-weight: bold;
 }
 
-/* .cards>h2 {
-    color: var(--banana-color);
-    font-size: 2.2rem;
-    font-weight: bold;
-} */
 
 .cards > #show-btn {
     position: absolute;
@@ -115,17 +113,7 @@ button.disable {
     transition: 0.25s all ease-in;
 }
 
-/* h1 {
-    color: var(--choco-color);
-    font-weight: bold;
-    font-size: 2.2rem;
-    text-align: center;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    font-style: normal;
-    line-height: normal;
-    transition: 0.25s all ease-in;
-} */
+
 
 
 
@@ -149,7 +137,7 @@ button.disable {
     padding: 10rem;
     margin: 1rem;
     width: 100%;
-    max-width: 1000px;
+    max-width: 50rem;
     flex-shrink: 0;
     transition: 0.25s all ease-in;
 
@@ -162,11 +150,7 @@ button.disable {
     font-weight: bold;
 }
 
-/* .cards>h2 {
-    color: var(--banana-color);
-    font-size: 3rem;
-    font-weight: bold;
-} */
+
 }
 
 

@@ -11,22 +11,16 @@ Play
 {% endblock %}
 
 {% block content %}
-<!-- <header>
-    <h1>Banana Choco</h1>
-</header> -->
-<!-- <body onload="getWord()"> -->
 <div class="deck-name">{{ deck_data.name }}</div>
-<!-- <h1>DN</h1> -->
 <main>
     <div class="cards">
         <div id="card-show" class="card-name"></div>
-        <!-- <h2>CN</h2> -->
-        <button id="show-btn" type="button">Show</button>
+        <button id="show-btn" type="button" onclick="hideShow(this)">Show</button>
     </div>
     <div class="BackNextClose">
         <button id="back-btn" type="button">Previous</button>
         <button id="next-btn" onclick="next()" type="button">Skip</button>
-        <button id="close-btn" onclick="window.location.href = '/'" type="button">Quit</button>
+        <button id="close-btn" onclick="onClose()" type="button">Quit</button>
     </div>
 </main>
 
@@ -34,6 +28,10 @@ Play
 {% block script %}
 <script>
     var deck_data = {{ deck_data|tojson }}
+    function hideShow(ele){
+        ele.style.display = "none";
+    }
+
 </script>
 <script src="/static/js/play.js"></script>
 {% endblock %}
