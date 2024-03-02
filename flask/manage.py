@@ -1,3 +1,6 @@
+# write by Mesanee Laihueang 650510676
+
+
 # lib from py
 from flask.cli import FlaskGroup
 
@@ -65,10 +68,8 @@ def seed_db():
                    username='Dudu', password='012345'))
     db.session.commit()
 
-    db.session.add(Deck(name='Animal', is_pulic=True, user_id=1))
-    db.session.add(Deck(name='Color', is_pulic=True, user_id=2))
-    # db.session.commit()
-
+    db.session.add(Deck(name='Animal', is_public=True, user_id=1))
+    db.session.add(Deck(name='Color', is_public=True, user_id=2))
     db.session.commit()
 
     db.session.add(Card(question="ant", answer="มด", player_id=1))
@@ -85,23 +86,15 @@ def seed_db():
     db.session.add(DeckCard(2, 1))
     db.session.add(DeckCard(3, 1))
     db.session.add(DeckCard(4, 1))
-    # db.session.commit()
+    db.session.commit()
 
-    # db.session.commit()
 
     db.session.add(DeckCard(5, 2))
     db.session.add(DeckCard(6, 2))
     db.session.add(DeckCard(7, 2))
     db.session.commit()
 
-@cli.command("test_db")
-def test_db():
-    all_deck_card = DeckCard.query.filter_by(card_id=1)
-    all_deck_data = Deck.query.filter(Deck.id.in_(list(map(lambda x: x.to_dict()["deck_id"], all_deck_card))), Deck.player_id == 1)
-    # all_deck_data = Deck.query.filter(Deck.player_id == 1)
-    print(len(list(map(lambda x: x.to_dict(),all_deck_card))))
-    print(len(list(map(lambda x: x.to_dict(),all_deck_data))))
-    
+>>>>>>>>> Temporary merge branch 2
 
 if __name__ == "__main__":
     cli()

@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 # my lib
 from app import db
 
+
 class Deck(db.Model, SerializerMixin):
     __tablename__ = "decks"
 
@@ -17,6 +18,7 @@ class Deck(db.Model, SerializerMixin):
     delete_at = db.Column(db.DateTime())
 
     def __init__(self, name, is_public, user_id):
+
         self.name = name
         self.is_public = is_public
         self.player_id = user_id
@@ -27,7 +29,6 @@ class Deck(db.Model, SerializerMixin):
     def public_status(self, public):
         self.is_public = public
 
-    
     def update(self, name, typeP):
         self.name = name
         self.public = typeP

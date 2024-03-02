@@ -7,6 +7,9 @@ def badRequest(err):
 def unauthen():
     return "", 401
 
+def internalErr():
+    return "", 502
+
 def success():
     return jsonify({ "message" : "success" }), 200
 

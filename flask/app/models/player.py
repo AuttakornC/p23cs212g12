@@ -16,6 +16,7 @@ class Player(db.Model, SerializerMixin):
     password = db.Column(db.String(255))
     avatar_url = db.Column(db.String(255))
     create_at = db.Column(db.DateTime())
+    update_at = db.Column(db.DateTime())
 
     def __init__(self, email:str, username:str, password:str):
         self.email = email
@@ -26,9 +27,11 @@ class Player(db.Model, SerializerMixin):
     
     def updateAVT(self, avatar_url):
         self.avatar_url = avatar_url
+        self.update_at = datetime.now(timezone.utc)
     
     def updateName(self, name:str):
         self.name = name
+        self.update_at = datetime.now(timezone.utc)
 
     def updatePass(self, password:str, _bycrypt=True):
         if _bycrypt:

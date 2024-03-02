@@ -1,5 +1,5 @@
 # lib from py
-from os import getenv
+from os import getenv, path
 from flask import Flask, session
 from werkzeug.debug import DebuggedApplication
 from flask_sqlalchemy import SQLAlchemy
@@ -18,6 +18,7 @@ app.jinja_options.update({
     'lstrip_blocks': True
 })
 
+app.config['APP_PATH'] = path.dirname(path.realpath(__file__))
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = getenv("SECRET_KEY", None)
 app.config['JSON_AS_ASCII'] = False
