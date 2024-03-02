@@ -94,7 +94,5 @@ def seed_db():
     db.session.add(DeckCard(7, 2))
     db.session.commit()
 
->>>>>>>>> Temporary merge branch 2
-
 if __name__ == "__main__":
     cli()

@@ -28,18 +28,18 @@ def explore_db_decks():
     # return decks
     
     
-@api.route("/explore/tags")
-def explore_db_tags():
-    tags = []
-    db_tags = Tag.query.all()
-    tags = list(map(lambda x: x.to_dict(), db_tags))
-    # app.logger.debug("DB cards: " + str(cards))
+# @api.route("/explore/tags")
+# def explore_db_tags():
+#     tags = []
+#     db_tags = Tag.query.all()
+#     tags = list(map(lambda x: x.to_dict(), db_tags))
+#     # app.logger.debug("DB cards: " + str(cards))
 
-    return jsonify(decks_cards)
+#     return jsonify(decks_cards)
     # return tags
 
 
-@api.route("/explore/players")
+# @api.route("/explore/players")
 def explore_db_player():
     players = []
     db_players = Player.query.all()
@@ -51,7 +51,7 @@ def explore_db_player():
     return players
 
 
-@api.route("/explore/decks/cards")
+# @api.route("/explore/decks/cards")
 def explore_db_decks_cards():
     decks_cards = []
     db_decks_cards = DeckCard.query.all()
@@ -63,7 +63,7 @@ def explore_db_decks_cards():
     return decks_cards
 
 
-@api.route("/explore/cards")
+# @api.route("/explore/cards")
 def explore_db_cards():
     cards = []
     db_cards = Card.query.all()
@@ -75,10 +75,7 @@ def explore_db_cards():
     return cards
 
 
-
-
-
-@api.route("/explore/decks/tags")
+# @api.route("/explore/decks/tags")
 def explore_db_decks_tags():
     decks_tags = []
     db_decks_tags = DeckTag.query.all()
