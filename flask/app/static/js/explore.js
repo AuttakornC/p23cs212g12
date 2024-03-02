@@ -32,13 +32,10 @@ function onPreview(data) {
     const decks = JSON.parse(data.getAttribute('dataDecks'));
     const cards = decks.cards
     
-
     for (const key in cards){
         // console.log(key, cards[key])
         addWordPreview(key, cards[key])
     }
-
-
 
     $('#preview').show();
     $('.box').hide();

@@ -7,7 +7,7 @@ from app.models.deck_card import DeckCard
 def get_my_deck(user_data):
     show = Deck.query.filter_by(player_id=user_data["id"])
     user = Player.query.get(user_data["id"])
-    print(user_data)
+    # print(user_data)
     json_show = []
     for i in show:
         temp = i.to_dict()
