@@ -1,8 +1,9 @@
 {% extends 'nav.html' %}
 
 {% block cssimp %}
-<link rel="stylesheet" href="/static/css/play.css">
 {{ super() }}
+<link rel="stylesheet" href="/static/css/play.css">
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -13,34 +14,26 @@ Play
 <!-- <header>
     <h1>Banana Choco</h1>
 </header> -->
-<div class="deck-name">{{ deck_detail.name }}</div>
-<div class="number">1/25</div>
+<!-- <body onload="getWord()"> -->
+<div class="deck-name">{{ deck_data.name }}</div>
+<!-- <h1>DN</h1> -->
 <main>
     <div class="cards">
-        <div class="card-name">Cat</div>
+        <div id="card-show" class="card-name"></div>
+        <!-- <h2>CN</h2> -->
         <button id="show-btn" type="button">Show</button>
     </div>
-    <!-- <div class="card-name">Cat</div> -->
     <div class="BackNextClose">
-        <button id="back-btn" type="button">Back</button>
-        <button id="next-btn" type="button">Next</button>
-        <button id="close-btn" onclick="window.location.href = '/'" type="button">close</button>
+        <button id="back-btn" type="button">Previous</button>
+        <button id="next-btn" onclick="next()" type="button">Skip</button>
+        <button id="close-btn" onclick="window.location.href = '/'" type="button">Quit</button>
     </div>
-    <!-- <div class="window-loader">
-        <div class="loader"></div>
-        <div class="PW">Please Wait ...</div>
-    </div> -->
 </main>
+
 {% endblock %}
 {% block script %}
-<!-- <script>
-    function hideshow(ele) {
-        ele.style.display = 'none';
-    }
-    function showCall() {
-        let a = document.getElementById("show-btn");
-        a.style.display = 'block';
-    }
-</script> -->
-<!-- <script src="/static/js/"></script> -->
+<script>
+    var deck_data = {{ deck_data|tojson }}
+</script>
+<script src="/static/js/play.js"></script>
 {% endblock %}
