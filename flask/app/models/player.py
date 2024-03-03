@@ -20,7 +20,7 @@ class Player(db.Model, SerializerMixin):
 
     def __init__(self, email:str, username:str, password:str):
         self.email = email
-        self.name = username;
+        self.name = username
         self.password = hashpw(password.encode(), gensalt()).decode()
         self.avatar_url = f'https://ui-avatars.com/api/?name={email[0]}+{email[1]}&background=f6d394&color=725c3a'
         self.create_at = datetime.now(timezone.utc)
@@ -30,7 +30,7 @@ class Player(db.Model, SerializerMixin):
         self.update_at = datetime.now(timezone.utc)
     
     def updateName(self, name:str):
-        self.name = name;
+        self.name = name
         self.update_at = datetime.now(timezone.utc)
 
     def updatePass(self, password:str, _bycrypt=True):

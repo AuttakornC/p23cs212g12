@@ -33,13 +33,13 @@ def edit_deck(path):
     result["is_public"] = deck_detail.is_public
     
     # query Card
-    card_in_deck = DeckCard.query.filter_by(deck_id=deck_detail.id)
+    card_in_deck = DeckCard.query.filter_by(deck_id=deck_detail.id).order_by(DeckCard.card_id)
     card_id = list(map(lambda x: x.to_dict()["card_id"], card_in_deck))
     all_card_in_deck = Card.query.filter(Card.id.in_(card_id), Card.is_deleted == False)
     result["cards"] = list(map(lambda x: { **x.to_dict(), "is_own": x.player_id==user_data["id"] }, all_card_in_deck))
 
     # query Tag
-    tag_in_deck = DeckTag.query.filter_by(deck_id=deck_detail.id)
+    tag_in_deck = DeckTag.query.filter_by(deck_id=deck_detail.id).order_by(DeckTag.tag_id)
     tag_id = list(map(lambda x: x.to_dict()["tag_id"], tag_in_deck))
     all_tag_in_deck = Tag.query.filter(Tag.id.in_(tag_id), Tag.is_deleted == False)
     result["tags"] = list(map(lambda x: x.to_dict(), all_tag_in_deck))

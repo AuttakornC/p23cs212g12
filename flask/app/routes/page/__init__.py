@@ -1,6 +1,6 @@
-# lib from py
 from flask import Blueprint
 
 main = Blueprint("main", __name__, url_prefix="/")
 
-from app.routes.page import home, add, play, profile, edit
+from app.routes.page import home, explore, add, play, profile, edit
+

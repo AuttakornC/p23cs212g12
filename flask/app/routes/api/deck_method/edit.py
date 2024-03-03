@@ -184,7 +184,6 @@ def updateDeck(data, user_data):
     db.session.flush()
     db.session.commit()
     for new_card in new_cards:
-        print(f"{new_card.id} {deck_data.id}")
         db.session.add(DeckCard(new_card.id, deck_data.id))
     db.session.commit()
 

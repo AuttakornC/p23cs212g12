@@ -1,8 +1,9 @@
 {% extends 'nav.html' %}
 
 {% block cssimp %}
-<link rel="stylesheet" href="/static/css/play.css">
 {{ super() }}
+<link rel="stylesheet" href="/static/css/play.css">
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -10,28 +11,27 @@ Play
 {% endblock %}
 
 {% block content %}
-<!-- <header>
-    <h1>Banana Choco</h1>
-</header> -->
-<div class="deck-name">{{ deck_detail.name }}</div>
-<div class="number">1/25</div>
+<div class="deck-name">{{ deck_data.name }}</div>
 <main>
     <div class="cards">
-        <div class="card-name">Cat</div>
-        <button id="show-btn" type="button">Show</button>
+        <div id="card-show" class="card-name"></div>
+        <button id="show-btn" type="button" onclick="hideShow(this)">Show</button>
     </div>
-    <!-- <div class="card-name">Cat</div> -->
     <div class="BackNextClose">
-        <button id="back-btn" type="button">Back</button>
-        <button id="next-btn" type="button">Next</button>
-        <button id="close-btn" onclick="window.location.href = '/'" type="button">close</button>
-    </div>
-    <div class="window-loader">
-        <div class="loader"></div>
-        <div class="PW">Please Wait ...</div>
+        <button id="back-btn" class="disable" type="button">Previous</button>
+        <button id="next-btn" onclick="next()" type="button">Skip</button>
+        <button id="close-btn" onclick="onClose()" type="button">Quit</button>
     </div>
 </main>
+
 {% endblock %}
 {% block script %}
-<!-- <script src="/static/js/"></script> -->
+<script>
+    var deck_data = {{ deck_data|tojson }}
+    function hideShow(ele){
+        ele.style.display = "none";
+    }
+
+</script>
+<script src="/static/js/play.js"></script>
 {% endblock %}

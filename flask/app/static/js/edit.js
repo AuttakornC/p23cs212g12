@@ -600,10 +600,8 @@ function saving() {
             });
         } catch (error) {}
         load.toggle();
-        // window.location.href = "/";
+        window.location.href = "/";
     }
-
-    console.log(form_data);
 
     sendData();
 }
