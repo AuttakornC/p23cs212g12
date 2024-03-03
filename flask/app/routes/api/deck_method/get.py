@@ -5,7 +5,7 @@ from app.models.deck_card import DeckCard
 
 # write by Rachata
 def get_my_deck(user_data):
-    show = Deck.query.filter_by(player_id=user_data["id"])
+    show = Deck.query.filter_by(player_id=user_data["id"], is_deleted=False)
     user = Player.query.get(user_data["id"])
     # print(user_data)
     json_show = []

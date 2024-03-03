@@ -16,9 +16,6 @@ if [ "$APP_ENV" = "development" ]; then
 
     echo "Tables created"
 
-    python3 manage.py test_db
-    echo "Complete."
-
     
     if [ "$FLASK_DEBUG" = "1" ]; then
         echo "Running on Flask Development Server"

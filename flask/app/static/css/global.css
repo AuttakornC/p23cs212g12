@@ -57,3 +57,17 @@ input, textarea {
 input:focus, textarea:focus {
     outline: none;
 }
+
+.icon-img {
+    aspect-ratio: 1;
+    width: 2rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: var(--cholo-filter);
+}
+
+.icon-img:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}

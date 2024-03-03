@@ -1,3 +1,5 @@
+/* write by Rachata 650510638 */
+
 body {
     background-color: var(--banana-color);
 
@@ -48,7 +50,7 @@ header {
 
 /* search css */
 
-.deck-container-home-page > #search {
+.deck-container-home-page > #search-form {
     width: 100%;
     padding: 1rem;
     display: flex;
@@ -56,28 +58,29 @@ header {
     
 }
 
-.deck-container-home-page > #search > div {
+.deck-container-home-page > #search-form > div {
     width: 100%;
-    max-width: 1000px;
+    max-width: 70rem;
 }
 
-.deck-container-home-page > #search > div > input {
+.deck-container-home-page > #search-form > div > input {
     width: 100%;
+    height: 39px;
     font-size: 1.25rem;
     padding-right: 2.5rem;
     color: var(--banana-color);
     background-color: var(--choco-color);
 }
 
-.deck-container-home-page > #search > div > input::placeholder {
+.deck-container-home-page > #search-form > div > input::placeholder {
     opacity: 1;
 }
 
-.deck-container-home-page > #search > div > input::placeholder {
+.deck-container-home-page > #search-form > div > input::placeholder {
     color: var(--banana-color);
 }
 
-.deck-container-home-page > #search > div > img {
+.deck-container-home-page > #search-form > div > img {
     width: 1.25rem;
     position: absolute;
     right: 0.75rem;
@@ -88,7 +91,7 @@ header {
 }
 
 
-/* deck */
+/* deck container */
 
 
 .deck-home-page {
@@ -100,12 +103,13 @@ header {
 
 .title-deck {
     width: 100%;
-    max-width: 1000px;
+    max-width: 70rem;
     margin-bottom: 30px;
+    color: var(--choco-color);
 }
 
 
-/* card */
+/* deck */
 
 .deck-container-home-page > .deck-home-page {
     width: 100%;
@@ -114,7 +118,7 @@ header {
 
 .deck-bg {
     width: 100%;
-    max-width: 1000px;
+    max-width: 70rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -125,11 +129,11 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* flex: 1; */
-    padding: 20px;
-    height: 25vh;
+    flex: 1;
+    padding: 15px;
+    height: 30vh;
     border-radius: 30px;
-    /* flex-shrink: 0; */
+    flex-shrink: 0;
     overflow: hidden;
     background-color: var(--main1-color);
 }
@@ -138,6 +142,19 @@ header {
     cursor: pointer;
     background-color: var(--main2-color);
 }
+
+.deck-popup {
+    display: block;
+    position: absolute;
+    background-color: black;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    opacity: 0;
+}
+
 
 
 .profile-icon{
@@ -151,12 +168,17 @@ header {
     filter: brightness(0) saturate(100%) invert(20%) sepia(15%) saturate(1929%) hue-rotate(357deg) brightness(94%) contrast(85%); 
 }
 
+.people {
+    color: var(--choco-color);
+}
+
 .description {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     text-align: center;
+    color: var(--choco-color);
 }
 
 .deck-home-page > .block {
@@ -183,7 +205,7 @@ header {
 }
 
 .add-footer button {
-    max-width: 1000px;
+    max-width: 70rem;
     width: 100%;
     padding: 0.5rem;
     border: none;
@@ -209,10 +231,6 @@ header {
     display: flex;
     justify-content: space-around;
     visibility: hidden;
-}
-
-.btn {
-    max-width: 25px;
 }
 
 
@@ -298,18 +316,52 @@ header {
 
 @media screen and (min-width: 601px) {
 
+    /* deck */
+
     .window-size {
         display: flex;
         justify-content: space-around;
         visibility: visible;
+        height: 2rem;
+        width: 100%;
     }
 
-    .btn {
-        max-width: 25px;
+    .window-size > button {
+        background-color: transparent;
+        border: none;
+    }
+
+    .edit {
+        background-image: url('./../image/edit.png');
+        width: 50%;
+        /* height: 50vh; */
+    }
+
+    .play {
+        background-image: url('./../image/play.png');
+    }
+
+    .delete {
+        background-image: url('./../image/recycle-bin.png');
     }
 
     .box:hover {
         cursor: auto;
         background-color: var(--main1-color);
+    }
+
+    .deck-popup {
+        display: none;
+    }
+
+    /* deck container */
+
+    .deck-bg {
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
+        row-gap: 2rem;
+        column-gap: 3rem;
+        max-width: 70rem;
+        
     }
 }
