@@ -3,6 +3,7 @@
 
 $(document).ready(function () {
     function add() {
+        load.toggle();
         $.get("api/explore/all/decks", (decks)=>{
             // console.log("decks:", decks[0]["name"])
             $.each(decks, (key, value) =>{
@@ -10,6 +11,7 @@ $(document).ready(function () {
                 addDataDecks(value)
             })
         });
+        load.toggle();
     }
     add();
 });
@@ -21,7 +23,7 @@ function addDataDecks(decks){
     for (let i in decks.tags) {
         tagHtml += `<span class="tag">#${decks.tags[i]}</span><nobr></nobr>`;
     }
-    const post_block = `<div class="box" onclick="onPreview(this)" dataDecks='${JSON.stringify(decks)}';>
+    const post_block = `<div class="box" onclick="onPreview('${decks.name}', ${decks.num_card}, ${decks.id})" dataDecks='${JSON.stringify(decks)}';>
     <div class="profile">
         <img class="profile-icon" src="${decks.avatar_url}" alt="">
         <span class="people">${decks.player_name}</span>
@@ -34,26 +36,28 @@ function addDataDecks(decks){
 
 
 
-function onPreview(data) {
-    const decks = JSON.parse(data.getAttribute('dataDecks'));
-    const cards = decks.cards
-
-    //clear หน้า preview ส่วน head
-    $(".header").html("")
-    //clear หน้า preview ส่วน word
-    $("#sug-own").html("")
-
-
-    addPreview(decks)
-
-    // console.log("decks:", decks)
-    for (const key in cards){
-        // console.log(key, cards[key])
-        addWordPreview(key, cards[key])
+function onPreview(deck_name, num_card, id) {
+    async function getCard() {
+        load.toggle();
+        //clear หน้า preview ส่วน head
+        $(".header").html("")
+        //clear หน้า preview ส่วน word
+        $("#sug-own").html("")
+        addPreview(deck_name, num_card);
+        try {
+            // console.log(result);
+            const resp = await fetch(`/api/explore/all/decks/cards?id=${id}`);
+            const result = await resp.json();
+            result.data.forEach(element => {
+                addWordPreview(element.question, element.answer);
+            });
+            $('#preview').show();
+            $('.box').hide();
+            $("#copy-btn").attr("onclick", `onCopy(${id});`);
+        } catch (error) {}
+        load.toggle();
     }
-
-    $('#preview').show();
-    $('.box').hide();
+    getCard();
 }
 
 function onClose() {
@@ -61,10 +65,10 @@ function onClose() {
     $('.box').show();
 }
 
-function addPreview(decks) {
-    const head = `<h1>${decks.name}<div id="sug-close" class="x" onclick="onClose()"><div></div><div></div></div></h1>
-    <h4>${decks.num_card} Cards</h4> `;
-    $(".header").html($(".header").html() + head)
+function addPreview(deck_name, num_card) {
+    const head = `<h1>${deck_name}<div id="sug-close" class="x" onclick="onClose()"><div></div><div></div></div></h1>
+    <h4>${num_card} Cards</h4> `;
+    $(".header").html($(".header").html() + head);
 }
 
 function addWordPreview(question, answer) {
@@ -85,7 +89,7 @@ function searchInput(word) {
                 
                 // value["name"].forEach(name=>{
                 const name = value.name.toLowerCase();
-                console.log(name) 
+                // console.log(name) 
                 if (name.length < word_len) {
                     
                 } else if (name.slice(0, word_len)!==word) {
@@ -129,3 +133,18 @@ search_form.addEventListener("submit", (e)=>{
     searchInput(search_input.value); // Use search_input.value to access the input value
 });
 
+function onCopy(deck_id) {
+    async function copy() {
+        load.toggle();
+        try {
+            const resp = await fetch(`/api/explore/copy?id=${deck_id}`);
+            const result = await resp.json();
+            window.location.href = `/edit/${result.data}`;
+        } catch (error) {}
+        load.toggle();
+    }
+
+    confirm_.open("Do you want to copy this deck?", "This action will replicate the current deck to become your personal deck. As the owner, you will have editing privileges.", ()=>{
+        copy();
+    });
+}

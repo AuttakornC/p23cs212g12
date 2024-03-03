@@ -147,6 +147,7 @@ form{
 
 .profile-icon{
     width: 25px;
+    aspect-ratio: 1;
     border-radius:50px;
 }
 
@@ -414,7 +415,8 @@ main {
         text-align: center;
     }
 
-    
-
+    .profile-icon {
+        width: 2rem;
+    }    
 
 }
