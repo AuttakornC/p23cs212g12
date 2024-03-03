@@ -46,14 +46,14 @@
 <div id="deck-menu">
     <div class="window-popup">
         <div class="header">
-            <h1>Title</h1> 
+            <h1></h1> 
             <div id="close-popup" class="close" onclick="onClose()"></div>
         </div>
         
         <div class="option">
-            <button onclick="onCopy();" type="button"><h1>Play</h1></button>
-            <button onclick="onCopy();" type="button"><h1>Edit</h1></button>
-            <button onclick="onCopy();" type="button"><h1>Delete</h1></button>
+            <button onclick="" id="play-btn" type="button"><h1>Play</h1></button>
+            <button onclick="" id="edit-btn" type="button"><h1>Edit</h1></button>
+            <button onclick="" id="delete-btn" type="button"><h1>Delete</h1></button>
         </div>
 
     </div>
@@ -66,6 +66,6 @@
 
 {% endblock %}
 {% block script %}
-<script src="/static/js/home.js"></script>
 {{ super() }}
+<script src="/static/js/home.js"></script>
 {% endblock %}

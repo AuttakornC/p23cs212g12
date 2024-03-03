@@ -26,6 +26,7 @@ Play
 
 {% endblock %}
 {% block script %}
+{{ super() }}
 <script>
     var deck_data = {{ deck_data|tojson }}
     function hideShow(ele){

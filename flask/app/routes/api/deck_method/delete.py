@@ -6,7 +6,6 @@ from app.lib.request import badRequest, success
 from app import db
 
 def delete_deck(deck_id:str, user_data):
-    print("dddddddddddddddddd")
     if not deck_id.isnumeric():
         return badRequest("Not found deck")
     deck_id = int(deck_id)

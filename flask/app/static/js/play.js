@@ -12,6 +12,9 @@ class Play {
 
     constructor(deck_data) {
         this.deck_data = deck_data;
+        if (deck_data.cards.length===0) {
+            window.location.href = "/"
+        }
         this.queue = [...Array(this.deck_data.cards.length).keys()];
         this.main_show.innerHTML = this.deck_data.cards[this.queue[this.current]].question;
         this.onANS = (e) => {

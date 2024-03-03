@@ -30,6 +30,7 @@ class Deck {
         // console.log(data);
         const deckContainner = document.getElementsByClassName('deck-bg');
         deckContainner[0].innerHTML = ``
+        let tagHtml
         data["data"].forEach(element => {
             // console.log(element);
             /*
@@ -38,22 +39,27 @@ class Deck {
             id: 3, is_deleted: false, is_public: false, len_card: 1, 
             name: "ta", player_id: 3, username: "Didi" }
             */
+            tagHtml = `` 
+            for (let i of element.tag) {
+                tagHtml += `<span class="tag">#${i.name}</span><nobr></nobr>`;
+            }
             deckContainner[0].innerHTML += `
             <div class="box">
-                <div class="deck-popup"></div>
+                <div class="deck-popup" onclick="popup('${element.name}', ${element.id}, ${element.len_card})"></div>
                 <div class="profile">
-                    <img class="profile-icon" src="/static/image/profile-icon.png" alt="">
+                    <img class="profile-icon" src="${element.avatar_url}" alt="">
                     <span class="people">${element.username}</span>
                 </div>
                 <div class="description">
                     <h4 id="nameD" class="deckName">${element.name}</h4>
                     <span class="cardNum"><h5>${element.len_card} Cards</h5></span>
+                    <div class='deck-tag'>${tagHtml}</div>
                 </div>
                 <div class="window-size">
                     <button onclick="onChange('/edit/${element.id}');" type="button">
                         <div class='icon-img edit'></div>
                     </button>
-                    <button onclick="onChange('/play/${element.id}');" type="button">
+                    <button onclick="onChange('/play/${element.id}', ${element.len_card});" type="button">
                         <div class='icon-img play'></div>
                     </button>
                     <button onclick="handler.onDelete(${element.id})" type="button">
@@ -65,14 +71,6 @@ class Deck {
             
             
         });
-        // add event to deck
-        let decks = $('.deck-popup');
-        decks.each(function(index, ele) {
-            $(ele).click(function() {
-                let deckName = $(this).siblings(".description").find(".deckName").text();
-                popup(deckName);
-            })
-        })
         
         load.toggle();
     }
@@ -88,6 +86,7 @@ class Deck {
                     
                 });
                 append();  
+                onClose();
             } catch {}
 
             load.toggle()
@@ -101,20 +100,31 @@ class Deck {
 const handler = new Deck();
 
 // redirect function
-function onChange(redirectUrl)
+function onChange(redirectUrl, len_card=0)
 {
     // const redirectUrl = '/create_deck';
-    window.location.href = redirectUrl;
+    if (redirectUrl.split("/")[1]==="play") {
+        if (len_card==0) {
+            confirm_.open("Emtry Deck!!", "We have observed that this deck currently contains no cards. Kindly ensure to include your desired cards on the edit page.")
+        } else {
+            window.location.href = redirectUrl;
+        }
+    } else {
+        window.location.href = redirectUrl;
+    }
 }
 
 //  popup option deck
-function popup(deckName) {
+function popup(deckName, deck_id, len_card=0) {
     if (deckName == '') {
         $('.header > h1').html('Unknow');
     } else {
-        $('.header > h1').html(deckName);
+        $('.header > h1').html(String(deckName).substring(0, 15));
     }
     
+    $("#play-btn").attr("onclick", `onChange('/play/${deck_id}', ${len_card});`);
+    $("#edit-btn").attr("onclick", `onChange('/edit/${deck_id}');`);
+    $("#delete-btn").attr("onclick", `handler.onDelete(${deck_id});`);
     $('#deck-menu').css("display", "flex");
 }
 
@@ -126,68 +136,76 @@ function onClose() {
 // edit home html to this >>
 // 
 function addDataDecks(decks){
-    // console.log(decks.avatar_url)
-    let tagHtml = '';
-    for (let i in decks.tags) {
-        tagHtml += `<span class="tag">#${decks.tags[i]}</span><nobr></nobr>`;
+    let tagHtml = ``;
+    $(".deck-bg").html('');
+    let deck = ``;
+    for (let i of decks) {
+        for (let j of i.tag) {
+            tagHtml += `<span class="tag">#${j.name}</span><nobr></nobr>`;
+        }
+        deck = `
+        <div class="box">
+            <div class="deck-popup"></div>
+            <div class="profile">
+                <img class="profile-icon" src="${i.avatar_url}" alt="">
+                <span class="people">${i.username}</span>
+            </div>
+            <div class="description">
+                <h4 id="nameD" class="deckName">${i.name}</h4>
+                <span class="cardNum"><h5>${i.len_card} Cards</h5></span>
+                <div class='deck-tag'>${tagHtml}</div>
+            </div>
+            <div class="window-size">
+                <button onclick="onChange('/edit/${i.id}');" type="button">
+                    <div class='icon-img edit'></div>
+                </button>
+                <button onclick="onChange('/play/${i.id}');" type="button">
+                    <div class='icon-img play'></div>
+                </button>
+                <button onclick="handler.onDelete(${i.id})" type="button">
+                    <div class='icon-img delete'></div>
+                </button>
+            </div>
+        </div>`;
+        $(".deck-bg").html($(".deck-bg").html()+deck);
     }
-    const post_block = `<div class="box" onclick="onPreview(this)" dataDecks='${JSON.stringify(decks)}';>
-    <div class="profile">
-        <img class="profile-icon" src="${decks.avatar_url}" alt="">
-        <span class="people">${decks.player_name}</span>
-    </div>
-    <div class="description"><h4 class="deckName">${decks.name}</h4><h5 class="cardNum">${decks.num_card} Cards</h5></div>
-    <span class="tags">${tagHtml}</span> 
-    </div>`;
-    $(".container").html($(".container").html()+post_block);
 }
 
 // search deck
 async function searchInput(word) {
-    const respond = await fetch("/api/deck");
-    const raw_data = await respond.json();
-    const decks = raw_data['data'];
-    decks.forEach(function(index, ele) {
-        // log deck to check data --------1---------
-        if (word.length!==0) {
-            word = word.toLowerCase();
-            const word_len = word.length;
-            $.each(decks, (key, value) =>{
-                
-                // value["name"].forEach(name=>{
-                const name = value.name.toLowerCase();
-                // console.log(name) 
-                // -----2------ check addDataDecks
-                if (name.length < word_len) {
-                    
-                } else if (name.slice(0, word_len)!==word) {
-                    
-                } else {
-                    addDataDecks(value)
-                }
-                // ------3------- check 'value' 
-                $.each(value.tags, (k, v) =>{
-                    const tag = v.toLowerCase();
-                    if (tag.length < word_len) {
-                    
-                    } else if (tag.slice(0, word_len)!==word) {
-                        
-                    } else {
-                        addDataDecks(value)
+    
+    if (word.length!==0) {
+        const respond = await fetch("/api/deck");
+        const raw_data = await respond.json();
+        const decks = raw_data['data'];
+        /* decks schema:
+            {
+                'id' : 3, 'name' : 'deckname', 'len_card' : 1, 'tag' : [{ delete_at: null, id: 1, is_deleted: false, name: "CS"}],
+                'player_id': 3, 'username': 'รชต ธนัญชัย', 'avatar_url': 'https://lh3.googleusercontent.com/a/ACg8ocLU8_khO9j6dlSlrg7TyFRA3O1ECRnBxyXliCkNm4Lmbas=s96-c',
+                'create_at': '2024-03-02 19:19:26', delete_at : None, 'is_deleted' : False,
+                'is_public' : False
+            }
+        */
+        word = word.toLowerCase();
+        let search = [];
+        let deckName, deckTag
+        $.each(decks, (index, ele) =>{
+            deckName = ele.name.toLowerCase();
+            deckTag = ele.tag;
+            if (deckName.includes(word)) {
+                search.push(ele);
+            } else {
+                for (let i of deckTag) {
+                    if (i.name.toLowerCase().includes(word)) {
+                        search.push(ele);
                     }
-                });
-            })
-        } else {
-            $.each(decks, (key, value) =>{
-                addDataDecks(value);
-            })
-            
-        }
-    })
-    // $.get("api/decks", (decks)=>{
-    //     console.log(decks[0])
-        
-    // });
+                }
+            }
+        })
+        addDataDecks(search)
+    } else {
+        handler.getDeck();
+    }
     
 }
 
