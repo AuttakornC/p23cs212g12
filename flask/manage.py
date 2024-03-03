@@ -27,9 +27,9 @@ def create_db():
 def seed_db():
     #     db.session.add(BlogEntry("เทสเตอร์","นี้คือเสียงจากเด็กคอม", "test@test.com"))
     db.session.add(Player(email='didi@gmail.com',
-                   username='Didi', password='012345'))
+                   username='Didi', password='0123456789'))
     db.session.add(Player(email='dudu@gmail.com',
-                   username='Dudu', password='012345'))
+                   username='Dudu', password='0123456789'))
     db.session.commit()
 
     db.session.add(Deck(name='Animal', is_public=True, user_id=1))
