@@ -10,6 +10,7 @@ from app.lib.token import encodeJWT
 
 @login_b.route("/login/fb")
 def login_fb():
+    print(app.config["FB_CLIENT_ID"])
     oauth.register(
         "facebook",
         client_id=app.config["FB_CLIENT_ID"],
@@ -23,7 +24,8 @@ def login_fb():
     )
     
     redirected_uri = url_for("login.login_fb_auth", _external=True)
-    return oauth.facebook.authorize_redirect(redirected_uri)
+    print("https"+redirected_uri[4:])
+    return oauth.facebook.authorize_redirect("https"+redirected_uri[4:])
 
 @login_b.route("/login/fb/auth")
 def login_fb_auth():

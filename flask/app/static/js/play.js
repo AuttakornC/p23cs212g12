@@ -16,9 +16,9 @@ class Play {
             window.location.href = "/"
         }
         this.queue = [...Array(this.deck_data.cards.length).keys()];
-        this.main_show.innerHTML = this.deck_data.cards[this.queue[this.current]].question;
+        this.main_show.children[0].innerHTML = this.deck_data.cards[this.queue[this.current]].question;
         this.onANS = (e) => {
-            this.main_show.innerHTML = this.deck_data.cards[this.queue[this.current]].answer;
+            this.main_show.children[0].innerHTML = this.deck_data.cards[this.queue[this.current]].answer;
             this.right_btn.innerHTML = "Keep";
             this.left_btn.innerHTML = "Discard";
             this.left_btn.setAttribute("onclick", "play.onDiscard();");
@@ -40,9 +40,9 @@ class Play {
         }
 
         this.main_show.parentElement.removeEventListener("click", this.onANS);
-        this.main_show.innerHTML = this.deck_data.cards[this.queue[this.current]].question;
+        this.main_show.children[0].innerHTML = this.deck_data.cards[this.queue[this.current]].question;
         this.onANS = (e) => {
-            this.main_show.innerHTML = this.deck_data.cards[this.queue[this.current]].answer;
+            this.main_show.children[0].innerHTML = this.deck_data.cards[this.queue[this.current]].answer;
             this.right_btn.innerHTML = "Keep";
             this.left_btn.innerHTML = "Discard";
             this.left_btn.setAttribute("onclick", "play.onDiscard();");
@@ -70,9 +70,9 @@ class Play {
         if (this.current!==0) {
             this.current--;
             this.main_show.parentElement.removeEventListener("click", this.onANS);
-            this.main_show.innerHTML = this.deck_data.cards[this.queue[this.current]].question;
+            this.main_show.children[0].innerHTML = this.deck_data.cards[this.queue[this.current]].question;
             this.onANS = (e) => {
-                this.main_show.innerHTML = this.deck_data.cards[this.queue[this.current]].answer;
+                this.main_show.children[0].innerHTML = this.deck_data.cards[this.queue[this.current]].answer;
                 this.right_btn.innerHTML = "Keep";
                 this.left_btn.innerHTML = "Discard";
                 this.left_btn.classList.add("disable");

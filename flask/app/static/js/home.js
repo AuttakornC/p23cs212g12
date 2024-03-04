@@ -40,18 +40,19 @@ class Deck {
             name: "ta", player_id: 3, username: "Didi" }
             */
             tagHtml = `` 
-            for (let i of element.tag) {
-                tagHtml += `<span class="tag">#${i.name}</span><nobr></nobr>`;
+            for (let i=0; i<element.tag.length; i++) {
+                if (i==2) {break;}
+                tagHtml += `<span class="tag">#${limitStr(element.tag[i].name, 6)}</span><nobr></nobr>`;
             }
             deckContainner[0].innerHTML += `
             <div class="box">
-                <div class="deck-popup" onclick="popup('${element.name}', ${element.id}, ${element.len_card})"></div>
+                <div class="deck-popup" onclick="popup('${limitStr(element.name, 15)}', ${element.id}, ${element.len_card})"></div>
                 <div class="profile">
                     <img class="profile-icon" src="${element.avatar_url}" alt="">
-                    <span class="people">${element.username}</span>
+                    <span class="people">${limitStr(element.username, 8)}</span>
                 </div>
                 <div class="description">
-                    <h4 id="nameD" class="deckName">${element.name}</h4>
+                    <h4 id="nameD" class="deckName">${limitStr(element.name, 10, 3000)}</h4>
                     <span class="cardNum"><h5>${element.len_card} Cards</h5></span>
                     <div class='deck-tag'>${tagHtml}</div>
                 </div>
@@ -105,7 +106,7 @@ function onChange(redirectUrl, len_card=0)
     // const redirectUrl = '/create_deck';
     if (redirectUrl.split("/")[1]==="play") {
         if (len_card==0) {
-            confirm_.open("Emtry Deck!!", "We have observed that this deck currently contains no cards. Kindly ensure to include your desired cards on the edit page.")
+            confirm_.open("Empty Deck!!", "We have observed that this deck currently contains no cards. Kindly ensure to include your desired cards on the edit page.")
         } else {
             window.location.href = redirectUrl;
         }
@@ -119,7 +120,7 @@ function popup(deckName, deck_id, len_card=0) {
     if (deckName == '') {
         $('.header > h1').html('Unknow');
     } else {
-        $('.header > h1').html(String(deckName).substring(0, 15));
+        $('.header > h1').html(limitStr(deckName, 8));
     }
     
     $("#play-btn").attr("onclick", `onChange('/play/${deck_id}', ${len_card});`);

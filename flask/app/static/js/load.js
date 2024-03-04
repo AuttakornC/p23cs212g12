@@ -11,3 +11,7 @@ class Loader {
 }
 
 const load = new Loader();
+
+function limitStr(str, len, maxWidth=610) {
+    return String(str).length > len && window.innerWidth<maxWidth ? String(str).substr(0, len)+"..."  : String(str)
+}

@@ -20,15 +20,16 @@ $(document).ready(function () {
 function addDataDecks(decks){
     // console.log(decks.avatar_url)
     let tagHtml = '';
-    for (let i in decks.tags) {
-        tagHtml += `<span class="tag">#${decks.tags[i]}</span><nobr></nobr>`;
+    for (let i=0; i<decks.tags.length; i++) {
+        if (i==2) {break;}
+        tagHtml += `<span class="tag">#${limitStr(decks.tags[i], 6)}</span><nobr></nobr>`;
     }
-    const post_block = `<div class="box" onclick="onPreview('${decks.name}', ${decks.num_card}, ${decks.id})" dataDecks='${JSON.stringify(decks)}';>
+    const post_block = `<div class="box" onclick="onPreview('${limitStr(decks.name, 10)}', ${decks.num_card}, ${decks.id})";>
     <div class="profile">
         <img class="profile-icon" src="${decks.avatar_url}" alt="">
-        <span class="people">${decks.player_name}</span>
+        <span class="people">${limitStr(decks.player_name ,10)}</span>
     </div>
-    <div class="description"><h4 class="deckName">${decks.name}</h4><h5 class="cardNum">${decks.num_card} Cards</h5></div>
+    <div class="description"><h4 class="deckName">${limitStr(decks.name, 15, 3000)}</h4><h5 class="cardNum">${decks.num_card} Cards</h5></div>
     <span class="tags">${tagHtml}</span> 
     </div>`;
     $(".container").html($(".container").html()+post_block);
@@ -66,7 +67,7 @@ function onClose() {
 }
 
 function addPreview(deck_name, num_card) {
-    const head = `<h1>${deck_name}<div id="sug-close" class="x" onclick="onClose()"><div></div><div></div></div></h1>
+    const head = `<h1>${deck_name.length > 15 ? deck_name.substr(0, 15) : deck_name}<div id="sug-close" class="x" onclick="onClose()"><div></div><div></div></div></h1>
     <h4>${num_card} Cards</h4> `;
     $(".header").html($(".header").html() + head);
 }
