@@ -52,7 +52,7 @@ class Deck {
                     <span class="people">${limitStr(element.username, 8)}</span>
                 </div>
                 <div class="description">
-                    <h4 id="nameD" class="deckName">${limitStr(element.name, 10, 3000)}</h4>
+                    <h4 id="nameD" class="deckName">${limitStr(element.name, 10)}</h4>
                     <span class="cardNum"><h5>${element.len_card} Cards</h5></span>
                     <div class='deck-tag'>${tagHtml}</div>
                 </div>
@@ -120,7 +120,7 @@ function popup(deckName, deck_id, len_card=0) {
     if (deckName == '') {
         $('.header > h1').html('Unknow');
     } else {
-        $('.header > h1').html(limitStr(deckName, 8));
+        $('.header > h1').html(limitStr(deckName, 10, 300000));
     }
     
     $("#play-btn").attr("onclick", `onChange('/play/${deck_id}', ${len_card});`);
@@ -142,19 +142,19 @@ function addDataDecks(decks){
     let deck = ``;
     for (let i of decks) {
         for (let j of i.tag) {
-            tagHtml += `<span class="tag">#${j.name}</span><nobr></nobr>`;
+            tagHtml += `<span class="tag">#${limitStr(j.name, 6)}</span><nobr></nobr>`;
         }
         deck = `
         <div class="box">
             <div class="deck-popup"></div>
             <div class="profile">
                 <img class="profile-icon" src="${i.avatar_url}" alt="">
-                <span class="people">${i.username}</span>
+                <span class="people">${limitStr(i.username, 15)}</span>
             </div>
             <div class="description">
-                <h4 id="nameD" class="deckName">${i.name}</h4>
-                <span class="cardNum"><h5>${i.len_card} Cards</h5></span>
-                <div class='deck-tag'>${tagHtml}</div>
+            <h4 id="nameD" class="deckName">${limitStr(i.name, 10)}</h4>
+            <span class="cardNum"><h5>${i.len_card} Cards</h5></span>
+            <div class='deck-tag'>${tagHtml}</div>
             </div>
             <div class="window-size">
                 <button onclick="onChange('/edit/${i.id}');" type="button">
