@@ -116,7 +116,7 @@ form.addEventListener("submit", (e)=>{
                         }
                     );
                     load.toggle();
-                    // window.location.href = "/";
+                    window.location.href = "/";
                 } catch (error) {
                     load.toggle();
                     confirm_.open("Something went wrong!!", "Please try again later. The server is experiencing issues.")
