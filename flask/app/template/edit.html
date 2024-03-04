@@ -23,10 +23,10 @@
 <div id="deck">
     <div id="prop-form" class="activate">
         <label for="title">Title : </label>
-        <input id="title" type="text" name="title" placeholder="Title..." style="text-align: center;">
+        <input id="title" type="text" name="title" maxlength="20" placeholder="Title..." style="text-align: center;">
         <div class="status-tab">
             <label for="status">Deck Status : </label>
-            <input id="status" type="text" name="status" value="private" hidden>
+            <input id="status" maxlength="20" type="text" name="status" value="private" hidden>
             <div id="status-toggle" onclick="onStatusToggle()" class="toggle">
                 <div>
                     <div class="circle">

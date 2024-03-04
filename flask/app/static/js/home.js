@@ -1,4 +1,5 @@
 // write by Rachata 650510638
+
 class Deck {
     constructor() {
         /* deck_lst schema:
@@ -44,7 +45,8 @@ class Deck {
                 if (i==2) {break;}
                 tagHtml += `<span class="tag">#${limitStr(element.tag[i].name, 6)}</span><nobr></nobr>`;
             }
-            deckContainner[0].innerHTML += `
+
+            const str = `
             <div class="box">
                 <div class="deck-popup" onclick="popup('${limitStr(element.name, 15)}', ${element.id}, ${element.len_card})"></div>
                 <div class="profile">
@@ -69,8 +71,9 @@ class Deck {
                 </div>
                 
             </div>`
-            
-            
+            const card = createElementFromString(str);
+            deckContainner[0].append(card);
+            this.deck_lst.push({ name: element.name, tag: element.tag.map(val=>val.name), element: card});
         });
         
         load.toggle();
@@ -97,6 +100,32 @@ class Deck {
         })
     }
     
+    onSearch(word) {
+        if (word.length===0) {
+            this.deck_lst.forEach(val=>{
+                val.element.style.display = "flex";
+            });  
+        }
+        const insen_word = word.toLocaleLowerCase();
+        this.deck_lst.forEach(val=>{
+            if (val.name.includes(insen_word)) {
+                val.element.style.display = "flex";
+            } else {
+                let have = false;
+                for (const tag of val.tag) {
+                    if (tag.includes(insen_word)) {
+                        val.element.style.display = "flex";
+                        have = true;
+                        break;
+                    }
+                }
+                if (!have) {
+                    val.element.style.display = "none";
+                }
+            }
+        });
+    }
+
 }
 const handler = new Deck();
 
@@ -176,33 +205,33 @@ function addDataDecks(decks){
 async function searchInput(word) {
     
     if (word.length!==0) {
-        const respond = await fetch("/api/deck");
-        const raw_data = await respond.json();
-        const decks = raw_data['data'];
-        /* decks schema:
-            {
-                'id' : 3, 'name' : 'deckname', 'len_card' : 1, 'tag' : [{ delete_at: null, id: 1, is_deleted: false, name: "CS"}],
-                'player_id': 3, 'username': 'รชต ธนัญชัย', 'avatar_url': 'https://lh3.googleusercontent.com/a/ACg8ocLU8_khO9j6dlSlrg7TyFRA3O1ECRnBxyXliCkNm4Lmbas=s96-c',
-                'create_at': '2024-03-02 19:19:26', delete_at : None, 'is_deleted' : False,
-                'is_public' : False
-            }
-        */
-        word = word.toLowerCase();
-        let search = [];
-        let deckName, deckTag
-        $.each(decks, (index, ele) =>{
-            deckName = ele.name.toLowerCase();
-            deckTag = ele.tag;
-            if (deckName.includes(word)) {
-                search.push(ele);
-            } else {
-                for (let i of deckTag) {
-                    if (i.name.toLowerCase().includes(word)) {
-                        search.push(ele);
-                    }
-                }
-            }
-        })
+        // const respond = await fetch("/api/deck");
+        // const raw_data = await respond.json();
+        // const decks = raw_data['data'];
+        // /* decks schema:
+        //     {
+        //         'id' : 3, 'name' : 'deckname', 'len_card' : 1, 'tag' : [{ delete_at: null, id: 1, is_deleted: false, name: "CS"}],
+        //         'player_id': 3, 'username': 'รชต ธนัญชัย', 'avatar_url': 'https://lh3.googleusercontent.com/a/ACg8ocLU8_khO9j6dlSlrg7TyFRA3O1ECRnBxyXliCkNm4Lmbas=s96-c',
+        //         'create_at': '2024-03-02 19:19:26', delete_at : None, 'is_deleted' : False,
+        //         'is_public' : False
+        //     }
+        // */
+        // word = word.toLowerCase();
+        // let search = [];
+        // let deckName, deckTag
+        // $.each(decks, (index, ele) =>{
+        //     deckName = ele.name.toLowerCase();
+        //     deckTag = ele.tag;
+        //     if (deckName.includes(word)) {
+        //         search.push(ele);
+        //     } else {
+        //         for (let i of deckTag) {
+        //             if (i.name.toLowerCase().includes(word)) {
+        //                 search.push(ele);
+        //             }
+        //         }
+        //     }
+        // })
         addDataDecks(search)
     } else {
         handler.getDeck();
@@ -215,10 +244,10 @@ const search_form = document.getElementById("search-form");
 const search_input = document.getElementById("search-input");
 
 search_icon.addEventListener("click", (e)=>{
-    searchInput(search_input.value);
+    handler.onSearch(search_input.value);
 });
 
 search_form.addEventListener("submit", (e)=>{
     e.preventDefault();
-    searchInput(search_input.value); // Use search_input.value to access the input value
+    handler.onSearch(search_input.value); // Use search_input.value to access the input value
 });

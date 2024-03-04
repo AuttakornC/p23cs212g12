@@ -23,7 +23,7 @@
 <div id="deck">
     <div id="prop-form" class="activate">
         <label for="title">Title : </label>
-        <input id="title" type="text" name="title" placeholder="Title..." style="text-align: center;">
+        <input id="title" type="text" name="title" maxlength="20" placeholder="Title..." style="text-align: center;">
         <div class="status-tab">
             <label for="status">Deck Status : </label>
             <input id="status" type="text" name="status" value="private" hidden>
@@ -43,7 +43,7 @@
             <div style="width: 100%;">
                 <ul id="tag-recm">
                 </ul>
-                <input type="text" id="tag-insert" name="tag" placeholder="Tag..." autocomplete="off">
+                <input type="text" maxlength="20" id="tag-insert" name="tag" placeholder="Tag..." autocomplete="off">
             </div>
             <button type="submit">+</button>
         </form>

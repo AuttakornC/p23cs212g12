@@ -29,7 +29,7 @@ function addDataDecks(decks){
         <img class="profile-icon" src="${decks.avatar_url}" alt="">
         <span class="people">${limitStr(decks.player_name ,10)}</span>
     </div>
-    <div class="description"><h4 class="deckName">${limitStr(decks.name, 15, 3000)}</h4><h5 class="cardNum">${decks.num_card} Cards</h5></div>
+    <div class="description"><h4 class="deckName">${limitStr(decks.name, 15)}</h4><h5 class="cardNum">${decks.num_card} Cards</h5></div>
     <span class="tags">${tagHtml}</span> 
     </div>`;
     $(".container").html($(".container").html()+post_block);
