@@ -1,3 +1,5 @@
+/* Write by Warisa 683 */
+
 body{
     background-color: var(--banana-color);
 }
@@ -31,6 +33,18 @@ main {
 
 button.disable {
     background-color: var(--main3-color);
+}
+.cards>#show-btn:hover{
+    background-color: var(--main1-color);
+}
+#back-btn:hover {
+    background-color: var(--main1-color);
+}
+.BackNextClose>#next-btn:hover {
+    background-color: var(--main1-color);
+}
+.BackNextClose>#close-btn:hover {
+    color: var(--main1-color);
 }
 
 .BackNextClose>#back-btn{
