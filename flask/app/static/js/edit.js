@@ -202,7 +202,10 @@ class DataManage {
     }
 
     onAddInput() {
-        const order = this.input_tags[this.input_tags.length-1].order_id;
+        let order = 0;
+        if (this.input_tags.length!==0) {
+            order = this.input_tags[this.input_tags.length-1].order_id + 1;
+        }
         const tag = `<div class="card-form-grp" order_="${order}" is_edited="n" old_id="0">
             <input style="grid-area: in1;" id="question" name="question" value="" type="text" placeholder="Question...">
             <input style="grid-area: in2;" id="answer" name="answer" value="" type="text" placeholder="Answer...">
