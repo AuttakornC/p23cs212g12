@@ -83,7 +83,7 @@ input{
     top: 40%;
     transform: translateY(-50%);
     cursor: pointer;
-    filter: var(--choco-filter);
+    filter: var(--banana-filter);
     
 }
 
@@ -266,6 +266,7 @@ main {
 #preview > .sug-window > .sug-list > table tbody tr th {
     text-align: center;
     width: 50%;
+    overflow-x: hidden;
     padding: 1rem;
     color: var(--choco-color);
     border-bottom: var(--choco-color) solid 3px;

@@ -482,7 +482,7 @@ class EditCheck {
         this.edit_window.style.display = "flex";
 
         function changeBTN() {
-            element.innerHTML = "sug";
+            element.innerHTML = "<div class=\"icon-img\" style=\"background-image: url(/static/image/suggestion-icon.png);\"></div>";
             element.setAttribute("onclick", "onSuggestClick(this);");
         }
 
@@ -510,7 +510,7 @@ function onEdit(element) {
         parent.children[0].disabled = false;
         parent.children[1].disabled = false;
         parent.children[4].value = "f";
-        element.innerHTML = "sug";
+        element.innerHTML = "<div class=\"icon-img\" style=\"background-image: url(/static/image/suggestion-icon.png);\"></div>";
         element.setAttribute("onclick", "onSuggestClick(this);");
     }
 }

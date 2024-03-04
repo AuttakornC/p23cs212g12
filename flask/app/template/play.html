@@ -13,10 +13,16 @@ Play
 {% endblock %}
 
 {% block content %}
-<div class="deck-name">{{ deck_data.name }}</div>
+<div class="deck-name">
+    {% if deck_data.name|length > 13 %}
+        {{ deck_data.name[:13] }}...
+    {% else %}
+        {{ deck_data.name }}
+    {% endif %}
+</div>
 <main>
     <div class="cards">
-        <div id="card-show" class="card-name"></div>
+        <div id="card-show" class="card-name"><h1></h1></div>
         <button id="show-btn" type="button" onclick="hideShow(this)">Show</button>
     </div>
     <div class="BackNextClose">

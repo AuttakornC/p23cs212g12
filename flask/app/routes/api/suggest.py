@@ -28,8 +28,11 @@ def suggest():
     result["owner"] = list(map(lambda x: x.to_dict(), own_card))
 
     # select dict
-    dict_res = urlopen(f"https://api.dictionaryapi.dev/api/v2/entries/en/{str(word).lower()}")
-    dict_json = load(dict_res)
+    try:
+        dict_res = urlopen(f"https://api.dictionaryapi.dev/api/v2/entries/en/{str(word).lower()}")
+        dict_json = load(dict_res)
+    except:
+        dict_json = []
 
     # print(dict_json)
     list_word = []

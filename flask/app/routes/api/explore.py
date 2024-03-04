@@ -204,14 +204,15 @@ def getDeckDetail(deck:Deck):
     
     cards = DeckCard.query.filter(DeckCard.deck_id==deck.id)
     tags = DeckTag.query.filter(DeckTag.deck_id==deck.id)
-    tags = list(map(lambda x: x.to_dict()["name"], tags))
+    tags = list(map(lambda x: x.to_dict()["tag_id"], tags))
+    tags_name = Tag.query.filter(Tag.id.in_(tags))
 
     result = {
         "id": deck.id,
         "avatar_url": player.avatar_url,
         "player_name": player.name,
         "name": deck.name,
-        "tags": tags,
+        "tags": list(map(lambda x: x.to_dict()["name"], tags_name)),
         "num_card": len(list(map(lambda x: x.to_dict(), cards)))
     }
 
