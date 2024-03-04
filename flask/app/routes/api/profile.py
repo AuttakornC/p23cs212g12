@@ -12,7 +12,7 @@ from app.lib.validate import formatNumAndChar, USERNAME_LEN, USERNAME_INVALID, F
 
 # Written By Auttakorn Camsoi
 # Route for change player info
-@api.route("/profile", methods=("POST",))
+@api.route("/profile", methods=["POST"])
 def profile():
     user = getDataFromSession()
     user_data = Player.query.get(user["id"])

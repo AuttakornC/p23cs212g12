@@ -52,7 +52,7 @@ class MyData {
         }
         let already_have = false;
         for (const tag of this.tags) {
-            if (tag.tag.toLowerCase()===name || tag.dbid===dbid) {
+            if (tag.tag.toLowerCase()===name || (tag.dbid!=0 && tag.dbid===dbid)) {
                 already_have = true;
                 break;
             }
@@ -210,6 +210,7 @@ function onAdd() {
     const node = createElementFromStr(tag);
     my_state.addInputTag(number_input, node);
     form_add.append(node);
+    form_add.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 

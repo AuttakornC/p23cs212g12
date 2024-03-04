@@ -87,7 +87,7 @@ class DataManage {
         }
         let already_have = false;
         for (const tag of this.tags) {
-            if (tag.tag.toLowerCase()===name || tag.dbid===dbid) {
+            if (tag.tag.toLowerCase()===name || (tag.dbid!=0 && tag.dbid===dbid)) {
                 already_have = true;
                 break;
             }
@@ -126,7 +126,7 @@ class DataManage {
             <button style="grid-area: btn1;" type="button" onclick="datamng.onEditInput(this);"><div class="icon-img" style="background-image: url(${this.edit_icon});"></div></button>
             <button style="grid-area: btn2;" type="button" onclick="datamng.onDeleteInput(this);"><div class="icon-img" style="background-image: url(${this.delete_icon});"></div></button>
         </div>`
-        const tag_element = createEleFromStr(tag)
+        const tag_element = createEleFromStr(tag);
         this.card_form.appendChild(tag_element);
         this.input_tags.push({ order_id: order, element: tag_element});
     }
