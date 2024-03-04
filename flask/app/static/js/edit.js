@@ -26,6 +26,9 @@ class DataManage {
     constructor(deck_data) {
         this.old_data = deck_data;
         this.title.value = deck_data.name;
+        if (deck_data.is_public && document.getElementById("status").value==="private") {
+            onStatusToggle();
+        }
         deck_data.tags.forEach(tag_data => {
             this.addTag(tag_data["name"], tag_data["id"]);
         });
@@ -296,10 +299,9 @@ tag_form.addEventListener("submit", (e)=>{
 
 // toggle status
 
-const status_toggle = document.getElementById("status-toggle");
-const status_input = document.getElementById("status");
-
 function onStatusToggle() {
+    const status_toggle = document.getElementById("status-toggle");
+    const status_input = document.getElementById("status");
     const private_toggle = document.getElementById("private-toggle");
     const public_toggle = document.getElementById("public-toggle");
     const current = status_input.value;
