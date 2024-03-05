@@ -22,6 +22,7 @@ class Play {
             this.right_btn.innerHTML = "Keep";
             this.left_btn.innerHTML = "Discard";
             this.left_btn.setAttribute("onclick", "play.onDiscard();");
+            this.show_btn.style.display = "none";
         }
         this.left_btn.setAttribute("onclick", "play.onPrevious();");
         this.main_show.parentElement.addEventListener("click", this.onANS);
@@ -46,6 +47,7 @@ class Play {
             this.right_btn.innerHTML = "Keep";
             this.left_btn.innerHTML = "Discard";
             this.left_btn.setAttribute("onclick", "play.onDiscard();");
+            this.show_btn.style.display = "none";
         };
         this.main_show.parentElement.addEventListener("click", this.onANS);
         this.right_btn.innerHTML = "Skip";
@@ -70,6 +72,7 @@ class Play {
         if (this.current!==0) {
             this.current--;
             this.main_show.parentElement.removeEventListener("click", this.onANS);
+            this.show_btn.style.display = "block";
             this.main_show.children[0].innerHTML = this.deck_data.cards[this.queue[this.current]].question;
             this.onANS = (e) => {
                 this.main_show.children[0].innerHTML = this.deck_data.cards[this.queue[this.current]].answer;
@@ -77,6 +80,7 @@ class Play {
                 this.left_btn.innerHTML = "Discard";
                 this.left_btn.classList.add("disable");
                 this.left_btn.classList.remove("disable");
+                this.show_btn.style.display = "none";
                 this.left_btn.setAttribute("onclick", "play.onDiscard();");
             };
             this.main_show.parentElement.addEventListener("click", this.onANS);
@@ -86,6 +90,8 @@ class Play {
                 this.left_btn.classList.add("disable");
             }
             this.left_btn.setAttribute("onclick", "play.onPrevious();");
+        } else {
+            confirm_.open("No more Card's in previous.", "This is your first card in this deck. You cann't go pre");
         }
     }
     
