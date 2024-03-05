@@ -490,12 +490,14 @@ class EditCheck {
             parent.children[0].disabled = false;
             parent.children[1].disabled = false;
             changeBTN();
+            this.edit_window.style.display = "none";
         }, {once: true});
 
         this.nchange_btn.addEventListener("click", (e)=>{
             parent.children[0].disabled = false;
             parent.children[1].disabled = false;
             parent.children[4].value = "f";
+            this.edit_window.style.display = "none";
             changeBTN();
         }, {once: true});
     }

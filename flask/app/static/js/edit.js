@@ -187,6 +187,7 @@ class DataManage {
     onDeleteInput(element) {
         const parent = element.parentElement;
         const id = parseInt(parent.children[5].value);
+        const order_id = parseInt(parent.getAttribute("order_"));
         if (id!==0 && parent.getAttribute("is_edited")!=="n") {
             confirm_.open("Do you want to remove this card?", "After this action, this card will be removed only from this deck.", ()=>{
                 this.delete_input.push(id);
@@ -195,6 +196,7 @@ class DataManage {
         } else {
             parent.replaceWith([]);
         }
+        this.input_tags = this.input_tags.filter(val=>val.order_id !== order_id);
     }
 
     closeEditOwn() {
@@ -424,7 +426,7 @@ class Suggest {
 
         function checkRefRepeat(id_) {
             for (const input_data of datamng.getInputTag()) {
-                if (input_data.element.children[2].value==="t" && parseInt(input_data.element.children[5].value)===id_) {
+                if (input_data.element.children[2].value==="t" && input_data.element.children[4].value==="t" && parseInt(input_data.element.children[5].value)===id_) {
                     return false;
                 }
             }
