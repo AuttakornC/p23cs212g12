@@ -31,5 +31,5 @@ def get_my_deck(user_data):
         # print(i)
     # json_show = list(map(lambda x: x.to_dict(), show))
     
-    print(json_show)
+    # print(json_show)
     return successBody(json_show)
