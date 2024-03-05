@@ -23,7 +23,8 @@ def login_google():
 
     # url to redirect to
     redirect_url = url_for("login.login_google_auth", _external=True)
-    return oauth.google.authorize_redirect("https"+redirect_url[4:])
+    # return oauth.google.authorize_redirect("https"+redirect_url[4:])
+    return oauth.google.authorize_redirect(redirect_url)
 
 @login_b.route("/login/google/auth")
 def login_google_auth():

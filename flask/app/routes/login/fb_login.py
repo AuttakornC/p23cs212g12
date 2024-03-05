@@ -24,8 +24,9 @@ def login_fb():
     )
     
     redirected_uri = url_for("login.login_fb_auth", _external=True)
-    print("https"+redirected_uri[4:])
-    return oauth.facebook.authorize_redirect("https"+redirected_uri[4:])
+    # print("https"+redirected_uri[4:])
+    # return oauth.facebook.authorize_redirect("https"+redirected_uri[4:])
+    return oauth.facebook.authorize_redirect(redirected_uri)
 
 @login_b.route("/login/fb/auth")
 def login_fb_auth():
