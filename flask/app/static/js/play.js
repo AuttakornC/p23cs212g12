@@ -91,7 +91,7 @@ class Play {
             }
             this.left_btn.setAttribute("onclick", "play.onPrevious();");
         } else {
-            confirm_.open("No more Card's in previous.", "This is your first card in this deck. You cann't go pre");
+            confirm_.open("No Further Cards Available in Previous Section.", "Please be informed that this card marks your initial position within this deck. Regrettably, you are unable to navigate to previous cards from this point onward.");
         }
     }
     

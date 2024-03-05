@@ -82,7 +82,7 @@ class Deck {
     // delete deck
     onDelete(id) {
         
-        async function del(append) {
+        async function del() {
             load.toggle();
             try {
                 await fetch(`api/deck?id=${id}`, {
@@ -90,7 +90,8 @@ class Deck {
                     
                 });
                 load.toggle();
-                append();  
+                // append(); 
+                window.location.reload(); 
                 onClose();
             } catch {
                 load.toggle();
@@ -98,7 +99,7 @@ class Deck {
 
         } 
         confirm_.open("Warning", "Are you sure to delete?", () => {
-            del(this.getDeck);
+            del();
         })
     }
     
