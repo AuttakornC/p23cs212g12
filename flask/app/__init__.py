@@ -19,7 +19,7 @@ app.jinja_options.update({
 })
 
 app.config['APP_PATH'] = path.dirname(path.realpath(__file__))
-app.config['DEBUG'] = True
+app.config['DEBUG'] = False
 app.config['SECRET_KEY'] = getenv("SECRET_KEY", None)
 app.config['JSON_AS_ASCII'] = False
 app.config['GOOGLE_CLIENT_ID'] = getenv("GOOGLE_CLIENT_ID", None)
