@@ -380,9 +380,11 @@ class Suggest {
             const result = await response.json();
 
             result.data.owner.forEach(val=>{
-                sug_own.innerHTML += `<tr><th>${val.question}</th><th>${val.answer}</th></tr>`;
-                sug_own.lastChild.addEventListener("click", (e)=>{
+                const tr = createElementFromString(`<tr><th>${val.question}</th><th>${val.answer}</th></tr>`);
+                tr.addEventListener("click", (e)=>{
+                    console.log("Out")
                     if (checkRefRepeat(val.id)) {
+                        console.log("Out")
                         element.children[0].value = val.question;
                         element.children[0].disabled = true;
                         element.children[1].value = val.answer;
@@ -400,6 +402,7 @@ class Suggest {
                         );
                     }
                 });
+                sug_own.append(tr);
             });
 
             result.data.dict.forEach(val=>{
