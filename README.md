@@ -6,10 +6,10 @@ This repository contains the source code for our CS212 course project at Chiang 
 
 ## 👥 Team Members
 
-* **[Auttakorn Camsoi]** (@AuttakornC) - [Full-stack]
-* **[Rachata Thananchai]** (@Meaww2) - [Full-stack]
-* **[Mesanee Laihuang]** (@nnyPRO) - [Full-stack]
-* **[Warisa Narata]** (@ggodcatt) - [UX/UI design]
+* **[Auttakorn Camsoi](https://github.com/AuttakornC)** - [Full-stack]
+* **[Rachata Thananchai](https://github.com/Meaww2)** - [Full-stack]
+* **[Mesanee Laihuang](https://github.com/nnyPRO)** - [Full-stack]
+* **[Warisa Narata](https://github.com/ggodcatt)** - [UX/UI design]
 
 ## 🛠 Tech Stack
 
