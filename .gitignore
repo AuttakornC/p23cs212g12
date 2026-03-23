@@ -1,4 +1,6 @@
 postgres_data
 *.lock
 __pycache__/
-.env.dev
+.env*
+
+!.env.example
